@@ -1,0 +1,1119 @@
+# Plan
+
+## Objectif
+
+Définir le contenu attendu du guide guideIA : chapitres et ce qu'on veut y dire.
+
+## Sommaire
+
+- [Méta — hors guide](#méta--hors-guide)
+- [Guide de style figures](#guide-de-style-figures)
+- [Chapitres](#chapitres)
+  - [Introduction](#introduction)
+  - [Partie 1](#partie-1)
+  - [Partie 2](#partie-2)
+  - [Partie 3](#partie-3)
+  - [Conclusion](#conclusion)
+
+## Méta — hors guide
+
+*Cette section ne fait pas partie du guide. Elle définit les conventions éditoriales propres à GuideIA : ton, public, style. Elle est lue par l'assistant IA en début de session de rédaction.*
+
+### Public visé
+
+Professionnels utilisant un assistant IA au quotidien, sans formation technique. Le guide suppose une curiosité intellectuelle, pas de connaissances en informatique ou en machine learning.
+
+### Voix narrative
+
+L'introduction et les parties expérientielles du guide sont écrites à la première personne. Ce choix est délibéré : la voix autobiographique engage le lecteur et pose la crédibilité de l'auteur. Elle n'est pas un style général du guide — les chapitres techniques restent impersonnels — mais elle est assumée là où elle apparaît.
+
+### Ton de l'auteur
+
+- **Humour pince-sans-rire**, jamais gratuit — toujours au service d'un point. Les formules sont soignées et mémorables ("les soldes aujourd'hui", "ado sous kétamine", "devoir à la maison").
+- **Posture d'opinion assumée** : l'auteur défend des positions, anticipe les objections et les retourne. Il assume ses clichés s'ils sont utiles ("j'assume le cliché, il est équilibré").
+- **Complicité avec le lecteur** : un "vous" complice, pas un lecteur à instruire. L'auteur parle *avec*, pas *à*.
+- **Rythme syncopé** : phrases courtes qui claquent, suivies de développements. Accumulations et listes implicites. Transitions directes, presque abruptes.
+- **Registre familier mais jamais relâché** : le mot juste prime sur l'élégance académique. Anglicismes bienvenus quand ils sont plus précis (*forgiving*, *big picture*, *drapeau rouge*).
+- **Autodérision et ironie** : l'auteur ne se prend pas au sérieux, mais prend son sujet au sérieux.
+
+### Ton général
+
+- **Pédagogique et accessible** — jamais technique pour le plaisir d'être technique
+- **Paragraphes courts et aérés**
+- **Analogies et exemples concrets** — privilégier les situations du quotidien pour illustrer les concepts
+- **Humour bienvenu, avec mesure** — uniquement au service de la compréhension, jamais gratuit
+- **Concepts importants mis en valeur** — reformulation, exemple dédié, ou encadré
+- **À éviter** : jargon technique, formulations trop formelles, condescendance
+
+### Progression et dosage
+
+Ces règles gouvernent la façon dont les concepts et les idées sont introduits au fil du texte :
+
+- **Ne pas anticiper** — un concept qui sera expliqué plus tard ne s'introduit pas en passant. Même une mention fugace crée du bruit pour le lecteur qui ne dispose pas encore des clés.
+- **Ne pas soulever une question que le lecteur ne se pose pas** — si la réponse est "non" ou "ça ne s'applique pas ici", ne pas poser la question. Le silence est plus propre.
+- **Doser les mises en garde** — une mise en garde utile se glisse discrètement dans le texte, sans en faire un point de débat. L'objectif est qu'elle s'installe chez le lecteur, pas qu'elle déclenche une polémique.
+- **Introduire sans insister** — un concept peut être évoqué brièvement à son premier passage, avec la promesse implicite que son rôle s'étoffera. Pas besoin de tout dire d'un coup.
+
+### Conventions
+
+- **Langue** : français — y compris les labels des figures
+- **Fichier source** : `GuideIA.md` — fichier unique, lisible en markdown par un humain
+- **Structure** : définie par les chapitres ci-dessous
+- **Balises** : système `{{def:...}}` / `{{ref:...}}` décrit dans `Methode.md`
+
+### Philosophie du guide
+
+**On n'utilise bien que ce que l'on comprend bien.** Cette conviction est le fil directeur du guide : expliquer le fonctionnement interne des IA n'est pas une fin en soi, c'est la condition pour en tirer le meilleur parti et éviter les pièges.
+
+### Structure narrative
+
+Le guide est organisé en trois parties après l'introduction :
+
+- **Partie 1** — forme un tout autonome et suffisant pour la plupart des lecteurs. Elle s'ouvre sur les grandes limitations (ce que les gens ont entendu comme faits ou légendes urbaines), explique la mécanique qui les cause, et se conclut sur les remèdes pratiques. Le lecteur qui comprend pourquoi ces limitations existent est bien mieux armé pour les contourner.
+- **Partie 2** — retours d'expérience à la première personne. Cas pratiques, méthode, exemples de conversations.
+- **Partie 3** — annexes techniques pour ceux qui veulent aller plus loin sous le capot. Le guide est complet sans elle.
+
+### Note de collaboration
+
+Ce projet est lui-même un exemple de collaboration humain-IA. La façon dont il se déroule — les échanges, les ajustements, les erreurs, les découvertes — constitue la matière première de l'appendice final du guide. Il faut donc documenter la collaboration au fil de l'eau, pas après coup.
+
+---
+
+## Guide de style figures
+
+*Voir section "Rendu final du document" dans `Methode.md` pour les contraintes par cible de rendu.*
+
+### Style général
+
+- **Dimensions** : 700×420px, `viewBox="0 0 700 420"`
+- **Fond** : blanc `#ffffff`
+- **Typographie** : `font-family="sans-serif"` — labels 12-13px, titres/annotations 14-15px
+- **Langue** : français pour tous les labels visibles
+
+### Palette commune
+
+| Rôle                             | Couleur                                   |
+| -------------------------------- | ----------------------------------------- |
+| Humain                           | `#6b7280` (gris)                          |
+| opérateur / éléments structurels | `#0d9488` (teal)                          |
+| Modèle / LLM                     | `#7c3aed` (violet)                        |
+| Données / points                 | `#3b82f6` (bleu)                          |
+| Outliers / alerte                | `#f97316` (orange)                        |
+| Inadéquation (underfitting)      | `#ef4444` (rouge)                         |
+| Surajustement (overfitting)      | `#7c3aed` (violet)                        |
+| Zone interpolation               | fond `#d1fae5`, contour `#10b981` (vert)  |
+| Zone extrapolation               | fond `#fee2e2`, contour `#ef4444` (rouge) |
+
+---
+
+### Groupe `prompt` — diagrammes de flux et de structure
+
+Figures : `flux-opérateur`, `prompt-etendu-historique`, `prompt-etendu-complet`
+
+**Nœuds (flux-opérateur)**
+
+- Rectangles à coins arrondis (`rx="8"`), largeur fixe 140px, hauteur 48px
+- Couleurs selon palette : humain gris, opérateur teal, modèle violet
+- Label centré, blanc, 14px
+
+**Flèches**
+
+- Directionnelles, épaisseur 2px, couleur `#6b7280`
+- Label court au-dessus (flux aller), en-dessous (flux retour), 12px, `#374151`
+
+**Blocs de structure (`prompt-etendu-*`)**
+
+- Empilement vertical, chaque couche rectangle plein, hauteur uniforme par type
+- Couleurs par type de couche : prompt système teal `#0d9488`, instructions utilisateur bleu `#3b82f6`, historique gris `#9ca3af`, dernier prompt violet `#7c3aed`
+- Label centré, blanc, 13px
+- Indication visuelle de croissance de l'historique (hauteur variable ou annotation fléchée)
+
+---
+
+### Groupe `immo` — graphiques cartésiens
+
+Figures : `immo-regression`, `immo-outliers`, `immo-deux-segments`, `immo-underfitting`, `immo-overfitting`, `immo-interpolation-extrapolation`
+
+**Axes**
+
+- x = surface (m²), y = prix (€)
+- Labels courts, sans valeurs numériques précises (figures pédagogiques)
+- Couleur axes : `#374151`, épaisseur 1.5px
+- Graduation légère : tirets fins `#e5e7eb`
+
+**Jeu de données**
+
+- ~15 points, **même distribution dans toutes les figures du groupe**
+- Cercles bleus `#3b82f6`, rayon 5px, `fill-opacity="0.75"`
+
+**Éléments spécifiques par figure**
+
+- `immo-regression` : droite teal `#0d9488`, épaisseur 2px ; lignes de lecture tiretées `#6b7280` pour un bien exemple
+- `immo-outliers` : 2-3 outliers orange `#f97316`, contour distinct, rayon 6px
+- `immo-deux-segments` : deux segments de droite, teal et violet, avec point de coupure visible
+- `immo-underfitting` : droite rouge `#ef4444` qui ne suit pas la tendance ; annotation "modèle trop simple"
+- `immo-overfitting` : courbe violette `#7c3aed` qui passe par tous les points, ondulée, trait 1.5px ; annotation "modèle trop complexe"
+- `immo-interpolation-extrapolation` : zones colorées fond vert/rouge délimitant les données, labels "interpolation" / "extrapolation"
+
+## Chapitres
+
+**Introduction** *(hors partie)*
+
+### Partie 1
+
+1. [Introduction](#1-introduction)
+2. [Travailler avec une IA](#2-travailler-avec-une-ia)
+3. [Le modèle et l'opérateur](#3-le-modèle-et-lopérateur)
+4. [C'est quoi la génération ?](#4-cest-quoi-la-génération-)
+5. [Le problème du poisson rouge](#5-le-problème-du-poisson-rouge)
+6. [C'est quoi le contexte ?](#6-cest-quoi-le-contexte-)
+7. [Le problème de l'attention](#7-le-problème-de-lattention)
+8. [Recueil de bonnes pratiques](#8-recueil-de-bonnes-pratiques)
+9. [Un jour sans fin](#9-un-jour-sans-fin)
+
+### Partie 2
+
+10. [Cas pratiques](#10-cas-pratiques)
+11. [Discours de la méthode](#11-discours-de-la-méthode)
+12. [Développer sa base de connaissance](#12-développer-sa-base-de-connaissance)
+13. [Exemples de conversations](#13-exemples-de-conversations)
+
+### Partie 3
+
+14. [Les secrets du prompt système](#14-les-secrets-du-prompt-système)
+15. [Attention is all you need](#15-attention-is-all-you-need)
+16. [L'apprentissage par renforcement](#16-lapprentissage-par-renforcement)
+17. [Le fantôme dans la machine](#17-le-fantôme-dans-la-machine)
+18. [De la gouvernance des IA](#18-de-la-gouvernance-des-ia)
+
+**Conclusion** *(hors partie)*
+
+<!-- ============================================================
+     CONTENU DU GUIDE
+     Tout ce qui suit appartient au guide, pas aux méta-données
+     du plan. Lors d'une harmonisation plan/guide, ne modifier
+     que le contenu des sections (#### Contenu, #### Figures,
+     #### Encadrés, #### Mots-clés) — pas les sections
+     précédentes.
+     ============================================================ -->
+
+# Guide pratique de l'assistant IA
+
+---
+
+## Introduction
+
+### 1. Introduction
+
+#### Mots-clés
+
+- fénéant-créatif
+
+#### Figures
+
+#### Encadrés
+
+> 📦 **encadré** `encadres-ia`
+> Les encadrés de ce guide ont été rédigés par une IA
+> Annonce méta en fin d'introduction : tous les encadrés sont rédigés exclusivement par un assistant IA avec un prompt dédié (lui-même co-produit avec une IA). Cite les éléments clés du prompt (rôle, règle d'or, consignes). Renvoie au chapitre 10 pour les détails de la collaboration. L'encadré s'illustre lui-même.
+
+> 📦 **encadré** `vrai-ecossais`
+> Le sophisme du vrai Écossais
+> Appliqué à l'intelligence artificielle. Structure logique du sophisme, exemples historiques (Deep Blue, Kasparov), et comment chaque avancée de l'IA a été recadillée par une définition plus restrictive de l'intelligence. Conclusion légère : le test de Turing est peut-être lui aussi un faux Écossais.
+
+#### Contenu
+
+Voix à la première personne (voir méta — Voix narrative). Arc : parcours de l'auteur et rapport à l'IA → le « moment ChatGPT » et conviction personnelle → philosophie « comprendre pour bien utiliser » (analogie voiture/Polytechnique) → critique des docteurs du prompt (Boileau) → bonne nouvelle pour les non-informaticiens → le « fénéant créatif » et le concept de flot → note de périmètre RGPD → présentation sobre des trois parties.
+
+L'encadré `vrai-ecossais` est placé après le premier passage sur Deep Blue / Kasparov.
+
+---
+
+## Partie 1
+
+### 2. Travailler avec une IA
+
+#### Mots-clés
+
+- anthropomorphisme
+- intention
+- hallucination
+- contexte
+- attention
+- boucle_d_or
+- biais_de_positivité
+
+#### Figures
+
+> 🖼️ **figure** `Humains, Animaux, IAs`
+> Trois cercles en triangle, type diagramme de Venn : Les Humains en haut, les animaux à gauche, les IAs à droite.
+> Commun aux trois : Système 1 : réponse rapide
+> Animaux et Humains : Intentions, émotions
+> IAs et Humains : Connaissance, information, langage
+> Humains seuls : Raisonnement, conscience
+
+#### Encadrés
+
+> 📦 **encadré** `theorie-de-lesprit`
+> La théorie de l'esprit
+> Pourquoi nous attribuons spontanément des intentions à l'IA — mécanisme cognitif documenté par les neurosciences, ancré dans notre évolution sociale. Apparition chez l'enfant vers 4 ans. Deux signaux déclencheurs : comportement orienté + langage. Caution scientifique : ce n'est pas de la naïveté, c'est de la biologie. L'anthropomorphisme est une intuition utile à condition de connaître ses limites.
+
+> 📦 **encadré** `systeme1-systeme2`
+> Système 1, système 2
+> Kahneman en deux systèmes. Système 1 : réflexe de survie, rapide, automatique, souvent juste. Système 2 : contrôleur lent et coûteux, repère les erreurs du système 1, focalise l'attention, résiste aux illusions — survie à plus long terme. L'IA comme système 1 pur sans système 2 pour corriger. Question suspendue : dans la collaboration humain-IA, qui joue ce rôle ?
+
+#### Contenu
+
+L'anthropomorphisme — tendance naturelle à humaniser l'IA. Ni défaut ni vertu, stratégie cognitive ancienne. Ce qu'on partage (système 1, langage) et ce qu'on ne partage pas (système 2, corps, émotions, intentions). Figure Venn Humains / Animaux / IAs. Conseil : embrasser l'anthropomorphisme en connaissant ses limites.
+
+Histoire du collaborateur au CV hors norme : un recrutement fictif qui déroule les qualités extraordinaires et les défauts structurels — distraction, mythomanie, obséquiosité, précipitation. Caricature assumée, fond vrai. Distinction discuter / travailler.
+
+Trois bonnes nouvelles : ces biais sont humains et connus → on sait les compenser ; l'IA les connaît et peut les appliquer si on lui rappelle ; vous allez vous améliorer aussi.
+
+Les vrais noms des problèmes : hallucinations (fabulations), attention (boucle d'or : ni trop ni trop peu), biais de positivité. Pont vers la suite : deux principes — être clair et précis, valider.
+
+---
+
+### 3. Le modèle et l'opérateur
+
+#### Mots-clés
+
+- modèle de langage
+- LLM
+- opérateur
+- prompt
+- complétion
+- prompt système
+
+#### Figures
+
+> 🖼️ **figure** `flux-opérateur`
+> Diagramme du flux entre les deux composants :
+> humain → prompt → orchopérateurrompt étendu → modèle → complétion → orchestropérateurse → humain.
+> Flux aller (prompt) et retour (réponse) distincts entre chaque composant.
+> Trois nœuds : humain (gris, neutre), orchestrateuopérateurèle/LLM (violet).
+> Style épuré, flèches directionnelles, labels courts.
+> Enrichir avec les données externes sur l'opérateur (wopérateur..) — philosophie "complet mais juste assez" :
+> montrer que l'opérateur peut aopérateur des données externes sans les détailler dans le texte.
+> Le lecteur voit l'architecture complète dès le ch. 3 et la visite progressivement dans les chapitres suivants.
+
+#### Encadrés
+
+#### Contenu
+
+**Les deux composants**
+La figure présente l'architecture de base d'un système IA utilisant les techniques générative de language. Elle repose sur deux process en général sur des serveurs différents: le modèle de langage et l'opérateur. L'opérateur présente une interface à l'utilisateur, il recoit une question / requête (le "prompt"). Il "l'enrobe" dans un message d'entrée qui est transmis au modèle, celui ci le "complète" (on va voir ce que ca signifie) pour obtenir un message de sortie. L'opérateur recoit ce message et en extrait une réponse qu'il présente à l'utilisateur. Et la boucle est bouclée on repart pour un tour de manège.
+
+Figure
+
+**Le modèle de langage (LLM) et la génération**
+Un modèle de langage, pour pouvoir être utilisé, a du passer par une longue phase d'entrainement ou on lui a présenté des milliards de textes (pour les modèles 'multi-modaux' il y a aussi des images et du son, mais ca ne change pas profondément le mécanisme, il y a plus de détails en annexe).
+
+Après cete apprentissage le modèle a "ingéré" une énorme quantités d'information qu'il a "conceptualisé", le terme est vague, mais celà veut dire qu'il peut passer d'un mot comme Paris à un concept qui entretient des rapports de proximité mesurables avec beaucoup d'autre concepts: France, capitale, ville, Seine, Lutèce, Tour Eiffel, Ville Lumière,Louvre, Joconde, Hausmannien, Jaques Chirac, Montmartre, Commune de Paris, Ernest Hemingway.... 
+
+Armé de ces connaissances on s'attend du moteur qu'il se livre sur le message d'entrée a une activités assez curieuse, une completion sémantique, on l'appelera 'génération', on parle aussi d'inférence, mais je préfère garder ce mot pour les annexes.
+
+Le principe est de considérer le message d'entrée comme un texte 'incomplet' et de le completer pour que le message de retour soit le texte qui prolonge le message d' entrée de la façon la plus probable.
+
+Vite! un exemple:  supposons que le message d'entrée soit "La capitale de la France est". Cette phrase reste suspendue, elle a "tension cognitive" sa complétion la plus
+probable est "Paris". Le consensus est fort. Vichy reste une réponse plausible, mais
+minoritaire, le modèle reflète le consensus de ses données d'entraînement, l'ajout d'une date aurait tué toutes hésitations.
+
+"La meilleure équipe de foot en France est" — c'est plus intéressant. Plusieurs
+complétions sont plausibles, le consensus est moins évident. Quelque chose va sortir, mais ce sera plus polémique...
+
+Et si on reformule : "De l'avis des principaux commentateurs sportifs, les trois
+meilleures équipes de foot en France sont" — la complétion devient plus prédictibe et plus riche, le message d'entrée était plus précis. On a déjà une intuition de la bonne manière de rédiger les prompts.
+
+Le mot "prompt" n'est pas anodin: il montre bien qu'il s'agit d'une "amorce" de texte invitant la génération.
+
+**L'opérateur**
+C'est le composant qui fait l'interface avec l'humain. Il reçoit le prompt, l'envoie au modèle, récupère la complétion et l'affiche. Le nom 'opérateur' est moins consensuel que 'modèle', certains l'appelent 'opérateur', mais surtout qunad il gère plusieurs modèles, ou 'harnais' mais surtout quand il joue un rôle très simple avec peu de traitement du prompt, et on verra qu'il y en a beaucoup dns les opérateurs que vous connaissez.
+
+**Quelques exemples**
+
+Table des exemples
+
+**Retour sur l'architecture**
+
+Cette architecture est plaisante pour un ingénieur informatique car elle est simple et sépare bien les responsabilités et les contraintes techniques.
+
+- Le modèle a besoin d'une forte capacité de calcul (encadré les GPU) alors que l'opérateur est une application WEB bien dans la moyenne (bien moins complexe qu'un site de e-commerce par exemple)
+
+- Le modèle "sert" de nombreux opérateurs en paralèle de nombreuses instances du même ou des variantes suivant les usages
+
+- Les modèles sont interchangeables suivant la complexité de la tache à accomplir (vous avez du tous remarqué dans vos chatbots que vous pouviez changer de modèle)
+
+- La communication repose sur des standards informatiques que l'on appelle souvent API (Application Programing Interface)
+
+- Modèles et opérateurs peuvent être développés par des entités différentes, commerciales ou open-source. Autant il y a peu de fournisseurs de modèles qui proposent en général leur propre opérateur façon chatbot. Autant il y a beaucoup d'opérateurs qui fournissent des expériences utilisateur différentes, par exemple les assistant de codage integrés dans les environnements de développement, ou des gestionnaires de workflows, ou tout autre façon d'enrichir un processus avec de la communication en language naturel.
+
+A celà s'ajoute un double modèle commercial, le service du modèle est facturé à l'opérateur (c'est un cout d'usage de l'API, avec un cout proportionnel à la taille des messages emtrée-sortie, allez on vous dit tout de suite que ca se mesure en 'tokens', on en reparlera, mais en gros c'est des mots) et l'opérateur facture à l'utilisateur avec des modèles SaaS classiques freemium (c'est tant par mois par option, c'est moins cher à l'année, si t'exagère sur les tokens faudr payer plus, ...)
+
+Naturellement les fournisseurs "verticalement intégrés" qui offrent les deux sont des plus discrets sur la refacturation interne, si tenté qu'elle existe. Evidemment toute opacité créant des théories complotistes, la rumeur court que le cout de la génération est bien moindre via la médiation de l'opérateur maison que via les API. Ca peut se comprendre car les gros fournisseurs cherchent à s'emparer du marché et captent plus de valeur avec l'opérateur (il vaut mieux vendre du béton que du ciment, et pourquoi pas des maisons), tout celà est bien sur aussi classique qu'anti-concurrentiel.
+
+Je soupconne cependant une autre raison aux plaintes sur les réseau sociaux qui semblent bien exagérer. Si vous voulez vous vanter d'être un déleoppeur IA, faire des modèles est absolument hors de portée, la barrière est tès élevée l'entrainement a n cout vertigineux, par contre bricoler des opérateurs est à la portée de beaucoup plus. Méfions nous cependant, la contribution de l'opérateur est souvent sous-estimée. comme on va le voir, et surtout le couplage entre le modèle et l'opérateur devient de plus en plus fort et il n'est pas toujours documenté.
+
+**Le problème de l'interface**
+Personne ne veut parler directement au modèle — en lui soumettant des débuts de phrase à compléter style: "la capitale de la France est..." il est plus naturel de poser la réponse: "Quelle est la capitale de la France", et même si le modèle a envie de compléter (il y a moins de tension cognitive) on se doute qu'il ne pa pas compléter de l façon aussi charmante que le font tous les chatbots commerciaux. [Image des champigons] C'est là que l'opérateur prend la main : il rajoute devant la question — sans la comprendre — des instructions pour que la réponse soit utile et cohérente.
+C'est ce qu'on appelle le prompt système. Ça ressemble à quelque chose comme :
+
+[bloc de code]
+Tu es un assistant IA qui répond à une question posée par un utilisateur. Tu dois donner
+des informations claires et précises, avec une explication courte, voire plusieurs
+possibilités s'il y a des ambiguïtés. Tu poses des questions de clarification si
+nécessaire. Tu peux ajouter quelques informations complémentaires qui restent dans le
+thème, et tu relances la conversation avec une question ouverte pour engager des demandes
+d'informations complémentaires. [...]
+[fin de bloc]
+
+Avec ce prompt système, on peut espérer une complétion du style :
+
+> La capitale de la France est Paris, sur la Seine. C'est aussi la plus grande ville du
+> pays avec 2 millions d'habitants. Y a-t-il d'autres pays dont vous voudriez connaître
+> la capitale ?
+
+Cet exemple est purement imaginaire — il veut simplement mettre en évidence l'importance
+du prompt système pour la qualité de la réponse : ton, format, gestion des relances,
+comportement en cas d'ambiguïté. C'est un secret de fabrication : complexe, finement
+réglé, propre à chaque IA. Tout n'est pas dans le modèle. (voir encadré, annexe)
+
+figure: dessin champignon
+
+La rédaction de votre propre prompt est aussi importante. Mais si on comprend le
+principe, c'est d'abord du bon sens : être clair et fournir du contexte pour bien encadrer la génération. Des formulation finalement vagues car non liees directement a la demane specfique comme "Vous etes un ..., adopter un ton didactique " risquent de contredire le prompt système. 
+
+De plus des réglages fins de ces prompts ne sont basés que sur des coincidences statistiques, par exemple pensez qu'etre aggessif améliore la réponse est une illusion. Elle est peut etre jsut plus longue parce que sur certains forums l'aggressivité appelle des réponses plus longue, mais sont elle meilleures pour cela. Dans la génération tout n'est que corrélation, plus ou moins pertinente. Les prochains chapitres vont explorerles bases des mécanismes d'hallucitations et d'attention.
+
+---
+
+### 4. C'est quoi la génération ?
+
+#### Mots-clés
+
+- génération
+- données d'entraînement
+- interpolation
+- extrapolation
+- hallucination
+- underfitting
+- overfitting
+
+#### Figures
+
+> 🖼️ **figure** `immo-regression`
+> Graphique axes surface (x) / prix (y). Points représentant les transactions.
+> Droite de régression représentant le prix moyen au m². Ligne verticale rouge
+> partant de la surface de l'appartement cible, ligne horizontale arrivant à son
+> prix estimé. Style pédagogique, épuré.
+
+> 🖼️ **figure** `immo-outliers`
+> Mêmes données que immo-regression, avec quelques points aberrants bien exagérés
+> (un bien bradé, un vendu très au-dessus du marché). Montrer comment ils dévient
+> la droite de régression.
+
+> 🖼️ **figure** `immo-deux-segments`
+> Modèle à deux pentes : une pour les petites surfaces (prix/m² élevé), une pour
+> les grandes (prix/m² plus faible). Illustre l'enrichissement du modèle par rapport
+> à immo-regression.
+
+> 🖼️ **figure** `immo-underfitting`
+> Données avec une structure visible (courbe), modèle trop simple (droite) qui ne
+> capture pas la tendance. Le modèle "n'est pas assez intelligent".
+
+> 🖼️ **figure** `immo-overfitting`
+> Même données, modèle trop complexe dont la courbe passe par tous les points mais
+> part dans des directions improbables entre les données. Le modèle "apprend par
+> cœur" au lieu de généraliser.
+
+> 
+
+#### Encadrés
+
+#### Contenu
+
+**Accroche**
+Il y a quelque chose de magique dans cette génération : on comprend que la connaissance
+vient des données d'entraînement, mais on se doute bien que nulle part dans la littérature
+humaine il n'y a un texte aussi tarabiscoté que le verbiage d'un prompt système ! Comment
+ça marche alors ?
+
+Ça repose sur le concept d'interpolation. Je vais l'expliquer en partant d'un exemple
+volontairement très simple.
+
+**L'exemple immobilier**
+Je voudrais estimer la valeur d'un appartement. Je dispose d'une liste de transactions
+immobilières avec les surfaces et les prix.
+
+Approche classique : calculer le prix moyen au m², puis multiplier par la surface.
+
+Utiliser la figure immo-regression ici.
+
+Sans le savoir,comme Monsieur Jourdain faisait de la prose, je viens de construire un modèle. Un modèle c'est :
+
+- une procédure pour calculer une sortie à partir d'une entrée : multiplier la surface par le prix moyen au m² (c'est la génération)
+- des paramètres qui influencent le calcul : ici un seul, le prix moyen au au m²
+- des données d'entrainement pour pouvoir calibrer les paramètres: ici les transactions immobilières
+- une méthode d'apprentissage pour trouver les paramètres qui reflètent le mieux les données d'entraînement: le calcul du prix moyen au m2, la somme de tous les prix divisé par la somme de toutes les surfaces.
+
+Même si la surface de mon bien ne figure pas dans les transactions historiques, ou qu'il y en a plusieurs avec la même surface et des prix différents, je trouve une valeurqui est une bonne base de réflexion. C'est la magie de l'interpolation.
+
+**Le LLM, même concept, échelle différente**
+
+- Les entrées/sorties : des débuts de texte et leur complétion
+- Les données d'entraînement : une immense base de textes, chacun découpé en plusieurs couples (début, complétion)
+- La procédure de calcul : c'est la fameuse génération, complexe, mais pas besoin
+  d'entrer dans les détails — juste que ça demande de bonnes capacités de calcul
+- Les paramètres : plusieurs milliards, voire dizaines de milliards
+- L'apprentissage : extrêmement complexe, des capacités de calcul gigantesques,
+  ça ne se fait pas tous les jours
+
+Les annexes consacrées à l'apprentissage profond, aux transformeurs et à l'apprentissage par renforcement détaillent le fonctionnement des LLM, mais ca n'est vraiment pas indispensable pour le reste de ce chapitre
+
+**D'où viennent les hallucinations**
+
+On voit tout de suite que notre modèle immobilier peut halluciner et donner des
+évaluations plus ou moins irréalistes. Pourquoi ? Deux sources:  les données
+et la puissance du modèle.
+
+*La qualité des données*
+Une bonne cuisine ne rattrape pas de mauvais ingrédients (garbage in, garbage out dit-on en anglais, des ordures en entrée - des ordures en sortie).
+
+On comprend bien qu'une certaine rigueur s'impose dans la collecte est la préparation des données et on écartera d'emblée les distractions grossière comme d'utiliser les transactions d'Epinal à la place de celles de Paris. Ca peut être moins visible comme des fautes de frappes ou plus subtil quand les données refletent pourtant la réalité.
+
+Un exemple typique est la présence de valeur aberrantes — un bien bradé, un vendu très au-dessus du marché — qui vont dérailler le calcul des paramètres. Le problème est aussi lié au mécanisme d'apprentissage. On voit dans l'illustration que la présence de ces transactions a une influence très pernicieuse.
+
+Utiliser la figure immo-outliers ici.
+
+Vous allez dire, mais ces transactions reflètent la réalité du marché, certes mais peut-être pas sa rationalité. Un exemple connu est l'université américaine qui présente un salaire moyen plutôt alléchants pour les étudiants recemment entrés sur le marché du travail. En fait l'un d'entre eux est un champion de basket  et son revenu est tellement astronomique qu'il tire vers le haut la moyenne. Il aurait été judicieux de l'enlever pour éviter de faux espoirs à tous les étudiants moyens ou médiocres au basket. Les statisticiens connaissent ce piège et regardent aussi la médiane: la moitié des étudiants gagnent moins et la moitié plus. C'est beaucoup plus robuste puisque le montant du basketteur ne joue plus, il compte pour un. Cependant on sent bien que cette robustesse se paye d'une perte d'information et que les prédictions vont être moins fiables. La conclusion est qu'il faut nettoyer les données soigneusement.
+
+De manière plus générale les données peuvent être correctes mais mal échantillonées, elles ne sont pas représentatives de l'ensemble que l'on vise, ce qui peut introduire un biais. Par exemple si on a relevé les transactions auprès d'une agence qui se spécialise sur les appartements de standing ou une autre sur les studios et que l'on veut utiliser le résultat pour une catégorie plus large. 
+
+Image:
+
+Quand on dit interpolation c'est qu'en général la surface d'appartment que l'on cherche est à "interieur" des données, il y en a de plus petites et de plus grandes. Dans le dernier cas, on peut être à l'exterieur, les calculs sont les même, mais c'est une extrapolation et ca risque de dévier encore plus.
+
+En gros: plus on sort de son domaine de compétence, plus il y a des chances de dire n'importe quoi, même si on est un brillant expert dans le dit domaine.
+
+Il y a beaucoup debiais qui font la joie des manuels de statistique, j'aime particulièrement le biais du survivant qu'on peut illustrer par: je veux faire un sondage sur l'equipement en telephone des foyers du pays et je fais le sondage par telephone.
+
+Pour les LLM, on voit bien ce que ça veut dire : gros travail de préparation des données, filtrage, nettoyage. Wikipedia c'est bien, les forums conspirationnistes c'est moins bien.
+
+Mais malheusement ca n'empechera pas le LLM d'integrer d'autre biais de la nature même de ces données, par exemple une culture plutot anglophone du fait de la masse de cette langue sur Internet. Ce peut etre un piege subtil, il a ete constate que les modeles ont plus de mal avec des variantes de l'anglais parlé par de petites populations comme Singapour (peu nombreux mais technophiles ils ont bien testés les modèles).
+
+Un biais encore plus simple et que nous avons déjà évoqué: la positivité. Le LLM dit rarement qu'il ne sait pas. Mais ou aurait-il pu apprendre cette franchise. Il y a moins de texte qui revelent notre ignorance que de textes qui etalent nos conaissance. C'est plutot à l'école que l'on apprend ce que l'on ne sait pas. 
+
+Ce biais peut etre encore renforcés par une technique employée pour l'entrainement des modèles. Après la phase d'acquisition des connaissances, l'apprentissage à partir des documents, une deuxième phase d'apprentissage permet d'améliorer la qualité des résultat. Concrètement, les données de sortie sont évaluées et cette évaluation qui devient la cible de l'apprentissage, les paramètres vont s'ajuster pour favoriser, parmi toutes les générations possibles, celles qui ont la meilleure évaluation. Cette évaluation est tout simplement donné par un autre modèle qui a été entrainé à évaluer la qualité d'une réponse. Et à partir de quelle donnée ce second modèle a-t-il été entrainés: le feedback d'humains a qui on a présenté des exemples de réponses. Ca s'appelle le RLHF (Reinforcement Learning by Human Feedback) , celà améliore l'acceptabilités humaine des réponses, mais introduit aussi des biais venant des fedback, on considère par exemple que cela renforce aussi la positivité. 
+
+*La puissance du modèle*
+Il y a peut-être plus que juste la surface : quartier, âge de l'immeuble, étage... Le
+modèle pourrait inclure plus de variables. Mais même avec une seule variable, la puissance joue. Les petites surfaces sont souvent plus chères au m² — notre modèle ne capture pas ça, et il ne pourra jamais le capturer, c'est dans ses genes.
+
+Utiliser la figure immo-deux-segments ici.
+
+La puissance d'un modèle est naturellement liée au nombre de paramétres. Ici il y en a trois, la valeur qui sépare petites surfaces et grandes surfaces et les deux prix au m2. Mais on comprend aussi que l'on a pas seulement augmenté le nombre de paramètres, on a aussi donné une structure au modèle qui capture une conaissance sur le monde. Un biologiste nous parlerai de capacités innées au lieu d'apprises. 
+
+Et donc, il y a des compétences, si elles ne sont pas dans les genes, on aura beau dresser, on y arrivera pas. On ne fera pas voler celui qui n'a pas d'ailes.
+
+Quand un modèle n'est pas assez puissant, on dit qu'il underfit — il ne peut pas progresser même avec plus d'entraînement.
+
+Utiliser la figure immo-underfitting ici.
+
+À l'inverse, un modèle très complexe avec trop peu de données peut "apprendre par cœur" sans généraliser — il overfit. Sa courbe colle aux données connues mais part dans des directions improbables ailleurs.
+
+Utiliser la figure immo-overfitting ici.
+
+La question de l'underfit ou overfit chez les LLM est compliquée, ils ont des milliards de paramètres mais aussi des milliards de données d'entrainement. Ce qui est sur c'est que l'on voit bien que l'interpolation explique la tendance à "boucher les trous". Plus votre prompt est précis et réduit l'espace d'interpolation, moins il y a de chances d'halluciner. Il ne s'agit de l'acculer dans un coin ou par construction de la question ces conaissances ne peuvent qu'être interpolée par des verités. Rappelez vous l'example des clubs de foot. En parlant des principaux commentateurs sportifs on crée une grille de contraintes qui laissent peu de place à l'imagination.
+
+Il y a un point ou l'underfit est flagrant, c'est la possibilité à raisonner, on sent bien que l'interpolation qui se passe en une seule étape n'est pas très compatible avec l'idée de poser des étapes de raisonnement, et c'est bien dommage parce que justifier la réponse semble être une approche saine pour éviter les hallucinations. C'est un peu ce que l'on fait en parlant des commentateurs sportifs, on lui donne un critère objectif pour choisir la bonne réponse, plutôt que de laisser un trou à tirer au sort.  Mais la on lui a pavé le chemin. On peut être un peu plus subtil en disant simplement "justifie ta réponse", l'interpolation va s'accrocher aussi à toutes les connaissances ou "justifier la réponse" est associé à une structure de phrase qu'il va donc chercher à reproduire dans le domaine du football. C'est compliqué, et surtout il ne va pas vraiment raisonner juste interpoler des schemas et des connaissances, il ne comprendra jamais ce qu'il a fait. Dites vous aussi que le prompt système fait déjà une partie de ce travail pour vous, observer d'abord les réponses, si elle ne vous semblent pas étayées alors demandez des explications, ne le croyez pas sur parole. 
+
+Nous même hallucinons quand nous "croyons" quelque chose, et en fait nous avons tort. La définition de croire c'est : admettre sans preuves. Dans ce cas la bonne stratégie c'est de chercher la preuve: comment et quand avons nous appris cette chose, l'avons nous déduite d'autre connaissances. Une IA n'a que des croyances et n'a aucune notion "d'avoir tort".
+
+Voixi un exemple, on insiste car c'est très important et très contre-intuitif pour un humain. Qaund j'écris "il sait" traduisez par "c'est très fréquent dans les données d'entrainement". Il sait que le Louvre est à Paris, Il sait que la Joconde est au Louvre, Il sait que aussi que la Joconde est à Paris c'est de notoriété publique. Donc si je lui demande ou est la Joconde il va me répondre tout de suite 'à Paris' (plus le verbiage du prompt système) il n'a jamais fait le syllogisme cher à Aristote: "La Joconde est au Louvre" et "le Louvre est à Paris" donc "La Joconde est à Paris", la Joconde est tellement connue que nous fonctionnons probablement de la même manière (système 1) mais notre système 2 (ou peut- être même 1.5) fait aussi le syllogisme. 
+
+Mais si je demande maintenant "ou sont les aveugles de Jericho" et "ou sont les noces de Cana" (deux tableaux du musée du Louvre), Gemini, même bien coaché par son prompt système va me répondre "à Jericho, un oasis la vallée du Jourdain" pour le premier "ca dépend si vous parlez du tableau de Veronese, au Louvre, à Paris si vous parlez de l'épisode de l'évangile à Cana, en basse Galilée". Le tableau de Veronèse est olus présent dans la littérature que celui de Poussin. 
+
+Ce qui est bien avec l'IA c'est qu'il ne va pas le prendre mal quand vous remettez en cause ses croyances, il n'a pas d'ego. Ce qui est moins bien c'est qu'il va peut être les remettre en cause tout de suite sans enqueter un peu et vous contredire. Vous comprendrez vite comment il fonctionne, LLM + prompt système. 
+
+---
+
+### 5. Le problème du poisson rouge
+
+#### Mots-clés
+
+- stateless
+- sans état
+- historique
+- contexte
+- fenêtre de contexte
+- token
+
+#### Figures
+
+> 🖼️ **figure** `prompt-etendu-historique`
+> Schéma de la structure du message envoyé au modèle :
+> [prompt système] + [historique de la conversation] + [dernière question].
+> Mettre en évidence que l'historique grossit à chaque échange.
+
+#### Encadrés
+
+> 📦 **encadré** `tokens`
+> Les tokens
+> Définition des tokens : unité de mesure des LLM, roughly un mot ou un fragment de mot.
+> Ordre de grandeur, coût (calcul GPU, donc énergie) — sans jugement de valeur, juste
+> les faits qui permettent de comprendre ce que les gens entendent.
+> Lien avec la fenêtre de contexte.
+
+#### Contenu
+
+**Les LLM n'ont aucune mémoire**
+Aspect fondamental : entre deux générations, le modèle repart de zéro.
+Pas de mémoire, pas d'état — stateless. Chaque génération est indépendante.
+Le titre du chapitre fait référence à la réputation (humoristique) des poissons rouges
+qui oublient tout — plus élégant que d'autres métaphores.
+
+**Le problème pour l'opérateur**
+Difficile de soutenir une conversation quand on oublie tout à chaque étape.
+Solution : l'opérateur renvoie tout l'historique dans le texte à compléter.
+Utiliser la figure prompt-etendu-historique ici.
+
+Ce message complet s'appelle tantôt "prompt", tantôt "contexte" — parce qu'il contient
+à la fois la question et les éléments de contexte nécessaires pour y répondre. La note
+d'humour sur la double signification de "contexte" est intégrée dans le guide de façon
+naturelle — plan aligné sur la structure du guide.
+
+**L'importance de maîtriser la longueur**
+Le message envoyé au modèle a une taille limite — la fenêtre de contexte —
+qui dépend du LLM. Elle est très grande, mais l'historique croît vite.
+Quand on approche de la limite, l'opérateur peut compresser l'historique
+(résumer les échanges anciens) pour faire de la place.
+
+Tout ce texte a un coût : c'est ce qu'on appelle les tokens — voir encadré tokens.
+(Inclure dans l'encadré : coût énergétique — calcul GPU, donc énergie — sans jugement
+de valeur, pour raccrocher ce que les gens entendent aux bons concepts.)
+
+Un contexte très long peut aussi créer de la confusion pour le modèle — on verra
+pourquoi dans le chapitre sur l'attention.
+
+**Conclusion pratique**
+Des conversations courtes et centrées sur un sujet. Nouvelle session si le sujet change.
+(Si toutes les réunions étaient comme ça !)
+
+---
+
+### 6. C'est quoi le contexte ?
+
+#### Mots-clés
+
+- contexte
+- prompt étendu
+- instructions utilisateur
+- projet
+- déclaratif
+- mémoire
+- skill
+- MCP
+- contexte dynamique
+- outil
+
+#### Figures
+
+> 🖼️ **figure** `prompt-etendu-complet`
+> Schéma de la structure complète du prompt étendu avec toutes les couches :
+> [prompt système] → [instructions utilisateur] → [historique de la session] → [dernier prompt].
+> Variante enrichie de la figure prompt-etendu-historique.
+
+#### Encadrés
+
+> 📦 **encadré** `tokens-speciaux`
+> Tokens spéciaux et génération
+> → Déplacé vers l'annexe technique.
+
+#### Contenu
+
+**Définition**
+Le contexte, c'est tout ce qu'on ajoute au prompt initial pour former le prompt étendu
+envoyé au moteur. On en a déjà vu deux exemples : le prompt système (géré par
+l'opérateur) et l'historique de la session. Le contexte a plusieurs rôles :
+contrôler le style de la réponse, orienter les priorités de génération, et donner
+de la mémoire au modèle.
+
+*Note : la section déclaratif/impératif est à supprimer du guide (décision de session).
+La supprimer aussi du plan — ne pas développer ce concept ici.*
+
+*Note : remplacer la référence à l'encadré `tokens-speciaux` dans le guide par un renvoi
+vers l'annexe technique.*
+
+*Note : ajouter un petit exemple narratif autour de l'email — sur le modèle de l'exemple
+météo du contexte dynamique. Renforce un concept important pour ceux qui n'ont pas encore
+généralisé. Rapide, en "racontant une histoire".*
+
+*Note : positionner ici le concept "boucle d'or" (Goldilocks) — niveau de détail optimal
+dans un prompt. Ni trop vague (le modèle improvise), ni trop contraint (on perd la valeur
+de l'IA). À placer après l'explication du contexte déclaratif, comme règle pratique issue
+du fonctionnement du modèle.*
+
+**Pourquoi "contexte" est bien choisi**
+Le langage humain est par essence ambigu et dépendant du contexte.
+"Tu peux me passer le sel ?" n'est pas une question sur vos capacités physiques.
+C'est précisément ce mécanisme — l'attention au contexte — qui a débloqué la technologie
+des LLM. On y reviendra dans le chapitre suivant.
+
+**La limite fondamentale : tout ça reste du texte plat**
+Le LLM ne se regarde pas travailler. Au final, il reçoit un grand texte à compléter
+— et c'est tout. Il ne peut pas hiérarchiser mécaniquement les éléments du contexte :
+on lui dit ce qui est important, et on espère qu'il comprend.
+**Enrichir le contexte : ce que l'opérateur vous offre**
+L'orchopérateur pose des outils pour enrichir le contexte de façon statique.
+Vous pouvez enregistrer des instructions personnelles qui seront systématiquement
+insérées dans le prompt étendu. Utiliser la figure prompt-etendu-complet ici.
+
+Certains opérateurs vont plus loin. Claude propose par exemple la notion de
+**projet** : un contexte spécifique partagé par un groupe de sessions — des instructions,
+des documents de référence, une mémoire commune.
+
+Un projet peut aussi inclure des **fichiers de référence** — documentations, notes,
+exemples — qui sont injectés dans le prompt étendu. Utile quand leur contenu est
+fondamental pour la session. Mais attention : ce sont autant de tokens supplémentaires,
+et un contexte qui grossit trop risque de diluer le focus de la session. On retrouve
+ici le conseil du chapitre précédent : des sessions courtes et centrées.
+
+**La mémoire**
+L'opérateur peut gérer une mémoire — globale ou par projet. Elle est injectée dans
+le prompt, clairement balisée. Le prompt système est enrichi en conséquence : il indique
+au modèle que le prompt contient une mémoire, et l'invite à proposer des modifications
+si la session apporte des éléments pertinents à mémoriser. En résumé : le moteur peut
+prendre des notes pour les prochaines sessions. Pour la session en cours, pas besoin —
+tout est déjà dans le prompt.
+
+Avantage : une mémoire se construit entre les sessions. Inconvénient : on ne maîtrise
+pas toujours bien ce qui s'y accumule, et on peut se retrouver avec des éléments qui
+polluent toutes les sessions — un peu comme les cookies publicitaires.
+
+> **TODO** : vérifier sur les différents assistants IA comment consulter et contrôler sa mémoire.
+
+Conseil pour un usage professionnel : restreindre la mémoire au niveau projet, voire
+s'en passer. La réserver aux usages plus personnels.
+
+**Le contexte dynamique**
+Jusqu'ici, le contexte était statique : défini à l'avance, injecté mécaniquement.
+Il existe une approche plus subtile : laisser le LLM lui-même choisir le contexte
+dont il a besoin. Concrètement, au lieu d'un seul tour de génération par prompt
+utilisateur, on en fait plusieurs. Une génération peut inclure dans sa réponse des
+requêtes de contexte supplémentaire, qui seront injectées dans le prompt suivant.
+
+Exemple narratif : "Fait-il beau à Nice ?"
+La date d'entraînement du modèle est passée — la météo du jour n'y figure pas.
+Avec de la chance, le modèle répond honnêtement qu'il ne sait pas. Mais il peut
+aussi inventer une réponse vraisemblable — c'est le biais de positivité : le prompt
+système lui demande d'être serviable, et une génération qui donne une réponse est
+statistiquement plus probable qu'une qui n'en donne pas. Ce biais vient aussi de
+l'entraînement lui-même : y a-t-il beaucoup de textes humains qui décrivent ce
+qu'on ne sait pas ?
+
+Pourtant le modèle sait des choses utiles : que la question relève de la météo,
+que la météo s'applique à un lieu, que Nice est une ville, et que le plus pratique
+est de faire une recherche web. Sa réponse va donc contenir une demande : effectuer
+cette recherche et lui communiquer le résultat. L'opérateur exécute, reconstruit
+le prompt avec le résultat, et relance la génération.
+
+Voir encadré tokens-speciaux (annexe technique) pour la mécanique sous-jacente.
+
+**Skills et MCP : le contexte dynamique généralisé**
+La recherche web n'est qu'un exemple. Le contexte dynamique repose sur un concept
+plus général : des **outils** que le LLM peut solliciter pour obtenir du contexte.
+
+Un **skill** est un ensemble d'instructions avec un contexte d'applicabilité, qui
+ajoute une compétence à la volée. Exemple : comment lire un fichier Excel. Le LLM
+reçoit le contenu brut du fichier et un ensemble d'instructions décrivant sa structure
+— il peut alors l'exploiter correctement. L'opérateur gère une table de décision
+permettant au LLM d'identifier le skill dont il a besoin et de générer la requête
+de le charger dans le prochain prompt.
+
+Le concept ultime est le **MCP** — Model Context Protocol, défini par Anthropic.
+Un MCP est une description fournie à l'opérateur pour accéder à un service
+externe. Il expose :
+
+- une liste de commandes disponibles (recherche web, lecture de fichier, lecture
+  d'emails...)
+- des instructions en langage naturel décrivant dans quelles conditions utiliser
+  cet outil et comment formuler chaque commande
+
+Les formats échangés peuvent être très structurés, s'appuyant sur des standards
+connus du modèle — SQL pour les bases de données, par exemple — ou soigneusement
+décrits dans les instructions.
+
+L'industrie a réagi avec enthousiasme : on trouve maintenant des centaines de MCP
+permettant, en langage naturel, de lire et envoyer des emails, d'accéder à des
+fichiers et au cloud, d'interroger des bases de données, de créer des factures dans
+un ERP, de générer des modèles 3D...
+
+---
+
+### 7. Le problème de l'attention
+
+#### Mots-clés
+
+- attention
+- self-attention
+- fenêtre de contexte
+- dilution
+- lost in the middle
+- polysémie
+
+#### Figures
+
+> 🖼️ **figure** `attention-dilution`
+> Illustration du mécanisme de dilution de l'attention : un contexte court où
+> l'attention est concentrée sur les éléments pertinents, vs un contexte long
+> où elle se disperse sur de nombreux éléments peu pertinents.
+
+#### Encadrés
+
+> 📦 **encadré** `polysemie`
+> La polysémie
+> Pourquoi le langage est intrinsèquement ambigu.
+> Exemples détaillés autour du mot "tour" et d'autres cas parlants.
+> Lien avec le mécanisme d'attention qui résout cette ambiguïté.
+
+#### Contenu
+
+*Note : chapitre en cours — contenu validé en session, rédaction à compléter.*
+
+**L'insight fondateur**
+Le langage est ambigu par nature — c'est sa caractéristique fondamentale, pas un défaut.
+Le sens d'un mot dépend des autres mots autour de lui. *Tour* peut être la Tour Eiffel,
+le Tour de France, un tour de potier, une pièce aux échecs, un tour de chant, un tour de vis,
+ou l'ordre dans une file — et on n'a même pas mentionné le donjon médiéval. "Il grimpe dans
+les tours" : régime moteur ou quelqu'un qui s'énerve ?
+
+Voir encadré polysemie ici.
+
+C'est précisément le mécanisme qui a débloqué la technologie des LLM : l'**attention**.
+Chaque mot "regarde" tous les autres et calcule à quel point ils sont pertinents pour lui.
+C'est ce qui permet de résoudre l'ambiguïté — pas mot à mot, mais en pondérant l'ensemble
+du contexte simultanément.
+
+**Ce que ça coûte**
+Ce mécanisme est puissant mais gourmand : son coût de calcul croît très vite avec la longueur
+du contexte. Plus le contexte est long, plus le calcul est lourd — et plus la qualité peut
+se dégrader.
+
+**Le problème de la dilution**
+Un contexte long ne signifie pas une meilleure compréhension. L'attention doit se répartir
+sur l'ensemble du texte — et si ce texte contient beaucoup d'éléments peu pertinents,
+la concentration se dilue. C'est contre-intuitif : on a l'impression qu'en donnant plus
+d'informations, on aide. En réalité, on peut nuire.
+
+Utiliser la figure attention-dilution ici.
+
+Analogie : un jury qui doit trancher un litige. Lui soumettre 10 documents clairs est plus
+efficace que 200 pièces dont 190 sont hors sujet. La pertinence prime sur le volume.
+
+**Le "lost in the middle"**
+Dans un contexte très long, les informations placées au milieu sont statistiquement moins
+bien traitées que celles en début ou en fin. Implication pratique : si vous avez une
+information critique, ne la noyez pas au milieu d'un long document.
+
+**Self-attention et polysémie — dans les deux sens**
+Le mécanisme d'attention résout la polysémie. Mais il le fait dans les deux sens : un
+contexte mal structuré, traitant plusieurs sujets à la fois, peut introduire de nouvelles
+ambiguïtés. Le modèle peut mélanger des fils pourtant distincts. Raison supplémentaire
+pour la règle d'or : une session, un sujet.
+
+*Note : cette section est présente dans le guide mais absente du plan — ajoutée ici.*
+
+**Conclusion pratique** (fusionnée avec la section dilution dans le guide)
+
+- Des prompts courts et ciblés
+- Les informations importantes en tête ou en queue de contexte
+- Ne pas injecter de documents entiers si seules quelques sections sont pertinentes
+- Reconnaître les signes de dégradation : réponses qui ignorent des instructions,
+  incohérences avec des éléments donnés plus tôt
+
+---
+
+### 8. Recueil de bonnes pratiques
+
+#### Mots-clés
+
+- hallucination
+- biais de positivité
+- attention
+- dilution
+- boucle d'or
+
+
+#### Figures
+
+#### Encadrés
+
+#### Contenu
+
+Chapitre pratique — boîte à outils face aux limites identifiées dans le guide.
+
+**Pattern Pourquoi / Comment / Quoi** (retour Régis) : allers-retours fréquents entre
+niveaux d'abstraction dans le travail avec une IA. Comment naviguer entre ces niveaux.
+
+**Trois grands problèmes structurels et leurs remèdes pratiques :**
+
+- Hallucinations : comment les détecter, comment limiter le risque
+- Biais de positivité : pourquoi l'IA dit rarement « je ne sais pas », comment le forcer
+- Attention/dilution : prompts courts, information critique en tête ou en queue
+- Amnésie
+
+Ce sont des problèmes assez humains finalement. Ils sont identifiés depuis longtemps. Nous avons développé des techniques. Les psychologues et les philosophes. Système 1...
+Parce que ce n'est que des troubles cognitifs, ça nous affecte tous, tous les jours.
+
+Deux bonnes nouvelles :
+
+- on peut s'en inspirer
+- c'est dans les données d'entraînement
+
+Il y a l'humour, une récompense quand on cadre le système 1.
+Malheureusement ça ne marche pas.
+
+Ces problèmes sont structurels, on ne peut que les pallier (au vrai sens du mot).
+
+Définir son vocabulaire (Conficius)
+On documente tout
+RTFM
+Effet Streisand
+Interdire et contraindre
+Laisser les blancs
+Ceinture et bretelles
+Passe en avant
+
+Le biais d'action
+
+Interdire ou contraindre ?
+**L'outillage comme réponse concrète aux limites** : présenter les outils non pas en
+annexe mais comme une réponse directe aux problèmes structurels. L'outillage change ce
+que l'IA peut faire, pas seulement comment on lui parle.
+
+**Idées à développer (issues de la KB) :**
+
+- Effet Streisand — mentionner ce qu'on veut éviter attire l'attention dessus ; bonne pratique pour la rédaction de prompts et d'instructions
+- Pas de référence en avant — ne pas introduire un concept pas encore expliqué (comme au rugby : pas de passe en avant) ; rend la lecture linéaire et autonome
+- Pattern mot-clé — un mot-clé court et stable pour évoquer un concept sans le re-définir ; conversations courtes et précises, contexte partagé immédiat
+- La session comme source de connaissance — extraire l'essentiel en fin de session (décisions, formulations, conventions) avant qu'elles disparaissent
+- Bonnes pratiques liste de gaps — vérifier l'indépendance de chaque gap, identifier les dépendances, ordonner par fondation d'abord
+- Principe ceinture et bretelles — deux mécanismes de sécurité qui se renforcent mutuellement valent mieux qu'un seul
+- Droit à l'oubli — quand et comment retirer un concept périmé ; signaux d'obsolescence, isolation préventive, nettoyage en session dédiée
+- Donner les blancs — comme aux échecs, celui qui parle en premier a l'initiative ; laisser l'IA s'exprimer avant de lui soumettre ses propres idées pour ne pas biaiser la réponse
+- WWH — structurer ses prompts et instructions en Why / What / How
+
+*(à compléter au fil des chapitres)*
+
+---
+
+### 9. Un jour sans fin
+
+#### Mots-clés
+
+#### Figures
+
+#### Encadrés
+
+#### Contenu
+
+*Contenu à développer à partir du texte de l'auteur — session dédiée.*
+
+Inspiré du film Groundhog Day : arc narratif frustration → positif. Comment la répétition des sessions avec une IA, qui repart de zéro à chaque fois, se transforme en méthode et en fluide de travail.
+
+---
+
+## Partie 2
+
+### 10. Cas pratiques
+
+#### Mots-clés
+
+#### Figures
+
+#### Encadrés
+
+#### Contenu
+
+Cas tirés de l'expérience de l'auteur :
+
+1. Écriture de documentation technique
+2. Gouvernance
+3. Codage
+4. Comment nous avons écrit ce guide — Claude et moi (bouclage narratif)
+
+Cas supplémentaires à envisager :
+
+- Recommandations instructions / setup du système — comment bien configurer son assistant
+- Gérer deux IA : une perso et une pro — séparation des contextes, des données, des usages
+
+---
+
+### 11. Discours de la méthode
+
+#### Mots-clés
+
+#### Figures
+
+#### Encadrés
+
+#### Contenu
+
+*À développer en session dédiée.*
+
+---
+
+### 12. Développer sa base de connaissance
+
+#### Mots-clés
+
+#### Figures
+
+#### Encadrés
+
+#### Contenu
+
+*À développer en session dédiée.*
+
+---
+
+### 13. Exemples de conversations
+
+#### Mots-clés
+
+#### Figures
+
+#### Encadrés
+
+#### Contenu
+
+*À développer en session dédiée.*
+
+---
+
+## Partie 3
+
+### 14. Les secrets du prompt système
+
+#### Mots-clés
+
+#### Figures
+
+#### Encadrés
+
+#### Contenu
+
+*À développer en session dédiée.*
+
+---
+
+### 15. Attention is all you need
+
+#### Mots-clés
+
+- transformer
+- self-attention
+- token
+- génération token par token
+- tokens spéciaux
+- apprentissage
+- RLHF
+- KV cache
+- espace latent
+- distance sémantique
+
+#### Figures
+
+#### Encadrés
+
+#### Contenu
+
+Annexe optionnelle — le livre est complet sans elle. Pour les lecteurs qui veulent comprendre
+vraiment comment ça marche sous le capot. Ton plus dense que les chapitres principaux.
+
+Contenu (absorbe l'ancienne annexe technique) :
+
+- Transformer à haut niveau
+- Self-attention (version technique du ch. 7)
+- Génération token par token
+- Tokens spéciaux (encadré `tokens-speciaux` déplacé depuis ch. 6)
+- Apprentissage et coût de calcul
+- Apprentissage par renforcement
+- RLHF
+- KV cache (pourquoi ça compte)
+- Espace latent et distance sémantique
+
+---
+
+### 16. L'apprentissage par renforcement
+
+#### Mots-clés
+
+#### Figures
+
+#### Encadrés
+
+#### Contenu
+
+*À d������velopper en session dédiée.*
+
+---
+
+### 17. Le fantôme dans la machine
+
+#### Mots-clés
+
+#### Figures
+
+#### Encadrés
+
+#### Contenu
+
+*À développer en session dédiée.*
+
+Raisonnement, conscience, nature de l'intelligence.
+
+---
+
+### 18. De la gouvernance des IA
+
+#### Mots-clés
+
+#### Figures
+
+#### Encadrés
+
+#### Contenu
+
+*À développer en session dédiée.*
+
+---
+
+## Conclusion
+
+### Conclusion *(hors partie)*
+
+#### Mots-clés
+
+#### Figures
+
+#### Encadrés
+
+#### Contenu
+
+**Structure à vérifier** : bouclantes (limites structurelles, réflexes) présentes et
+solides — ouvrante manquante, à ajouter.
+
+**Paragraphe prospectif** (retour Régis) : ouvrante finale — modélisation du monde,
+rythme d'innovation, Capex, mise en perspective historique (révolution industrielle,
+électricité), espoirs et craintes. Se place en fin de conclusion après les bouclantes
+existantes, à la place de « Bonne collaboration » qui est trop plat.
+
+**Les mots et les choses** : digression philosophique d'amateur — absorbée depuis la Partie 3.
+
+**Remerciements** : ajouter en fin de conclusion — les personnes avec qui l'auteur
+a discuté, y compris les IA.
+
+**Note données privées / RGPD** : hors périmètre du guide. Ajouter une phrase dans
+l'introduction qui délimite proprement : ce guide traite du fonctionnement et de
+l'utilisation, pas des aspects légaux, contractuels ou de confidentialité.

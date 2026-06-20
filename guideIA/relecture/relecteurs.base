@@ -1,0 +1,17 @@
+properties:
+  file.name:
+    displayName: Nom
+views:
+  - type: table
+    name: Table
+    filters:
+      and:
+        - file.inFolder("guideIA/relecture/Relecteurs")
+    order:
+      - file.name
+      - OK
+      - e-mail
+      - rôle
+    columnSize:
+      file.name: 185
+      note.e-mail: 266

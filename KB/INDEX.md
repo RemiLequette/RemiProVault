@@ -1,0 +1,325 @@
+# Knowledge Base Index
+
+## Quick Start
+
+**Why:** Every AI-assisted session needs consistent conventions. This file is the single entry point to the Knowledge Base (KB) — loaded at the start of every session on instruction from the project's AI agent configuration.
+
+**What:** A navigation map. Does not contain knowledge — points to it. Two catalogues: `conventions/` (rules for doing things) and `guides/` (step-by-step processes). A Decision Layer maps the current task to the files to load.
+
+**How:** At session start, read the Session Bootstrap below. During the session, consult the Decision Layer to load only what the task requires.
+
+---
+
+## Session Bootstrap
+
+Steps to follow at the start of every session, in order.
+
+1. Read `public/guides/how-to-get-things-done.md` — session model and working practice.
+2. Read `public/guides/working-with-forge.md` — Forge path format, read/write decision, common patterns.
+3. Read `public/conventions/todo-list.md` — TODO and WIP file structure.
+4. Read `PROJECT.md` at the project root — project context, current objective, WIP.
+5. Apply the Scope Rule below.
+6. Use the Decision Layer to identify and load the conventions relevant to the current task.
+7. Greet the user by name, state the active project, and confirm you are ready.
+
+---
+
+## AI Agents
+
+Agent-specific instructions. Apply only for the active agent.
+
+| Agent | Specificities |
+|-------|---------------|
+| Claude | None |
+
+---
+
+## Scope Rule — Mandatory
+
+**Never access files or directories outside the active project folder without explicit user request.**
+
+This includes:
+- Listing sibling project folders
+- Reading files in other projects
+- Inferring context from other projects
+
+**Exception:** The Knowledge Base folder is accessible **read-only** — load only what the decision layer instructs.
+
+WHY: Prevents context pollution, unnecessary file reads, and unintended exposure of unrelated projects.
+
+---
+
+## Decision Layer — What to read
+
+To identify what type of document to read, ask: what would you need to audit it?
+- Artifacts → convention
+- A log → guide
+
+Match the current task against the triggers below. Read only the documents that match.
+Use Forge to read all KB documents.
+
+| Trigger | Load |
+|---------|------|
+| Creating or editing a `.md` file | `conventions/documentation.md`, `conventions/documentation-style.md` |
+| Declaring a document type, auditing content style | `conventions/documentation-style.md` |
+| SQL query, database read/write, schema change | `conventions/sqlite.md` |
+| CommWise layout, CSS, flex, viewport constraints | `conventions/commwise-layout.md` |
+| CommWise modal, overlay, disabled button | `conventions/commwise-modals.md` |
+| CommWise block read/write, assembly, synchronisation | `conventions/commwise-framework.md` |
+| Modular architecture (Core, IService, Assembly, Framework) | `conventions/modular-architecture.md` |
+| Architecture of a time-tracked structured dataset (artifact) | `conventions/artifact.md` |
+| Project uses input channels to import ideas (email, Notion, etc.) | `conventions/idea-inbox.md` |
+| Registering a project, querying project dependencies, posting or triaging cross-project ideas | `conventions/project-registry.md` |
+| Live DOM debug, JS validation in browser | `conventions/claude-chrome-mcp.md` |
+| Complex analysis, structured reasoning, multi-step problem | `conventions/claude-structured-reasoning.md` |
+| `file://` HTML page with persistent storage | `conventions/indexeddb-file-protocol.md` |
+| Setting up or using the local development server | `conventions/local-server.md` |
+| Creating or auditing a GLOSSARY.md | `conventions/glossary.md` |
+| Node.js automation script, cross-project tool | `conventions/tools.md` |
+| Creating or managing a TODO.md or backlog | `conventions/todo-list.md` |
+| Setting up or auditing Claude project structure or instructions | `conventions/project-structure.md` |
+| Setting up a new Claude project | `guides/project-setup-process.md` |
+| Auditing a project for conformance | `guides/audit-process.md` |
+| Updating a guide file | `guides/guide-maintenance.md` |
+| Building or setting up the HTML todo list tool | `guides/todo-tool.md`, `conventions/todo-list.md`, `conventions/local-server.md` |
+
+
+---
+
+## conventions/
+
+Rules and patterns governing how something is done. A convention leaves a trace in the artifacts — conformance is auditable by examining documents, code, or data directly. Load only what the current task requires (use the Decision Layer above). A task may require more than one convention.
+
+| File | Summary | Keywords |
+|------|---------|----------|
+| filesystem.md | Use `filesystem` for reads, `edit-file-lines` for writes, `node` for mechanical copy/replace ops (zero tokens) | filesystem, MCP, read, write, copy, node, regex, files |
+| md-doc-usage.md | Read/write docs via md-doc tool — section-level access, token efficiency, conformance check, tmp file management | md-doc, tool, read, write, documentation, conformance, tmp |
+| documentation.md | Convention universelle pour tous les fichiers Markdown — structure, titres, TOC, Keywords, Index, Changelog, Quick Start, citations | markdown, documentation, TOC, titres, ancres, keywords, index, changelog, quick-start, citations |
+| documentation-style.md | Document types taxonomy and Why-What-How content hierarchy — every document declares its type; process specs and conventions separate intent, model, and implementation. | document-type, style, taxonomy, process, spec, convention, why-what-how, intent, model, implementation |
+| sqlite.md | One statement per call, DELETE before INSERT, always verify after writes, update schema.sql after DDL | sqlite, MCP, SQL, database, schema, write, query |
+| commwise-layout.md | `max-height` is the only reliable way to constrain flex children overridden by CommWise `!important` rules | CommWise, flex, layout, max-height, viewport, CSS, override |
+| commwise-modals.md | Modal open/close requires both `dds-hidden` (display) and `visible` (opacity/visibility) + mandatory reflow between. Disabled buttons need ID-level CSS override. | CommWise, modal, overlay, dds-hidden, visible, disabled, button, CSS, trap |
+| commwise-framework.md | CommWise as a framework — MCP tool, block model, module assembly, PULL/PUSH synchronisation, session lifecycle, editing best practices. | CommWise, MCP, framework, blocks, assembly, synchronisation, pull, push, session |
+| modular-architecture.md | Architecture convention for modular SPAs — Core, IService, Assembly, Framework concepts and project doc structure. | architecture, modular, core, IService, assembly, framework, convention |
+| artifact.md | Generic convention for time-tracked structured datasets — file structure, revision lifecycle, URL modes, local server, revision index, scripts, GitHub Pages. | artifact, structured data, revisions, JSON, lifecycle, scripts, GitHub Pages |
+| idea-inbox.md | Convention for collecting and processing ideas from multiple input channels (Gmail, Notion, etc.) — channel model, status lifecycle, processing rules, on-demand trigger. | idea-inbox, canal, channel, Gmail, Notion, inbox, processing, import |
+| project-registry.md | Centralized directory of all projects using the KB (`public/projects.md`) and cross-project idea inbox (`public/project-ideas-inbox.md`) — registration format, inbox posting, triage rules. | project-registry, projects, directory, dependencies, cross-project, idea-inbox, triage |
+| claude-chrome-mcp.md | Use Claude in Chrome MCP for live DOM diagnostics and JS fix validation — eliminates layout guesswork | Chrome, MCP, browser, DOM, debug, javascript, inspect, layout |
+| claude-structured-reasoning.md | 8 core techniques for clearer thinking: thinking tags, step-by-step decomposition, chain-of-thought, roles, structure, adversarial framing, constraints, reference-based | thinking-tags, chain-of-thought, structured-reasoning, prompting, clarity, analysis, constraints |
+| local-server.md | Shared local HTTP server for all projects — allowed roots, API contract (/ping /file /dir), static serving, bootstrap pattern | local-server, HTTP, file-access, static, allowed-roots, multi-project |
+| indexeddb-file-protocol.md | IndexedDB replaces localStorage for `file://` HTML pages — Chrome blocks localStorage in file:// context; IndexedDB works reliably. Includes reusable async snippet and migration table. | IndexedDB, localStorage, file-protocol, browser-storage, persistence, patch, HTML |
+| glossary.md | Convention pour GLOSSARY.md dans chaque projet — domaines, termes, references croisees, chargement selectif par un AI Assistant. Section ## Glossary obligatoire dans PROJECT.md. | glossaire, glossary, terminologie, domaines, definitions, conformite, audit |
+| tools.md | Node.js script-based tools — when to use, structure, standard interface (args, stdout, exit codes), invocation via commands MCP, output rules, catalogue. | tools, scripts, node, automation, token-efficiency, commands-mcp, cross-project |
+| todo-list.md | Lightweight backlog for any project — format, states, archiving, AI Assistant role. Two files: TODO.md (active) + TODO-archive.md (done). | todo, backlog, tasks, priority, archiving, session |
+| project-structure.md | Canonical structure for any Claude project — folder layout, mandatory files, Claude project instructions template, bootstrap chain. | project-structure, claude-project, instructions, template, bootstrap, scaffold |
+| forge.md | Internal spec for the Forge MCP server — architecture, format registry, type handlers, dispatch flow. | forge, MCP, format, handler, registry, sequence, syntax-adapter |
+
+---
+
+## guides/
+
+Step-by-step processes for specific operations. A guide leaves a trace in the process — auditing whether it was followed requires a log. Read when performing the named operation, not at every session.
+
+| File | Summary | Keywords |
+|------|---------|----------|
+| working-with-forge.md | Forge path format, read/write decision tree, common patterns — loaded at every session bootstrap. | forge, MCP, path, roots, read, write, native, structured, patterns |
+| project-setup-process.md | Process to create a new Claude project. References best practices at each step. Includes scaffolding, file templates, checklist, and examples. | project-setup, process, initialization, configuration, best-practices, scaffolding |
+| best-practices.md | Design principles for Claude project structure | best-practices, structure, instructions, conventions, clarity, context, design-principles |
+| audit-process.md | Process to verify project conformance to best practices. Rules of engagement: session dedication, corrections, guide updates, re-audit separation. Structured findings, proposals, approval workflow. Includes checkpoint + batching workflow. | audit, verification, best-practices, compliance, quality-assurance, process, methodology |
+| guide-maintenance.md | Standards for maintaining all guides: update Table of Contents and Changelog with every modification. Required for all guides (project-setup, best-practices, audit-process). | maintenance, guides, documentation, changelog, discoverability, traceability, standards |
+| how-to-get-things-done.md | Practical framework for running effective AI-assisted working sessions — session model (chat = session), three phases (scoping, execution, closure), anti-patterns. | working-session, productivity, scoping, closure, WIP, todo, chat, log |
+| todo-tool.md | Guide for the HTML tool that reads and writes TODO.md via the local server — rationale, conceptual model, architecture (bootstrap, transaction model, file access). | todo-tool, HTML, local-server, bootstrap, transaction, synchronization, todo |
+| gemini-cli.md | Guide for configuring and using Gemini CLI — MCP server setup, GEMINI.md project context, system prompt override, recommended project structure, comparison with Claude. | gemini, gemini-cli, MCP, system-prompt, GEMINI.md, google, terminal |
+
+---
+
+## tools/
+
+Deterministic artifacts that execute mechanical tasks without consuming AI reasoning. Two types: **scripts** (see `conventions/tools.md`) and **viewers/editors** (see `guides/editor-tool.md`). A tool leaves a trace in both artifacts (it exists) and execution (it was run, with a result).
+
+---
+
+## Keywords
+index, conventions, workflows, guides, navigation, discoverability, knowledge-base, decision-layer, scope
+
+---
+
+## Index
+
+| Terme | Occurrences |
+|-------|-------------|
+
+---
+
+## Changelog
+
+### Version 3.8 - working-with-forge.md recreated + Session Bootstrap updated
+**Date:** 2026-06-18
+**Reason:** Guide recreated for Forge v2 — minimal, no architecture, focused on path format and read/write decision. Decision reversed from v3.6: describes alone are insufficient — the global decision flow and path format require a dedicated guide. Added to Session Bootstrap (step 2) so it is loaded at every session.
+
+**Modifications:**
+- Session Bootstrap: step 2 added — `working-with-forge.md`; steps 3–7 renumbered
+- Table guides/: entry `working-with-forge.md` added (first row)
+
+---
+
+### Version 3.7 - gemini-cli.md added to guides/
+**Date:** 2026-06-17
+**Reason:** New guide for Gemini CLI — human-facing only, no Decision Layer trigger (choosing which AI to use is a human decision, not an AI Assistant trigger).
+
+**Modifications:**
+- Table guides/: entry `gemini-cli.md` added
+
+---
+
+### Version 3.6 - working-with-forge.md supprimé de la table guides/
+**Date:** 2026-06-14
+**Reason:** Décision session : les MCP tool describes doivent se suffire à eux-mêmes — pas de guide opérationnel séparé. Le trigger avait déjà été retiré en v3.4. Entrée de table retirée. Voir TODO O52 pour la suppression du fichier et l'amélioration des describes.
+
+**Modifications:**
+- Table guides/: entrée `working-with-forge.md` retirée
+
+---
+
+### Version 3.5 - FAL removed
+**Date:** 2026-06-11
+**Reason:** FAL is a concept from Forge v1 — not present in the current codebase or spec.
+
+**Modifications:**
+- Decision Layer: `— \`forge_read(fal)\`` removed from intro line
+- Table conventions/: `forge.md` summary rewritten — `FAL syntax` → `format registry`; keywords `FAL, namespace, RTFM, internal-spec` removed
+- Table guides/: `working-with-forge.md` summary rewritten — `FAL concept, RTFM workflow (describe before read/write)` → `tool reference, common patterns`; keywords `FAL, RTFM, forge_describe` removed
+
+---
+
+### Version 3.4 - working-with-forge.md trigger removed
+**Date:** 2026-06-11
+**Reason:** `working-with-forge.md` describes Forge v1 (FAL, RTFM, Brand, forge_describe) — incompatible with Forge v2. Trigger removed from Decision Layer to prevent loading an obsolete guide. Table entry kept for traceability. See TODO O52.
+
+**Modifications:**
+- Decision Layer: trigger `Using Forge to read or write artifacts, first session with Forge` removed
+
+---
+
+### Version 3.3 - Streisand Effect applied to forge.md entry
+**Date:** 2026-06-07
+
+---
+
+### Version 3.2 - working-with-forge.md + forge.md clarified
+**Date:** 2026-06-07
+
+---
+
+### Version 3.1 - Decision Layer litmus test + Forge vocabulary
+**Date:** 2026-07-07
+
+---
+
+### Version 3.0 - backlog alias in Decision Layer
+**Date:** 2026-06-06
+
+---
+
+### Version 2.9 - project-registry.md added
+**Date:** 2026-06-06
+
+---
+
+### Version 2.8 - tools section, convention-guide distinction, documentation-style alignment
+**Date:** 2026-06-06
+
+---
+
+### Version 2.7 - Quick Start WWH, Session Bootstrap, section intros
+**Date:** 2026-06-06
+
+---
+
+### Version 2.6 - how-to-get-things-done.md added
+**Date:** 2026-06-06
+
+---
+
+### Version 2.5 - local-server.md added
+**Date:** 2026-06-04
+
+---
+
+### Version 2.4 - idea-inbox.md + documentation-style au trigger md
+**Date:** 2026-06-04
+
+---
+
+### Version 2.3 - artifact.md added
+**Date:** 2026-06-04
+
+---
+
+### Version 2.2 - documentation-style.md added
+**Date:** 2026-06-03
+
+---
+
+### Version 2.1 - Decision Layer trigger md-doc removed
+**Date:** 2026-05-31
+
+---
+
+### Version 2.0 - Documentation conventions loaded at every session
+**Date:** 2026-05-31
+
+---
+
+### Version 1.9 - md-doc-usage.md referenced
+**Date:** 2026-05-31
+
+---
+
+### Version 1.8 - Scope Rule + suppression Claude.md + dossier public/
+**Date:** 2026-05-31
+
+---
+
+### Version 1.7 - Ajout project-structure.md
+**Date:** 2026-05-31
+
+---
+
+### Version 1.6 - Ajout todo.md
+**Date:** 2026-05-31
+
+---
+
+### Version 1.5 - Session Bootstrap + AI Agents
+**Date:** 2026-05-31
+
+---
+
+### Version 1.4 - Suppression workflows/
+**Date:** 2026-05-31
+
+---
+
+### Version 1.3 - Decision layer + maintenance separation
+**Date:** 2026-05-31
+
+---
+
+### Version 1.2 - Tools convention
+**Date:** 2026-05-30
+
+---
+
+### Version 1.1 - Glossaire
+**Date:** 2026-05-30
+
+---
+
+### Version 1.0 - Creation
+**Date:** 2026-05-30
+**Raison:** Index de la knowledge base — point d'entrée pour toutes les sessions.
+
+**Contenu initial :**
+- Table conventions/ avec keywords
+- Table guides/ avec keywords

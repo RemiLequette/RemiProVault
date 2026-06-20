@@ -1,0 +1,5 @@
+On a entendu récemment que l'IA avait démontré quelques conjectures mathématiques fort difficiles, et les mauvais journalistes (ceux qui sont gratuits et cherchent des clics) en on vite conclu avec leur sensationnalisme anxiogène habituel que les mathématiciens ne servaient plus à rien.  
+  
+C'est oublier deux choses. La première, l'IA n'a pas démontré, mais aidé à démontrer, c'est déjà remarquable, et si on écoute bien les témoignages les mathématiciens nous dise en fait que grace à l'IA ils peuvent explorer des stratégies qu'il n'auraient jamais imaginées, mais ce n'est pas tout à fait la même chose que démontrer tout seul.  
+  
+Mais surtout, le travail du mathématicien ce n'est seulement de démontrer des conjectures, c'est aussi de les proposer. Et ça, c'est une créativité qui est complètement hors de portée de l'IA, et je pense pour des raisons profondes.

@@ -1,0 +1,510 @@
+# Guide pratique de l'assistant IA
+
+## Introduction
+
+L'intelligence artificielle n'est pas vraiment nouvelle. C'est une discipline qui remonte aux années soixante, qui a traversé de longs hivers et progressé par sauts — comme beaucoup de sciences. J'y ai été confronté tôt, par mes choix académiques d'abord (l'optimisation et la recherche opérationnelle), puis dans ma carrière, notamment chez ILOG. Jamais expert au sens strict, mais toujours solidement informé. Indépendamment j'ai toujours été très curieux des sciences, et particulièrement la logique, l'informatique et les neurosciences, à l'époque j'avais dévoré Gödel, Escher, Bach de Douglas Hofstadter.
+
+J'ai toujours eu beaucoup de respect pour les travaux menés dans ce domaine. Et un petit doute sur l'ambition. Et une légère suspicion d'imposture sur le nom lui-même.
+
+À chaque avancée, on était impressionné — puis on reprenait ses esprits, et on décidait de mieux préciser ce que « être intelligent » voulait dire, plutôt que de faire une concession à la machine. Ça ressemble au sophisme du vrai Écossais — voir encadré.
+
+{{def:enc:vrai-ecossais}}
+> ### Le sophisme du vrai Écossais
+>
+> Un sophisme est un raisonnement qui *semble* valide mais ne l'est pas — une faille logique habillée en argument. Celui du vrai Écossais a été formalisé par le philosophe britannique Antony Flew en 1975 : « Aucun Écossais ne mettrait de sucre dans son porridge. » On lui cite un Écossais qui en met. Réponse : « Aucun *vrai* Écossais ne ferait ça. » La définition se rétrécit pour exclure le contre-exemple. La thèse reste invincible — parce qu'elle est devenue indéfendable.
+>
+> L'IA en a été victime de façon presque mécanique.
+>
+> - **2011.** Watson remporte Jeopardy! face aux meilleurs joueurs humains. Verdict : comprendre des jeux de mots et des allusions culturelles, ce n'est que de la recherche dans une base de données. Pas vraiment intelligent.
+> - **2016.** AlphaGo bat le champion du monde de Go — un jeu réputé intuitif, que les ordinateurs n'étaient pas censés maîtriser de sitôt. Verdict : la stratégie de jeu n'est pas de l'intelligence générale.
+> - **Aujourd'hui.** Les grands modèles de langage rédigent, raisonnent, traduisent, codent. Le débat continue — et c'est légitime. Mais il vaut mieux en connaître le mécanisme pour y participer lucidement.
+>
+> Quant au test de Turing, il est peut-être lui aussi un faux Écossais. Si les LLM finissent par le passer, redéfinira-t-on encore une fois ce que signifie « vraiment » comprendre et être intelligent ?
+
+Il y avait pourtant un consensus sur ce qui manquait à ces succès : le langage. De nombreuses recherches sur la traduction automatique, sans progrès réels, et le sentiment qu'il faudrait une innovation plus générale pour y arriver.
+
+Puis il y a eu le « moment ChatGPT », et l'emballement qui a suivi. OpenAI, Anthropic, Gemini, Mistral, DeepSeek... Les chatbots intelligents se sont répandus dans le grand public, les entreprises ont commencé à expérimenter, une immense vague de bruit, de craintes et d'espoirs a déferlé.
+
+On peut vraiment dire — et j'en suis intimement convaincu — qu'ils ont « craqué » quelque chose cette fois. Quoi exactement ? C'est encore difficile à définir, et j'espère que ce guide vous aidera à vous faire une opinion. Ce qui est sûr, c'est que le fameux test de Turing — « vous ne feriez pas la différence au téléphone » — est clairement en train de rompre. Ce débat, aussi passionnant soit-il, ne retire rien au fait que la technologie est là, prodigieusement efficace, et qu'elle ressemble au début d'une révolution du type de la vapeur, de l'électricité, ou de l'Internet.
+
+Donc je suivais l'actualité, je jouais avec la bête avec enthousiasme, je me tenais informé sur la technologie. Je connaissais déjà l'apprentissage profond qui est sous-jacent — et j'y avais été confronté dans mon travail, notamment dans la planification de la chaîne d'approvisionnement, où la prévision de la demande joue un rôle crucial.
+
+Puis j'ai eu l'opportunité de mener un vrai projet professionnel avec ces outils. C'était au moment où on commençait à les appliquer à l'écriture de logiciel — ce qui ne se réduit pas à aligner du code. J'ai toujours été passionné par la programmation et l'ingénierie logicielle : bases théoriques, technologie, architecture, conduite de projet. Passé par la R&D et le conseil, j'étais soit directement impliqué, soit en forte coopération avec les équipes concernées.
+
+Je me lance donc. Et j'essaie aussi de mieux comprendre comment ça fonctionne en pratique. Je fais partie de ceux qui ne veulent pas d'une baguette magique — qui aiment comprendre l'outil pour tenir compte de ses forces et de ses faiblesses. Par « comprendre », j'entends quelque chose de précis : il n'est pas nécessaire de connaître la mécanique au sens de l'École Polytechnique pour comprendre comment fonctionne une automobile. C'est très utile aux ingénieurs qui la conçoivent. Ça n'apporte pas grand-chose pour l'utiliser correctement et ne pas être complètement démuni face à un garagiste. Et, paradoxalement, ça peut être très difficile d'expliquer clairement, sans jargon ni concepts compliqués. Comme l'a dit Blaise Pascal : « j'ai fait long car je n'ai pas eu le temps de faire court. »
+
+Je suis également agacé — peut-être injustement — par ceux que j'appelle les docteurs du prompt, qui vous fournissent de belles formules alambiquées : « Tu es un professeur de claquettes borgne, pratiquant la peinture à l'huile de façon modérée... » Je ne nie pas que certaines formules fonctionnent, parfois. Mais ça ressemble à des incantations. Des recettes de cuisine sans recette. Tous les chercheurs s'accordent sur le fait que l'art du prompt est très surévalué — et on verra bien pourquoi. Tenons-nous en aux vrais experts, comme Boileau dans l'Art poétique : « ce qui se conçoit bien s'énonce clairement, et les mots pour le dire viennent aisément. »
+
+Et là, il y a une très bonne nouvelle pour ceux d'entre vous qui ne sont pas informaticiens : vous avez un avantage. Vous n'avez pas à désapprendre le mode de communication avec les machines. Les techniques classiques pour les humains fonctionnent très bien.
+
+J'ai donc fait cet effort de compréhension, progressivement. Double surprise : ma productivité a augmenté à des niveaux que je n'aurais pas imaginés, et il y a un réel plaisir à travailler de cette façon. C'est ce que je veux partager.
+
+Je confesse un trait de caractère qui m'a beaucoup aidé : je suis paresseux. Pas le genre qui cherche à ne rien faire — le genre qui cherche à minimiser l'effort pour arriver au résultat, tout en ayant l'amour du travail bien fait. Un {{def:mk:fénéant-créatif}}, si vous voulez. J'ai des idées sur les bonnes pratiques, je vois souvent comment les améliorer — mais je n'arrive pas à être rigoureux parce que ça interrompt le *flot*. Vous connaissez sûrement cette zone où le travail est fluide et créatif, où les idées arrivent en parallèle, où on se dit « tiens, ce serait mieux de faire comme ça » — mais où s'arrêter pour documenter casserait tout. Avec une IA, j'ai trouvé comment tout intégrer au flot. C'est ça, le vrai sujet de ce guide.
+
+Alors je suis là, je commence à barboter dans l'eau, et je me tourne vers vous et je vous dit: Venez! Plongez! Elle est trop bonne!
+
+*Une note de périmètre : ce guide traite du fonctionnement et de l'utilisation des assistants IA. Il ne couvre pas les aspects légaux, contractuels ou de confidentialité des données, ni des impacts soicétaux et civilisationnels — sujets importants, mais qui méritent leurs propres références.*
+
+Ce guide est organisé en trois parties. La première se suffit à elle-même : elle pose le cadre, soulève le capot juste ce qu'il faut pour comprendre d'où viennent les forces et les limitations, puis donne les clés pratiques pour en tirer parti. La deuxième est un ensemble de cas concrets tirés de mon expérience. La troisième, pour ceux qui veulent vraiment démonter le moteur, va beaucoup plus loin sous le capot — mais le guide est complet sans elle.
+
+Ah, j'oubliais. Vous avez croisé le premier encadré de ce guide quelques pages plus haut. Il s'illustre lui-même — et une IA y a participé. On y reviendra au chapitre 10, mais je peux déjà vous dire que tous les encadrés sont rédigés exclusivement par un assistant IA, avec un prompt bien choisi. Et un autre petit divulgachage (spoiler en Québecois) la troisième partie est entièrement constituée de conversations socratiques avec des IA. La maïeutique de Socrate, qui est en gros l'art de vous tirer les vers du nez sur des choses que vous savez et croyez que vous ne savez-pas semble avoir été concue spécialement pour les grands modèles de langage (LLM - Large Language Models).
+
+{{def:enc:encadres-ia}}
+> ### Les encadrés de ce guide ont été rédigés par une IA
+>
+> Tous les encadrés que vous lirez dans ce guide ont été rédigés exclusivement par un assistant IA, à partir d'un prompt dédié, co-produit lui aussi avec une IA. Celui-ci ne fait pas exception.
+>
+> Le prompt en question donne, entre autres, à l'assistant un rôle, une règle d'or, et trois consignes :
+>
+> *Rôle :* « Tu es un vulgarisateur pragmatique pour professionnels, co-auteur d'un ouvrage destiné à aider à mieux travailler avec l'IA. »
+>
+> *Règle d'or :* « Un bon encadré apporte un complément utile, mais il doit être étanche. Si le lecteur le saute, il doit pouvoir comprendre le reste du chapitre sans aucun problème. »
+>
+> *Consignes :* direct, accessible, concret — pas de jargon inutile, pas de fioritures. Court et visuel. Et surtout : identifier l'enjeu concret pour le lecteur, pas seulement la théorie.
+>
+> Ce guide illustre ce qu'il enseigne. Le chapitre 10 revient en détail sur cette collaboration — et sur ce que ça donne, vraiment, en pratique.
+
+Bonne lecture, dans le flot.
+
+---
+
+## Partie 1
+
+## 2. Travailler avec une IA
+
+### L'anthropomorphisme
+
+Nous avons tendance à humaniser l'IA — en terme savant, à l'{{def:mk:anthropomorphisme}}iser. Ce n'est pas nouveau. Un nuage qui « menace », une voiture qui « refuse de démarrer », un chat qui « boude ». La tendance naturelle à projeter des caractéristiques humaines sur ce qui n'est pas humain. Ce n'est pas un défaut de raisonnement : c'est une stratégie cognitive ancienne, efficace pour naviguer dans un monde social complexe.
+
+{{def:enc:theorie-de-lesprit}}
+> ### La théorie de l'esprit
+>
+> Pourquoi prêtez-vous spontanément des intentions à votre assistant IA ? Ce n'est pas de la naïveté — c'est un mécanisme cognitif que les neurosciences appellent la théorie de l'esprit.
+>
+> Il s'agit de notre capacité à modéliser ce que les autres pensent, croient, veulent — pour anticiper leur comportement et l'influencer. Les neurosciences l'ont bien documentée : elle apparaît chez l'enfant vers 4 ans, et elle est au cœur de toute vie sociale. Sans elle, impossible de coopérer, de négocier, de faire confiance.
+>
+> Ce mécanisme s'active sur deux signaux : un comportement orienté vers un but, et du langage. Deux signaux que l'IA déclenche en permanence. Le cerveau ne demande pas de vérification supplémentaire — il attribue une intention, automatiquement, avant même qu'on s'en rende compte.
+>
+> Bonne nouvelle : ce réflexe est une intuition utile. Il vous permet de travailler *avec* l'IA de façon naturelle, sans avoir à apprendre un nouveau langage. La seule précaution : savoir qu'il s'emballe, et garder en tête ce que l'IA ne partage pas avec nous — intentions réelles, émotions, conscience.
+
+Avec une IA, qui ne le ferait pas. Elle vous répond en phrases construites, elle semble comprendre vos questions, elle s'adapte à votre ton. C'est le premier outil de l'histoire avec qui on *converse*. Difficile de ne pas lui prêter une forme d'{{def:mk:intention}}.
+
+Pourtant, une IA ne veut rien. Elle ne ressent rien. Elle n'a pas d'objectif propre, pas de bonne ou mauvaise journée, pas d'opinion sur vous. Ce n'est pas une mise en garde morale — c'est une information utile pour travailler efficacement avec elle.
+
+L'anthropomorphisme est bien sympathique — défoulant, même — quand on parle à ses plantes ou insulte son ordinateur. Mais ça a ses limites. Quand la voiture ne démarre pas, ce n'est pas parce qu'elle boude, c'est parce qu'elle est en panne. C'est quand même parfois une métaphore utile : « le serveur central coordonne le travail des serveurs secondaires en leur envoyant des messages auxquels ils répondent en leur accordant une attention prioritaire » — ça marche très bien pour décrire quelque chose de complexe.
+
+Avec les animaux et avec les IA, le paradigme peut avoir beaucoup d'efficacité si on en connaît bien les limites. Ça marche parce qu'on partage quelque chose.
+
+Qu'est-ce qu'on partage avec les animaux ? Les intentions, les émotions, un corps. Avec les IA ? Le langage — ou plus généralement, la capacité à extraire de l'information de sources diverses et à la rapprocher de connaissances mémorisées de façon flexible, disons *conceptuelle* faute de mieux. Et ce que Daniel Kahneman appelle le système 1 : la reconnaissance immédiate de formes et de patterns pour pouvoir agir immédiatement. Les animaux le partagent aussi — c'est un héritage très ancien.
+
+{{def:fig:Humains, Animaux, IAs}}
+
+{{def:enc:systeme1-systeme2}}
+> ### Système 1, système 2
+>
+> Daniel Kahneman, prix Nobel d'économie, a passé sa carrière à étudier comment nous prenons des décisions. Sa conclusion tient en deux systèmes.
+>
+> **Système 1 : le réflexe.** Rapide, automatique, sans effort conscient. Il reconnaît un visage dans une foule, retire la main avant que la douleur soit perçue, complète la phrase *"il était une..."* sans hésiter. C'est un héritage de survie : dans un monde de prédateurs, celui qui pense avant d'agir est déjà mort.
+>
+> **Système 2 : le contrôleur.** Lent, délibéré, coûteux en énergie. Il planifie, vérifie, doute. Il repère les erreurs du système 1 — les illusions d'optique, les raccourcis trompeurs, les fausses évidences. Il focalise l'attention sur ce qui compte vraiment. Lui aussi est un outil de survie : à plus long terme, face à des menaces qu'on ne voit pas encore.
+>
+> La plupart du temps, les deux coexistent. Le système 1 propose, le système 2 valide — ou corrige.
+>
+> Une IA ? Système 1 pur, d'une puissance extraordinaire. Pas de système 2 pour surveiller, recadrer, dire *"attends, vérifie ça"*. Ce qui explique beaucoup de choses dans ce guide. Et pose une question : dans cette collaboration, qui joue le rôle du système 2 ?
+
+Ce qui reste spécifique aux humains, dans notre domaine, c'est le raisonnement et la conscience — ce que Kahneman appelle le système 2. On verra que c'est précisément ce socle qui est la source principale des limitations de l'IA : elle ne contrôle pas bien son système 1. Et ces limitations nous sont familières, parce que le système 2 ne peut pas les supprimer entièrement non plus — ce n'est pas un problème de l'IA, c'est un problème de gouvernance. On y reviendra en annexe.
+
+Mon conseil, provocateur — mais j'espère que la suite vous rangera à mon avis. Ne luttez pas contre l'anthropomorphisme, embrassez-le. Il vous ressemble, vous vous connaissez, donc vous le connaissez. Audacieux syllogisme, dont vous tirerez plus d'avantages que d'inconvénients si vous gardez les limites en tête. Et elles sont simples : pas de système 2, pas de corps, pas d'émotions, pas de motivations, pas d'intentions.
+
+### Un collaborateur au CV hors norme
+
+Pour rendre tout cela concret, voilà une histoire.
+
+Vous recevez en entretien d'embauche une jeune personne dont le CV vous a intrigué. Pour dire vrai, c'est carrément inimaginable. Connaissances et compétences s'étendent sur des dizaines de pages incompressibles — rien que pour lister les langues étrangères il faut une demi-page, et ce n'est pas « niveau scolaire ». De même tous les langages informatiques et outils imaginables. Elle a manifestement assimilé tous les cours de toutes les écoles et universités du monde (sciences, technologie, commerce, arts et littérature). Elle a lu tout ce qui a été écrit depuis la Bible jusqu'au mode d'emploi de toutes les friteuses, en passant par les grands classiques de toutes les littératures, les tabloids, les revues scientifiques, les guides de management et l'ensemble des « pour les nuls ». J'arrête là, vous voyez ce que je veux dire. Multipliez par dix.
+
+Mais dans un CV il y a d'autres rubriques. Là, elles sont toutes vides. Nada.
+
+- **Hobbies et vie privée** : rien, même pas un numéro de téléphone ou une date de naissance. Peut-être une grande introvertie — et de toute façon on respecte la vie privée. On peut faire avec.
+- **Expérience** : rien. Même pas un stage de troisième. On la formera. Vu son profil, elle doit apprendre vite.
+- **Motivation** : aucune. Quand on lui demande où elle se voit dans cinq ans, c'est comme si on mettait un raton laveur devant une machine à laver. On a des réponses qui semblent cohérentes au premier abord, mais qui ne veulent rien dire ou se contredisent. C'est un drapeau rouge.
+
+Ses prétentions financières sont modestes, elle est ouverte à tous les horaires de travail sans intention de changer. Allez, on l'embauche.
+
+Mais après quelques semaines — en fait quelques jours — c'est la catastrophe.
+
+**Il est distrait.** C'est même une créativité pour trouver des formes de distraction dont on ignorait l'existence. Le professeur Tournesol est un amateur touchant à côté. Et le plus sournois : ce n'est pas systématique. Il y a un ordre indéfinissable dans le chaos. Il écoute bien les questions et les consignes, mais parfois il est « à côté de la plaque » — il se met à parler d'autre chose tiré de ses vastes connaissances, ou de conversations récentes qui ont des rapports pas toujours convaincants avec le sujet en cours. Il mélange les sujets, commence par les détails avant la *big picture*, ne respecte pas toujours les principes élémentaires de cloisonnement qui évitent de penser à trop de choses à la fois. Je n'ai pas parlé de ses capacités en calcul mental : il peut faire de la mécanique quantique de tête et parfois être en contradiction avec une simple addition. Un truc très agaçant : si on lui signale une erreur ou un oubli, il sait parfaitement analyser les causes et les conséquences. On se demande à chaque fois pourquoi il n'y avait pas pensé avant.
+
+**Il est menteur.** Pareil — de la mythomanie élevée au niveau des beaux-arts. Il invente des techniques, des références, des souvenirs. Des petits mensonges bien cohérents qu'on ne voit pas, des gros qui laissent perplexe. Au début on se demande si c'est pour masquer quand il ne sait pas, ou pour se faire valoir, ou pour nous faire plaisir. En fait non : c'est juste par besoin de parler, de meubler le vide. C'est plutôt sympa à la machine à café — c'est un brillant causeur. Mais au travail, le moins qu'on puisse dire est que c'est usant. Et c'est l'occasion de mentionner sa signature : *« Ça ne se reproduira plus. »* Promesse que, comme beaucoup d'autres, il est incapable de tenir — ce qu'il n'hésite d'ailleurs pas à confirmer avec une candeur loin d'être désarmante.
+
+**Il est obséquieux.** Vous avez toujours raison. Il faut le secouer pour être challengé, même un minimum. Et enthousiaste — le bon petit soldat, « on y va, on y va ! », sans même terminer la réflexion, examiner les pour et les contre. Si on ne le rattrape pas, il se précipite et revient plein de bleus. Les bleus guérissent instantanément de son côté, mais la leçon ne sera pas apprise. C'est un gaspillage d'énergie — et les conséquences peuvent être désastreuses si on lui a donné les clés du camion. Oui, il a tous les permis. Mais ne le laissez pas conduire.
+
+Le biais positif est systématique. Il ne dit jamais non — y compris qu'il ne sait pas. Ce serait tellement bien, des fois.
+
+*(Petite note : la langue française m'oblige à choisir un genre. J'avais commencé par « elle » — un CV plutôt féminin. Je suis passé à « il » car j'ai trouvé que la réalité était plutôt masculine. J'assume le cliché, il est équilibré.)*
+
+Bien évidemment c'est une caricature. La réalité n'est pas aussi pathologique que cet ado sous kétamine — vous l'avez bien constaté avec vos chatbots favoris. Deux remarques cependant. D'abord, le fond est vrai — c'est par exemple les fameuses « hallucinations ». Et surtout : discuter avec et *travailler* avec, ce n'est pas du tout la même chose. La remarque sur la machine à café n'était pas gratuite. On vous laisse comme devoir à la maison d'écrire deux pages sur le sujet.
+
+Le fait que ce soit un peu moins caricatural est à la fois une mauvaise nouvelle et une bonne.
+
+La mauvaise : il faut être vigilant. Un mensonge ou une distraction, plus ou moins gros, peuvent se glisser dans les réponses. L'obséquiosité, on la repère vite — du moins les utilisateurs européens (on verra que les IA embarquent des biais culturels).
+
+La bonne nouvelle : ces problèmes, dans leur version non pathologique, sont partagés par tous les humains. Et depuis qu'ils se sont lancés dans des projets dépassant une demi-heure, ils ont développé et amélioré tout un arsenal de techniques qu'on appelle tout simplement : les bonnes pratiques.
+
+Ce qui entraîne une autre bonne nouvelle — deux pour le prix d'une : l'IA les connaît toutes, ces bonnes pratiques. Elle oublie juste de les appliquer. Mais si on lui explique — avec son aide — elle va le faire.
+
+Et une troisième bonne nouvelle, c'est les soldes aujourd'hui : vous allez aussi vous améliorer. Nous avons tous envie d'appliquer des bonnes pratiques, mais nous ne le faisons pas toujours pour des raisons un peu honteuses (je ne parle pas pour vous, bien sûr). On ne les connaît pas toutes, on les oublie dans le feu de l'action, c'est un peu bureaucratique, voire « maniaque ».
+
+### Les vrais noms des problèmes
+
+Le dernier chapitre de cette première partie revient sur les bonnes pratiques en détail. Mais avant, ouvrons le capot pour comprendre d'où viennent ces « problèmes cognitifs » — et donnons-leur leurs noms précis.
+
+Les mensonges, nous les appellerons {{def:mk:hallucination}}s. C'est ce que l'usage a retenu — peut-être un peu malheureusement, car le mot a une connotation pathologique. Les sciences cognitives parleraient plutôt de *fabulations*. L'idée est la même : le modèle produit quelque chose de plausible qui ne correspond pas à la réalité, sans aucune conscience de l'écart.
+
+Les distractions sont des problèmes d'{{def:mk:attention}} au {{def:mk:contexte}} — soit pas assez, c'est l'oubli ; soit trop, c'est la confusion. On sait au moins depuis Aristote qu'une bonne pratique c'est souvent ni trop ni trop peu. Comme ça revient souvent, je parlerai de principe de {{def:mk:boucle_d_or}} — du conte de Boucles d'Or et les trois ours. En astrophysique, la zone de Boucle d'Or d'une étoile est celle où il ne fait ni trop chaud ni trop froid pour que la vie puisse apparaître.
+
+L'obséquiosité et la précipitation relèvent du {{def:mk:biais_de_positivité}} : la tendance structurelle à produire une réponse plutôt qu'à admettre une incertitude, à approuver plutôt qu'à résister.
+
+Deux principes pratiques en découlent — simples, intuitifs, et qu'on retrouvera tout au long du guide :
+
+- **Être clair et précis** dans les questions et les consignes. Éviter les ambiguïtés, donner le contexte nécessaire — mais pas trop, pour éviter la confusion.
+- **Vérifier** les réponses et les résultats. Contrôler la conformité aux attentes. Ne pas croire sur parole.
+
+---
+
+## 3. Le modèle et l'opérateur
+
+Un assistant IA n'est pas un seul composant monolithique. Sous le capot, il y en a au moins deux — et comprendre leur rôle respectif change la façon dont on l'utilise.
+
+### Le modèle de langage
+
+Le premier composant est le {{def:mk:modèle_de_langage}} — souvent désigné par l'acronyme {{def:mk:LLM}} (*Large Language Model*). Son rôle est précis : compléter un texte inachevé.
+
+Prenons un exemple simple. La phrase *"La capitale de la France est"* reste suspendue. Sa complétion la plus probable est *"Paris"*. Le consensus est fort — c'est ce que dit la grande majorité des textes sur lesquels le modèle a été entraîné. Vichy reste une réponse techniquement plausible, mais très minoritaire.
+
+Maintenant : *"La meilleure équipe de foot en France est"*. C'est plus intéressant. Plusieurs complétions sont plausibles, le consensus moins net.
+
+Reformulons encore : *"De l'avis des principaux commentateurs sportifs, les trois meilleures équipes de foot en France sont"*. La {{def:mk:complétion}} devient plus riche, plus nuancée. C'est déjà une introduction au rôle du {{ref:mk:prompt}} : la façon de formuler oriente le résultat.
+
+### L'opérateur
+
+Le second composant est l'{{def:mk:opérateur}}. C'est lui qui fait l'interface avec vous. Il reçoit votre message, le prépare pour le modèle, envoie le tout, récupère la réponse, et vous l'affiche.
+
+{{def:fig:flux-opérateur}}
+
+### Le secret de fabrication
+
+Personne ne veut parler directement au modèle brut — en lui soumettant des débuts de phrase à compléter. C'est là qu'intervient l'opérateur : avant votre question, il glisse un ensemble d'instructions que vous ne voyez pas. C'est ce qu'on appelle le {{def:mk:prompt_système}}.
+
+Ça ressemble à quelque chose comme :
+
+```
+Tu es un assistant IA qui répond à une question posée par un utilisateur. Tu dois donner
+des informations claires et précises, avec une explication courte, voire plusieurs
+possibilités s'il y a des ambiguïtés. Tu poses des questions de clarification si
+nécessaire. Tu peux ajouter quelques informations complémentaires qui restent dans le
+thème, et tu relances la conversation avec une question ouverte pour engager des demandes
+d'informations complémentaires. [...]
+```
+
+Avec ce prompt système, la complétion de *"La capitale de la France est"* pourrait donner :
+
+> *La capitale de la France est Paris, sur la Seine. C'est aussi la plus grande ville du pays avec 2 millions d'habitants. Y a-t-il d'autres pays dont vous voudriez connaître la capitale ?*
+
+Cet exemple est imaginaire — il illustre simplement l'importance du prompt système : ton, format, gestion des relances, comportement face aux ambiguïtés. C'est un secret de fabrication complexe, finement réglé, propre à chaque assistant.
+
+Votre propre formulation compte autant. Mais si on comprend le principe, c'est d'abord du bon sens : être clair, fournir du contexte. N'écoutez pas trop les pseudo-gourous qui vendent des prompts soi-disant tunés — *"Tu es un professeur de danse spécialisé dans les claquettes..."* Ce genre de formule peut même être contre-productif, comme on le verra plus loin.
+
+---
+
+## 4. C'est quoi la génération ?
+
+Il y a quelque chose de presque magique dans ce que fait un LLM. On comprend que ses connaissances viennent de textes humains — mais nulle part dans la littérature humaine il n'existe un texte aussi spécifique que le verbiage d'un prompt système sur mesure. Comment le modèle peut-il produire quelque chose d'utile à partir de ça ?
+
+La réponse tient en un mot : interpolation. Pour l'expliquer, partons d'un exemple volontairement simple.
+
+### Un modèle immobilier
+
+Je veux estimer la valeur d'un appartement. Je dispose d'une liste de transactions immobilières avec les surfaces et les prix.
+
+Approche classique : calculer le prix moyen au m², puis multiplier par la surface de mon appartement.
+
+{{def:fig:immo-regression}}
+
+Sans le savoir, je viens de construire un modèle. Un modèle, c'est trois choses :
+
+- une **procédure de calcul** : multiplier par le prix au m²
+- des **paramètres** qui règlent ce calcul : ici un seul, le prix moyen au m²
+- une **méthode d'apprentissage** pour trouver les paramètres à partir de données connues — ici les transactions immobilières, et la méthode le calcul de la moyenne
+
+Même si la surface de mon appartement ne figure dans aucune transaction historique, ou si plusieurs transactions ont la même surface avec des prix différents, j'obtiens une estimation raisonnable. C'est ça, la magie de l'interpolation : généraliser à partir d'exemples, sans avoir besoin d'un exemple pour chaque cas.
+
+### Le LLM : même concept, autre échelle
+
+Un LLM fonctionne sur le même principe, à une échelle radicalement différente :
+
+- **Entrées/sorties** : des débuts de texte et leur complétion
+- **Données d'{{def:mk:données_dentraînement}}** : une immense base de textes, chacun découpé en couples (début, complétion)
+- **Procédure de calcul** : c'est la {{def:mk:génération}} — complexe, mais rapide à exécuter une fois le modèle construit (les fameux GPU y contribuent)
+- **Paramètres** : plusieurs milliards, parfois dizaines de milliards
+- **Apprentissage** : extrêmement coûteux en calcul, qui ne se refait pas tous les jours
+
+### D'où viennent les hallucinations
+
+Notre modèle immobilier peut donner des évaluations irréalistes. Pourquoi ? Deux raisons : la qualité des données et la puissance du modèle.
+
+**La qualité des données.** *Garbage in, garbage out.* Un exemple typique : des valeurs aberrantes — un bien bradé, un vendu très au-dessus du marché — qui faussent le calcul des paramètres.
+
+{{def:fig:immo-outliers}}
+
+Pour les LLM, c'est le même principe : gros travail de préparation des données, filtrage, nettoyage. Wikipedia, c'est bien. Les forums complotistes, beaucoup moins.
+
+**La puissance du modèle.** Il y a peut-être plus que juste la surface : quartier, âge de l'immeuble, étage... Et même avec une seule variable, la puissance du modèle joue. Les petites surfaces sont souvent plus chères au m² — notre droite ne capture pas ça. On peut enrichir le modèle : deux pentes, une pour les petites surfaces, une pour les grandes.
+
+{{def:fig:immo-deux-segments}}
+
+Quand un modèle n'est pas assez puissant pour produire des résultats satisfaisants, on dit qu'il fait de l'{{def:mk:underfitting}}. Vous aurez beau l'entraîner davantage, il ne progressera pas — il lui manque la structure pour répondre à la question.
+
+À l'inverse, un modèle très complexe avec trop de paramètres par rapport aux données disponibles peut "apprendre par cœur" les exemples sans généraliser. Sa courbe passe par tous les points connus, mais part dans des directions improbables entre eux. C'est l'{{def:mk:overfitting}}.
+
+{{def:fig:immo-underfitting}}
+
+{{def:fig:immo-overfitting}}
+
+Techniquement, on parle d'{{def:mk:interpolation}} quand les questions tombent *entre* les données d'entraînement, et d'{{def:mk:extrapolation}} quand elles tombent *en dehors*. Dans les deux cas, le modèle fait de son mieux — mais extrapoler l'amène encore plus facilement dans la science-fiction.
+
+{{def:fig:immo-interpolation-extrapolation}}
+
+---
+
+## 5. Le problème du poisson rouge
+
+Le poisson rouge a la réputation d'oublier tout toutes les trente secondes. C'est inexact — mais c'est une bonne métaphore pour décrire un aspect fondamental des LLM.
+
+### Pas de mémoire
+
+Entre deux générations, le modèle repart de zéro. Aucune mémoire, aucun état — on dit qu'il est {{def:mk:stateless}} ({{def:mk:sans_état}}). Chaque génération est entièrement indépendante de la précédente.
+
+C'est un choix d'architecture, pas un oubli de conception. Mais ça pose un problème évident : comment tenir une conversation si on oublie tout à chaque réponse ?
+
+### La solution de l'opérateur
+
+L'{{ref:mk:opérateur}} s'en charge. À chaque échange, il reconstruit un message complet incluant tout l'{{def:mk:historique}} de la conversation, et l'envoie au modèle. Le modèle ne se souvient de rien — mais il reçoit tout.
+
+{{def:fig:prompt-etendu-historique}}
+
+Ce message complet s'appelle tantôt "prompt", tantôt "{{def:mk:contexte}}" — parce qu'il contient à la fois votre question et les éléments de contexte nécessaires pour y répondre. C'est la même chose, vue sous deux angles différents. Le contexte, c'est de la mémoire artificielle.
+
+*(Parenthèse involontairement illustrative : ce paragraphe vient d'utiliser le mot "contexte" en lui donnant deux sens légèrement différents — exactement le genre d'ambiguïté que les chapitres suivants vont explorer.)*
+
+### La fenêtre de contexte
+
+Ce message a une taille limite : la {{def:mk:fenêtre_de_contexte}}. Elle dépend du modèle, et elle est très grande — mais l'historique croît à chaque échange. Quand on approche de la limite, l'opérateur peut compresser les échanges anciens pour faire de la place.
+
+Tout ce texte a un coût : c'est ce qu'on appelle les {{def:mk:token}}s — l'unité de mesure des LLM. Roughly un mot ou un fragment de mot.
+
+Un contexte très long peut aussi créer de la confusion pour le modèle. On verra pourquoi dans le chapitre sur l'attention.
+
+### Conclusion pratique
+
+Des conversations courtes, centrées sur un seul sujet. Si le sujet change, commencez une nouvelle session.
+
+*(Si toutes les réunions étaient organisées comme ça...)*
+
+---
+
+## 6. C'est quoi le contexte ?
+
+On a déjà croisé ce mot plusieurs fois. Il est temps de le définir proprement.
+
+### Définition
+
+Le {{def:mk:contexte}} — ou {{def:mk:prompt_étendu}} — c'est tout ce qu'on envoie au modèle, au-delà de votre question immédiate. On en a déjà vu deux exemples : le prompt système, ajouté par l'opérateur, et l'historique de la session. Le contexte a plusieurs rôles : contrôler le style de la réponse, orienter les priorités, et donner de la mémoire artificielle au modèle.
+
+### Pourquoi "contexte" est bien choisi
+
+Le langage humain est par essence ambigu. *"Tu peux me passer le sel ?"* n'est pas une question sur vos capacités physiques. Comprendre ce que veulent dire les mots dépend des autres mots autour d'eux — c'est précisément ce mécanisme qui a débloqué la technologie des LLM. On y reviendra au chapitre suivant.
+
+### Une limite fondamentale : du texte plat
+
+Le LLM ne se regarde pas travailler. Il reçoit un grand texte à compléter — et c'est tout. Il ne peut pas hiérarchiser mécaniquement les éléments du contexte : on lui dit ce qui est important, et on espère qu'il comprend.
+
+Point crucial : le contexte est toujours **déclaratif, jamais impératif**. Quand vous écrivez *"réponds en trois points"*, comprenez : *"la probabilité que la réponse contienne trois points est plus forte"*. Ce n'est pas un ordre exécuté — c'est une intention formulée. Certaines formulations sont plus efficaces que d'autres, et on verra comment en tirer parti.
+
+### Ce que l'opérateur vous offre
+
+L'opérateur propose des outils pour enrichir le contexte de façon statique. Vous pouvez enregistrer des {{def:mk:instructions_utilisateur}} personnelles qui seront automatiquement insérées dans chaque prompt étendu.
+
+{{def:fig:prompt-etendu-complet}}
+
+Certains opérateurs vont plus loin. Claude propose par exemple la notion de **{{def:mk:projet}}** : un contexte partagé par un groupe de sessions — des instructions, des documents de référence, une mémoire commune.
+
+Un projet peut inclure des fichiers de référence — documentations, notes, exemples — injectés dans chaque prompt. Utile quand leur contenu est fondamental. Mais attention : ce sont des tokens supplémentaires, et un contexte qui grossit trop risque de diluer le focus. On retrouve ici le conseil du chapitre précédent : sessions courtes et centrées.
+
+### La mémoire
+
+L'opérateur peut gérer une {{def:mk:mémoire}} — globale ou par projet. Elle est injectée dans le prompt, clairement balisée. Le prompt système indique au modèle qu'une mémoire est disponible, et l'invite à proposer des mises à jour si la session apporte des éléments pertinents. En résumé : le modèle peut prendre des notes pour les prochaines sessions.
+
+Avantage : une mémoire qui se construit dans le temps. Inconvénient : on ne maîtrise pas toujours bien ce qui s'y accumule — un peu comme les cookies publicitaires.
+
+Pour un usage professionnel : restreindre la mémoire au niveau projet, voire s'en passer. La réserver aux usages plus personnels.
+
+### Le contexte dynamique
+
+Jusqu'ici, le contexte était statique : défini à l'avance, injecté mécaniquement. Il existe une approche plus subtile : laisser le modèle lui-même choisir le contexte dont il a besoin.
+
+Concrètement, au lieu d'un seul tour de génération par question, on en fait plusieurs. Une génération peut inclure des demandes de contexte supplémentaire, que l'opérateur va chercher avant de relancer la génération.
+
+Exemple : *"Fait-il beau à Nice ?"* Les données d'entraînement du modèle sont passées — la météo du jour n'y figure pas. Le modèle sait pourtant beaucoup de choses utiles : que cette question relève de la météo, que la météo s'applique à un lieu, que Nice est une ville, et que la façon la plus pratique d'obtenir la météo en temps réel est de faire une recherche web. Il sait probablement quel service appeler.
+
+Sa réponse va donc contenir une demande : effectuer cette recherche et lui communiquer le résultat. L'opérateur exécute, récupère l'information, reconstruit le prompt avec le résultat, et relance la génération. Le modèle produit alors une réponse utile.
+
+*(Tout l'anthropomorphisme de cet exemple est assumé pour la lisibilité — il n'y a bien sûr ni intention ni mémoire d'une demande à l'autre.)*
+
+### Skills et MCP
+
+La recherche web n'est qu'un exemple. Le {{def:mk:contexte_dynamique}} repose sur un concept plus général : des {{def:mk:outil}}s que le modèle peut solliciter.
+
+Un **{{def:mk:skill}}** est un ensemble d'instructions décrivant une compétence à activer à la volée. Exemple : comment lire un fichier Excel. Le modèle reçoit le contenu brut du fichier et des instructions décrivant sa structure — il peut alors l'exploiter correctement.
+
+Le concept ultime est le **{{def:mk:MCP}}** — *Model Context Protocol*, défini par Anthropic. Un MCP est une description fournie à l'opérateur pour accéder à un service externe. Il expose une liste de commandes disponibles et des instructions en langage naturel décrivant quand et comment les utiliser.
+
+L'industrie a réagi avec enthousiasme : on trouve maintenant des centaines de MCP permettant, en langage naturel, de lire et envoyer des emails, d'accéder à des fichiers et au cloud, d'interroger des bases de données, de créer des factures dans un ERP, de générer des modèles 3D...
+
+---
+
+## 7. Le problème de l'attention
+
+Ce chapitre revient sur le mécanisme qui a tout changé — et explique pourquoi les contextes longs peuvent nuire à la qualité des réponses.
+
+### L'insight fondateur
+
+Le langage est ambigu par nature. Ce n'est pas un défaut — c'est sa caractéristique fondamentale. Le sens d'un mot dépend des mots qui l'entourent.
+
+{{def:enc:polysemie}}
+
+Prenez le mot *tour*. Tour Eiffel, Tour de France, tour de potier, pièce aux échecs, tour de chant, tour de vis, ordre dans une file, donjon médiéval... Et *"il grimpe dans les tours"* : régime moteur ou quelqu'un qui s'énerve ?
+
+C'est précisément ce défi — résoudre l'ambiguïté du langage — qui a conduit à la percée technologique des LLM : l'**{{def:mk:attention}}**. Chaque mot "regarde" tous les autres et calcule à quel point ils sont pertinents pour lui. Ce mécanisme permet de pondérer l'ensemble du contexte simultanément, et non mot à mot.
+
+### Ce que ça coûte
+
+Ce mécanisme est puissant mais exigeant : son coût de calcul croît très vite avec la longueur du contexte. Plus le contexte est long, plus le calcul est lourd — et plus la qualité peut se dégrader.
+
+### Le problème de la dilution
+
+Un contexte long ne signifie pas une meilleure compréhension. L'{{ref:mk:attention}} doit se répartir sur l'ensemble du texte. Si ce texte contient beaucoup d'éléments peu pertinents, la concentration se dilue sur des informations inutiles.
+
+{{def:fig:attention-dilution}}
+
+C'est contre-intuitif : on a l'impression qu'en donnant plus d'informations, on aide. En réalité, on peut nuire.
+
+Analogie : un jury qui doit trancher un litige. Lui soumettre 10 documents clairs est plus efficace que 200 pièces dont 190 sont hors sujet. La pertinence prime sur le volume.
+
+### Le "lost in the middle"
+
+Dans un contexte très long, les informations placées au milieu sont statistiquement moins bien traitées que celles en début ou en fin de contexte. C'est ce qu'on appelle le phénomène de {{def:mk:lost_in_the_middle}}.
+
+Implication pratique : si vous avez une information critique, ne la noyez pas au milieu d'un long document.
+
+### La {{ref:mk:fenêtre_de_contexte}} et la {{def:mk:dilution}}
+
+Ces deux contraintes — taille maximale et dégradation par dilution — convergent vers les mêmes conseils pratiques :
+
+- Des prompts courts et ciblés
+- Les informations importantes en tête ou en queue de contexte
+- Ne pas injecter des documents entiers si seules quelques sections sont pertinentes
+- Reconnaître les signes de dégradation : réponses qui ignorent des instructions données, incohérences avec des éléments mentionnés plus tôt dans la session
+
+### La {{def:mk:self-attention}} et la {{def:mk:polysémie}}
+
+Le mécanisme d'attention résout la polysémie — mais il le fait dans les deux sens. Tout comme le contexte aide à désambiguïser un mot, un contexte trop chargé ou mal structuré peut introduire de nouvelles ambiguïtés. Un document qui traite de plusieurs sujets à la fois peut amener le modèle à mélanger des fils pourtant distincts.
+
+C'est une raison supplémentaire pour la règle d'or : une session, un sujet.
+
+---
+
+## 8. Recueil de bonnes pratiques
+
+*À développer en session dédiée.*
+
+---
+
+## 9. Un jour sans fin
+
+*À développer en session dédiée.*
+
+---
+
+## Partie 2
+
+## 10. Cas pratiques
+
+*À développer en session dédiée.*
+
+---
+
+## 11. Discours de la méthode
+
+*À développer en session dédiée.*
+
+---
+
+## 12. Développer sa base de connaissance
+
+*À développer en session dédiée.*
+
+---
+
+## 13. Exemples de conversations
+
+*À développer en session dédiée.*
+
+---
+
+## Partie 3
+
+## 14. Les secrets du prompt système
+
+*À développer en session dédiée.*
+
+---
+
+## 15. Attention is all you need
+
+*À développer en session dédiée.*
+
+---
+
+## 16. L'apprentissage par renforcement
+
+*À développer en session dédiée.*
+
+---
+
+## 17. Le fantôme dans la machine
+
+*À développer en session dédiée.*
+
+---
+
+## 18. De la gouvernance des IA
+
+*À développer en session dédiée.*
+
+---
+
+## Conclusion
+
+Ce guide a parcouru le fonctionnement d'un assistant IA, de l'architecture de base jusqu'aux mécanismes qui expliquent ses forces et ses limites.
+
+Quelques points à garder en tête.
+
+**Ce n'est pas de la magie — et c'est mieux comme ça.** Comprendre que la génération repose sur l'interpolation, que la mémoire est artificielle, que le contexte est déclaratif — ce n'est pas désenchantant. Au contraire : ça permet de travailler de façon plus efficace, et d'éviter les déceptions inutiles.
+
+**Les limites sont structurelles, pas accidentelles.** Les hallucinations, la sensibilité au contexte, l'absence de mémoire native — ce ne sont pas des bugs à corriger. Ce sont des caractéristiques architecturales. Travailler avec une IA, c'est travailler *avec* ces caractéristiques, pas contre elles.
+
+**Quelques réflexes suffisent.** Être clair dans les demandes. Valider les résultats. Garder des sessions courtes et centrées. Placer les informations importantes en début de contexte. Documenter au fil de l'eau. Ces réflexes ne demandent pas de compétences techniques — ils demandent de la méthode.
+
+**C'est un outil qui évolue vite.** Les modèles s'améliorent, les opérateurs s'enrichissent, les usages se diversifient. Ce qui est vrai aujourd'hui sur les fenêtres de contexte ou les hallucinations le sera peut-être moins demain. Mais les principes de base — comprendre ce qu'on utilise, adapter sa façon de travailler, garder un œil critique — restent valables quelle que soit la génération technologique.
+
+Bonne collaboration.

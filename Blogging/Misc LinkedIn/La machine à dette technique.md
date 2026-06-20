@@ -1,0 +1,9 @@
+J'aime coder et le software engineering. Dans une première partie de ma carrière, je travaillais au développement d'un logiciel de CAO.  
+Mon métier a évolué, mais j'ai toujours continué, et j'ai adopté les IDE (Jetbrain, VSCode, Eclipse pour les historiens...) puis les assistants IA (CoPilot, Claude Code, ...)  
+Et un vieux soupçon se confirme, ce sont de formidables accélérateurs de mauvaises pratiques (les IDE et les assistants).  
+On connaît les bonnes pratiques: documenter -> écrire les tests -> coder, ne pas regarder le code pour découvrir le contrat, etc.  
+C'est du temps pénible ; la pression des échéances et la méthode agile sont de bonnes excuses pour se jeter sur les joujous précités et accumuler la dette technique.  
+L'IA, pour des raisons quasiment ontologiques, et en plus un formidable accélérateur de mauvaises pratiques, montrez-lui tout votre repo, et il va vous construire un plat de spaghettis dépassant votre imagination.  
+Inversez le paradigme! Utilisez-le comme un accélérateur de bonnes pratiques ; il les connaît, mais ne les applique pas a priori.  
+Entrez dans une amélioration continue et parallèle de la méthodologie, de l'outillage, de la doc, des tests et du code. À chaque déviation, challengez-le sur les causes et construisez ensemble les améliorations pour que ça ne se reproduise plus (ne le croyez pas quand il dit que ça ne se reproduira pas).  
+Ne travaillez que dans les chatbots natifs (LeChat, ChatGPT, Claude, Gemini) pourvu que vous ayez les bons MCP pour accéder à vos artefacts. Ils ont des capacités de réflexion bien supérieures ; l’ingénierie du prompt system est très sous-estimée (juste : débranchez la mémoire, c’est à vous de contrôler le contexte, pas à lui). Quand on utilise un outil dédié à un type d'artefact, on perd de la hauteur.

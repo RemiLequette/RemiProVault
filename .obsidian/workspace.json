@@ -1,0 +1,223 @@
+{
+  "main": {
+    "id": "c4db535ca0811e8a",
+    "type": "split",
+    "children": [
+      {
+        "id": "01d9b2e2fe03355f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "723d34aa1fbccbff",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "guideIA/Encadre.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Encadre"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "a3cd1a9ff703c8e8",
+    "type": "split",
+    "children": [
+      {
+        "id": "51409f610ae7e2d5",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "21354019d0a7eefa",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "3a3024ee5a249d54",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "20c35ee729daa775",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "07805332dada46f6",
+    "type": "split",
+    "children": [
+      {
+        "id": "81d4cf8cc16d31a3",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "44a9acfd65427bd3",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "0258548e869001c1",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "988eadddecba9b2e",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "e361173a87ed2e04",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "9ccad1d5b89cb68b",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "723d34aa1fbccbff",
+  "lastOpenFiles": [
+    "guideIA/GuideIA/GuideIA-introduction.md",
+    "guideIA/relecture/Projet de mail.md",
+    "guideIA/relecture/relecteurs.base",
+    "guideIA/relecture/Relecteurs/Caroline Mondon.md",
+    "guideIA/relecture/Relecteurs/Laetitia Balac-Ruscher.md",
+    "guideIA/relecture/Relecteurs/Jean-Marc Lehu.md",
+    "guideIA/relecture/Relecteurs/Guillaume Lequette.md",
+    "guideIA/relecture/Relecteurs/Domitille Lequette.md",
+    "guideIA/relecture/Relecteurs/Barbara Smith.md",
+    "guideIA/relecture/Relecteurs/Anne-Marie Ergis.md",
+    "guideIA/relecture/Relecteurs/Nicolas Lequette.md",
+    "guideIA/relecture/Relecteurs/Pascal Maryniak.md",
+    "guideIA/relecture/Relecteurs/Régis Martin.md",
+    "guideIA/relecture/Relecteurs/Anne de Chastenet.md",
+    "guideIA/relecture/Relecteurs/Yves Bréchet.md",
+    "guideIA/relecture/Relecteurs/Daniel Godard.md",
+    "guideIA/relecture/Relecteurs/Filippo Focacci.md",
+    "guideIA/bootstrap.md",
+    "Blogging/Cinéma/06-L'infobésité de Xanadu.md",
+    "Untitled 1.base",
+    "Untitled.base",
+    "guideIA/relecture/Relecteurs",
+    "guideIA/relecture/Relecteurs.md",
+    "guideIA/relecture",
+    "Blogging/Cinéma/05-Citizen Kane, la quête de Rosebud.md",
+    "Blogging/Cinéma/04-Citizen Kane, la vérité fragmentée.md",
+    "Blogging/LE PROMPT QUI TUE.md",
+    "Blogging/Cinéma/03-La méthode Phil Connors.md",
+    "Blogging/Cinéma/02-Une Intuition d'Arthur C. Clarke.md",
+    "Blogging/Cinéma/01-2001 L'Odyssée de l'espace.md",
+    "Blogging/Cinéma/2001 L'Odyssée de l'espace.md",
+    "Blogging/Misc LinkedIn",
+    "Blogging/Cinéma",
+    "Blogging/Philo",
+    "Blogging",
+    "Untitled.canvas",
+    "RemiProVault/guideIA/TODO.md.8e56cb5e425d15635395ad027b8ffa06.tmp"
+  ]
+}
