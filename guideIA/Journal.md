@@ -383,3 +383,15 @@ Découverte importante : l'outil `commands` peut exécuter des binaires directs 
 Le guide ne s'affichait pas dans le plan-editor. Après lecture du code, le bug était dans le regex de `parseGuide` — `###` au lieu de `##`. Mais la vraie question était : d'où vient la convention ? La spec `guide-parser.md` disait `###`. `Methode.md` disait `##`. Le guide lui-même utilisait `##`.
 
 Plutôt que de corriger le code seul, on a corrigé les trois endroits cohéremment : le code, la spec, et la référence vers la source de vérité. Une ligne de code changée — et une restructuration documentaire qui évite que le bug se reproduise silencieusement.
+
+---
+
+## Session 2026-06-20 — Convention nommage des parties
+
+### Décisions
+- Renommage des parties dans l'ensemble du projet : "Partie 1/2/3" → "Première Partie / Deuxième Partie / Troisième Partie"
+- 5 fichiers modifiés : `GuideIA-ch02.md`, `GuideIA-ch10.md`, `GuideIA-ch14.md`, `Plan-meta.md`, `METHODE.md`
+- Correction au passage d'un artefact dans `GuideIA-ch02.md` : préfixe parasite `le ch` supprimé
+
+### Collaboration
+- Session courte et chirurgicale : audit complet des occurrences avant toute modification, go explicite, exécution en une passe sans retour arrière.

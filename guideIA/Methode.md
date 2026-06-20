@@ -1,22 +1,60 @@
-# Méthode
+ Méthode
 
 ## Objectif
 Décrire la méthode de travail du projet guideIA : organisation des sessions, gestion des documents, et collaboration entre l'utilisateur et l'assistant IA.
 
 ## Sommaire
-- [Pourquoi cette méthode](#pourquoi-cette-méthode)
-- [Fichiers du projet](#fichiers-du-projet)
-- [Organisation des sessions](#organisation-des-sessions)
-- [Workflow de collaboration](#workflow-de-collaboration)
-- [Todo](#todo)
-- [Snapshots de session](#snapshots-de-session)
-- [Conventions du guide final](#conventions-du-guide-final)
-- [Structure technique du guide](#structure-technique-du-guide)
-- [Guide de style](#guide-de-style)
-- [Balises](#balises)
-- [Rendu final du document](#rendu-final-du-document)
-- [Outillage](#outillage)
-- [Journal](#journal)
+```insta-toc
+---
+title:
+  name:
+  level:
+  center:
+exclude:
+style:
+  listType:
+omit:
+levels:
+  min:
+  max:
+---
+
+# Table of Contents
+
+- Objectif
+- Sommaire
+- Pourquoi cette méthode
+- Fichiers du projet
+    - Fichiers racine
+    - Répertoire Plan/ — un fichier par chapitre
+    - Répertoire GuideIA/ — un fichier par chapitre
+    - Correspondance Plan / GuideIA
+- Organisation des sessions
+- Workflow de collaboration
+- Todo
+- Snapshots de session
+- Conventions du guide final
+- Structure technique du guide
+    - Titres
+    - Parties
+- Guide de style
+- Balises
+    - Principe général
+    - Déclaration dans le plan
+    - Balises dans le guide
+    - Fichiers des figures
+    - Outils de check
+    - Outils de rendu
+- Encadrés et IA
+- Rendu final du document
+    - Cibles de rendu
+        - HTML
+        - PDF
+        - Markdown
+- Outillage
+- Journal
+- Idées futures
+```
 
 ## Pourquoi cette méthode
 
@@ -41,12 +79,8 @@ La méthode est **indépendante du sujet traité**. Elle définit l'organisation
 | `exemples-sessions/` | Snapshots de sessions sélectionnées pour l'appendice |
 | `figures/` | Figures du guide (générées ou trouvées), référencées par identifiant |
 | `figures/html/` | Figures pour la cible de rendu HTML (formats supportés par les navigateurs : SVG, PNG, JPEG...) |
-| `tools/` | Scripts d'outillage (check, rendu, génération) — écrits en JavaScript, exécutés avec Node.js |
-| `tools/plan-editor.html` | Outil de visualisation et d'édition du plan et du guide — voir `outils/plan-editor.md` |
-| `tools/plan-editor-draft.json` | Révision en cours de plan-editor — fichier généré, ne pas modifier manuellement |
-| `outils/` | Documentation des outils (specs, notes) |
-| `outils/plan-editor.md` | Spec de l'outil plan-editor (Why/What/How) |
-| `outils/guide-parser.md` | Documentation du parser (`tools/lib/guide-parser.js`) |
+| `tools/` | Scripts d'outillage (check, rendu, génération) — répertoire distinct du projet, chemin défini dans les instructions projet |
+| `outils/` | Documentation des outils (specs, notes) — répertoire distinct du projet, chemin défini dans les instructions projet |
 
 ### Répertoire `Plan/` — un fichier par chapitre
 
@@ -56,12 +90,12 @@ Le plan est éclaté en fichiers indépendants, un par chapitre. Chaque fichier 
 |---|---|
 | `Plan/Plan-meta.md` | Méta-données du plan : objectif, guide de style figures, liste des chapitres, conventions éditoriales (ton, public, style) propres à GuideIA. Ce fichier est chargé en début de toute session de rédaction. |
 | `Plan/Plan-introduction.md` | Plan du chapitre Introduction |
-| `Plan/Plan-ch02.md` … `Plan/Plan-ch18.md` | Plan de chaque chapitre (chapitres 2 à 18) |
+| `Plan/Plan-ch01.md` … `Plan/Plan-ch17.md` | Plan de chaque chapitre (chapitres 1 à 17) |
 | `Plan/Plan-conclusion.md` | Plan du chapitre Conclusion |
 
 **Nommage des fichiers chapitre :**
 - Introduction : `Plan-introduction.md`
-- Chapitres numérotés : `Plan-chNN.md` (ex : `Plan-ch02.md`, `Plan-ch15.md`)
+- Chapitres numérotés : `Plan-chNN.md` (ex : `Plan-ch01.md`, `Plan-ch15.md`)
 - Conclusion : `Plan-conclusion.md`
 
 ### Répertoire `GuideIA/` — un fichier par chapitre
@@ -71,12 +105,12 @@ Le guide final est éclaté en fichiers indépendants, miroir exact de la struct
 | Fichier | Rôle |
 |---|---|
 | `GuideIA/GuideIA-introduction.md` | Texte rédigé du chapitre Introduction |
-| `GuideIA/GuideIA-ch02.md` … `GuideIA/GuideIA-ch18.md` | Texte rédigé de chaque chapitre (chapitres 2 à 18) |
+| `GuideIA/GuideIA-ch01.md` … `GuideIA/GuideIA-ch17.md` | Texte rédigé de chaque chapitre (chapitres 1 à 17) |
 | `GuideIA/GuideIA-conclusion.md` | Texte rédigé du chapitre Conclusion |
 
 **Nommage des fichiers chapitre :**
 - Introduction : `GuideIA-introduction.md`
-- Chapitres numérotés : `GuideIA-chNN.md` (ex : `GuideIA-ch02.md`, `GuideIA-ch15.md`)
+- Chapitres numérotés : `GuideIA-chNN.md` (ex : `GuideIA-ch01.md`, `GuideIA-ch15.md`)
 - Conclusion : `GuideIA-conclusion.md`
 
 ### Correspondance Plan / GuideIA
@@ -87,11 +121,6 @@ Chaque fichier de travail (`Methode.md`, `Plan/Plan-meta.md`) doit maintenir une
 
 ## Organisation des sessions
 
-**Début de session :**
-- Charger `Methode.md` et `Plan/Plan-meta.md`
-- Charger les dernières entrées de `Journal.md` pour connaître l'état du projet
-- Charger les fichiers chapitre concernés (`Plan/Plan-chNN.md`, `GuideIA/GuideIA-chNN.md`) selon le sujet de la session
-- Rappeler à l'utilisateur le mot-clé de clôture : **`clôture`**
 
 Les sessions doivent être **focalisées** : un sujet par session, clairement défini au départ. Si la conversation dérive vers un autre sujet, l'assistant le signale immédiatement et propose de traiter la digression dans une session séparée.
 
@@ -130,15 +159,15 @@ L'assistant n'écrit jamais le journal de sa propre initiative — il attend le 
 
 ## Todo
 
-Fichier : `Todo.md`
+Dossier : `TODO/ITEMS/` — un fichier `.md` par item, convention KB `todo-list.md`.
 
 La todo centralise tout ce qui n'est pas traité dans la session en cours : tâches à faire, idées sur le contenu ou la méthode, outils à développer. Elle sert aussi à l'assistant pour noter ses suggestions de sujets à traiter lors des prochaines sessions.
 
-**Gestion :** n'importe lequel des deux peut proposer un ajout. L'assistant formule, l'utilisateur valide, l'assistant écrit.
+**Format :** chaque item est un fichier `TODO/ITEMS/<titre>.md` avec YAML front matter (`Status`, `importance`, `effort`, `type`). Template : `TODO/ITEM template.md`.
 
-**Contexte :** certaines entrées incluent une note de contexte en langage naturel pour préciser quand elles deviennent pertinentes (ex : "à faire une fois la rédaction du guide commencée").
+**Gestion :** n'importe lequel des deux peut proposer un ajout. L'assistant formule, l'utilisateur valide, l'assistant écrit le fichier item.
 
-**Aperçu :** à la demande, l'assistant fait un aperçu rapide de la todo. Les sessions dédiées permettent de la passer en revue et de filtrer selon l'avancement du projet.
+**Aperçu :** à la demande, l'assistant liste `TODO/ITEMS/` et filtre selon le statut ou la priorité. Les sessions dédiées permettent de la passer en revue selon l'avancement du projet.
 
 ## Snapshots de session
 
@@ -165,10 +194,10 @@ L'utilisateur peut demander à tout moment un snapshot de la session en cours, d
 
 ### Parties
 - Les parties regroupent les chapitres en blocs thématiques.
-- Numérotées : **Partie 1**, **Partie 2**, **Partie 3**.
+- Numérotées : **Première Partie**, **Deuxième Partie**, **Troisième Partie**.
 - Sans titre pour le moment — les noms viendront plus tard.
-- Dans le guide (`GuideIA.md`) : niveau `##`, ex. `## Partie 1`
-- Dans le plan (`Plan.md`) : niveau `###` dans la section `## Chapitres`, ex. `### Partie 1`
+- Dans le guide (`GuideIA.md`) : niveau `##`, ex. `## Première Partie`
+- Dans le plan (`Plan.md`) : niveau `###` dans la section `## Chapitres`, ex. `### Première Partie`
 - Dans les fiches de contenu (après le délimiteur) : même niveau `###` avant les fiches des chapitres de la partie.
 - Les parties ne sont pas numérotées dans le sommaire du guide — elles y apparaissent comme séparateurs visuels.
 
@@ -306,7 +335,7 @@ Les contraintes sur les figures varient selon la cible de rendu — c'est pourqu
 
 - Stockage des figures : `figures/html/` — un fichier par identifiant (ex : `flux-orchestrateur.svg`, `immo-regression.png`)
 - Le script de rendu insère les figures en `<img src="...">` avec légende générée depuis le plan
-- Script : `tools/render_html.js` (Node.js) — assemble tous les fichiers `GuideIA/GuideIA-chNN.md` dans l'ordre du plan, applique les balises, et produit `output/GuideIA.html`
+- Script : `render_html.js` (Node.js) — assemble tous les fichiers `GuideIA/GuideIA-chNN.md` dans l'ordre du plan, applique les balises, et produit `output/GuideIA.html` — chemin défini dans les instructions projet
 
 #### PDF
 
@@ -326,10 +355,12 @@ Elles ne doivent pas entrer en conflit avec la syntaxe markdown standard.
 
 Les scripts d'outillage sont écrits en **JavaScript** et exécutés avec **Node.js**.
 
-**Exécution depuis une session :** l'outil `commands` peut lancer des scripts directement (`node tools/script.js`) même sans accès shell complet. C'est le moyen privilégié pour tester les scripts sans quitter la session.
+Les scripts d'outillage et leur documentation sont dans des répertoires distincts du projet guideIA. Leurs chemins sont définis dans les instructions projet.
+
+**Exécution depuis une session :** l'outil `commands` peut lancer des scripts directement même sans accès shell complet. C'est le moyen privilégié pour tester les scripts sans quitter la session.
 
 Des outils seront développés pour automatiser les tâches mécaniques :
-- **plan-editor** (`tools/plan-editor.html`) : outil de navigation et d'édition du plan et du guide — spec dans `outils/plan-editor.md`
+- **plan-editor** : outil de navigation et d'édition du plan et du guide — spec dans `outils/plan-editor.md`
 - **Check** : vérification de la cohérence entre `Plan.md` et `GuideIA.md` (voir section Balises)
 - **Rendu** : transformation des balises et génération des index (voir section Balises)
 - Génération de la TOC du guide

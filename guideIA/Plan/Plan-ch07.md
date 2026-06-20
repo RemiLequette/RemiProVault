@@ -1,82 +1,72 @@
-# Plan — Chapitre 7
+# Plan — Chapitre 8
 
-### 7. Le problème de l'attention
+### 8. Recueil de bonnes pratiques
 
 #### Mots-clés
 
+- hallucination
+- biais de positivité
 - attention
-- self-attention
-- fenêtre de contexte
 - dilution
-- lost in the middle
-- polysémie
+- boucle d'or
 
 #### Figures
 
-> 🖼️ **figure** `attention-dilution`
-> Illustration du mécanisme de dilution de l'attention : un contexte court où
-> l'attention est concentrée sur les éléments pertinents, vs un contexte long
-> où elle se disperse sur de nombreux éléments peu pertinents.
-
 #### Encadrés
-
-> 📦 **encadré** `polysemie`
-> La polysémie
-> Pourquoi le langage est intrinsèquement ambigu.
-> Exemples détaillés autour du mot "tour" et d'autres cas parlants.
-> Lien avec le mécanisme d'attention qui résout cette ambiguïté.
 
 #### Contenu
 
-*Note : chapitre en cours — contenu validé en session, rédaction à compléter.*
+Chapitre pratique — boîte à outils face aux limites identifiées dans le guide.
 
-**L'insight fondateur**
-Le langage est ambigu par nature — c'est sa caractéristique fondamentale, pas un défaut.
-Le sens d'un mot dépend des autres mots autour de lui. *Tour* peut être la Tour Eiffel,
-le Tour de France, un tour de potier, une pièce aux échecs, un tour de chant, un tour de vis,
-ou l'ordre dans une file — et on n'a même pas mentionné le donjon médiéval. "Il grimpe dans
-les tours" : régime moteur ou quelqu'un qui s'énerve ?
+**Pattern Pourquoi / Comment / Quoi** (retour Régis) : allers-retours fréquents entre
+niveaux d'abstraction dans le travail avec une IA. Comment naviguer entre ces niveaux.
 
-Voir encadré polysemie ici.
+**Trois grands problèmes structurels et leurs remèdes pratiques :**
 
-C'est précisément le mécanisme qui a débloqué la technologie des LLM : l'**attention**.
-Chaque mot "regarde" tous les autres et calcule à quel point ils sont pertinents pour lui.
-C'est ce qui permet de résoudre l'ambiguïté — pas mot à mot, mais en pondérant l'ensemble
-du contexte simultanément.
+- Hallucinations : comment les détecter, comment limiter le risque
+- Biais de positivité : pourquoi l'IA dit rarement « je ne sais pas », comment le forcer
+- Attention/dilution : prompts courts, information critique en tête ou en queue
+- Amnésie
 
-**Ce que ça coûte**
-Ce mécanisme est puissant mais gourmand : son coût de calcul croît très vite avec la longueur
-du contexte. Plus le contexte est long, plus le calcul est lourd — et plus la qualité peut
-se dégrader.
+Ce sont des problèmes assez humains finalement. Ils sont identifiés depuis longtemps. Nous avons développé des techniques. Les psychologues et les philosophes. Système 1...
+Parce que ce n'est que des troubles cognitifs, ça nous affecte tous, tous les jours.
 
-**Le problème de la dilution**
-Un contexte long ne signifie pas une meilleure compréhension. L'attention doit se répartir
-sur l'ensemble du texte — et si ce texte contient beaucoup d'éléments peu pertinents,
-la concentration se dilue. C'est contre-intuitif : on a l'impression qu'en donnant plus
-d'informations, on aide. En réalité, on peut nuire.
+Deux bonnes nouvelles :
 
-Utiliser la figure attention-dilution ici.
+- on peut s'en inspirer
+- c'est dans les données d'entraînement
 
-Analogie : un jury qui doit trancher un litige. Lui soumettre 10 documents clairs est plus
-efficace que 200 pièces dont 190 sont hors sujet. La pertinence prime sur le volume.
+Il y a l'humour, une récompense quand on cadre le système 1.
+Malheureusement ça ne marche pas.
 
-**Le "lost in the middle"**
-Dans un contexte très long, les informations placées au milieu sont statistiquement moins
-bien traitées que celles en début ou en fin. Implication pratique : si vous avez une
-information critique, ne la noyez pas au milieu d'un long document.
+Ces problèmes sont structurels, on ne peut que les pallier (au vrai sens du mot).
 
-**Self-attention et polysémie — dans les deux sens**
-Le mécanisme d'attention résout la polysémie. Mais il le fait dans les deux sens : un
-contexte mal structuré, traitant plusieurs sujets à la fois, peut introduire de nouvelles
-ambiguïtés. Le modèle peut mélanger des fils pourtant distincts. Raison supplémentaire
-pour la règle d'or : une session, un sujet.
+Définir son vocabulaire (Confucius)
+On documente tout
+RTFM
+Effet Streisand
+Interdire et contraindre
+Laisser les blancs
+Ceinture et bretelles
+Passe en avant
 
-*Note : cette section est présente dans le guide mais absente du plan — ajoutée ici.*
+Le biais d'action
 
-**Conclusion pratique** (fusionnée avec la section dilution dans le guide)
+Interdire ou contraindre ?
+**L'outillage comme réponse concrète aux limites** : présenter les outils non pas en
+annexe mais comme une réponse directe aux problèmes structurels. L'outillage change ce
+que l'IA peut faire, pas seulement comment on lui parle.
 
-- Des prompts courts et ciblés
-- Les informations importantes en tête ou en queue de contexte
-- Ne pas injecter de documents entiers si seules quelques sections sont pertinentes
-- Reconnaître les signes de dégradation : réponses qui ignorent des instructions,
-  incohérences avec des éléments donnés plus tôt
+**Idées à développer (issues de la KB) :**
+
+- Effet Streisand — mentionner ce qu'on veut éviter attire l'attention dessus ; bonne pratique pour la rédaction de prompts et d'instructions
+- Pas de référence en avant — ne pas introduire un concept pas encore expliqué (comme au rugby : pas de passe en avant) ; rend la lecture linéaire et autonome
+- Pattern mot-clé — un mot-clé court et stable pour évoquer un concept sans le re-définir ; conversations courtes et précises, contexte partagé immédiat
+- La session comme source de connaissance — extraire l'essentiel en fin de session (décisions, formulations, conventions) avant qu'elles disparaissent
+- Bonnes pratiques liste de gaps — vérifier l'indépendance de chaque gap, identifier les dépendances, ordonner par fondation d'abord
+- Principe ceinture et bretelles — deux mécanismes de sécurité qui se renforcent mutuellement valent mieux qu'un seul
+- Droit à l'oubli — quand et comment retirer un concept périmé ; signaux d'obsolescence, isolation préventive, nettoyage en session dédiée
+- Donner les blancs — comme aux échecs, celui qui parle en premier a l'initiative ; laisser l'IA s'exprimer avant de lui soumettre ses propres idées pour ne pas biaiser la réponse
+- WWH — structurer ses prompts et instructions en Why / What / How
+
+*(à compléter au fil des chapitres)*

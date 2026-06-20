@@ -1,37 +1,15 @@
-# Plan — Chapitre 15
+﻿# Plan --- Chapitre 17
 
-### 15. Attention is all you need
+### 17. Le fantome dans la machine
 
-#### Mots-clés
-
-- transformer
-- self-attention
-- token
-- génération token par token
-- tokens spéciaux
-- apprentissage
-- RLHF
-- KV cache
-- espace latent
-- distance sémantique
+#### Mots-cles
 
 #### Figures
 
-#### Encadrés
+#### Encadres
 
 #### Contenu
 
-Annexe optionnelle — le livre est complet sans elle. Pour les lecteurs qui veulent comprendre
-vraiment comment ça marche sous le capot. Ton plus dense que les chapitres principaux.
+*A developper en session dediee.*
 
-Contenu (absorbe l'ancienne annexe technique) :
-
-- Transformer à haut niveau
-- Self-attention (version technique du ch. 7)
-- Génération token par token
-- Tokens spéciaux (encadré `tokens-speciaux` déplacé depuis ch. 6)
-- Apprentissage et coût de calcul
-- Apprentissage par renforcement
-- RLHF
-- KV cache (pourquoi ça compte)
-- Espace latent et distance sémantique
+Raisonnement, conscience, nature de l'intelligence.

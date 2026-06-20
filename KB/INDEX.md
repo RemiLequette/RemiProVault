@@ -15,12 +15,11 @@
 Steps to follow at the start of every session, in order.
 
 1. Read `public/guides/how-to-get-things-done.md` — session model and working practice.
-2. Read `public/guides/working-with-forge.md` — Forge path format, read/write decision, common patterns.
-3. Read `public/conventions/todo-list.md` — TODO and WIP file structure.
-4. Read `PROJECT.md` at the project root — project context, current objective, WIP.
-5. Apply the Scope Rule below.
-6. Use the Decision Layer to identify and load the conventions relevant to the current task.
-7. Greet the user by name, state the active project, and confirm you are ready.
+2. Read `public/conventions/todo-list.md` — TODO and WIP file structure.
+3. Read `PROJECT.md` at the project root — project context, current objective, WIP.
+4. Apply the Scope Rule below.
+5. Use the Decision Layer to identify and load the conventions relevant to the current task.
+6. Greet the user by name, state the active project, and confirm you are ready.
 
 ---
 
@@ -56,7 +55,6 @@ To identify what type of document to read, ask: what would you need to audit it?
 - A log → guide
 
 Match the current task against the triggers below. Read only the documents that match.
-Use Forge to read all KB documents.
 
 | Trigger | Load |
 |---------|------|
@@ -77,6 +75,7 @@ Use Forge to read all KB documents.
 | Creating or auditing a GLOSSARY.md | `conventions/glossary.md` |
 | Node.js automation script, cross-project tool | `conventions/tools.md` |
 | Creating or managing a TODO.md or backlog | `conventions/todo-list.md` |
+| Writing a Journal entry or a Changelog entry, migrating inline changelogs | `conventions/journal-changelog.md` |
 | Setting up or auditing Claude project structure or instructions | `conventions/project-structure.md` |
 | Setting up a new Claude project | `guides/project-setup-process.md` |
 | Auditing a project for conformance | `guides/audit-process.md` |
@@ -111,8 +110,8 @@ Rules and patterns governing how something is done. A convention leaves a trace 
 | glossary.md | Convention pour GLOSSARY.md dans chaque projet — domaines, termes, references croisees, chargement selectif par un AI Assistant. Section ## Glossary obligatoire dans PROJECT.md. | glossaire, glossary, terminologie, domaines, definitions, conformite, audit |
 | tools.md | Node.js script-based tools — when to use, structure, standard interface (args, stdout, exit codes), invocation via commands MCP, output rules, catalogue. | tools, scripts, node, automation, token-efficiency, commands-mcp, cross-project |
 | todo-list.md | Lightweight backlog for any project — format, states, archiving, AI Assistant role. Two files: TODO.md (active) + TODO-archive.md (done). | todo, backlog, tasks, priority, archiving, session |
+| journal-changelog.md | Append-only logs for any project — Journal.md (session log) and CHANGELOG.md (centralized file history, replaces inline ## Changelog sections). | journal, changelog, log, session, append-only, traceability, migration |
 | project-structure.md | Canonical structure for any Claude project — folder layout, mandatory files, Claude project instructions template, bootstrap chain. | project-structure, claude-project, instructions, template, bootstrap, scaffold |
-| forge.md | Internal spec for the Forge MCP server — architecture, format registry, type handlers, dispatch flow. | forge, MCP, format, handler, registry, sequence, syntax-adapter |
 
 ---
 
@@ -122,7 +121,6 @@ Step-by-step processes for specific operations. A guide leaves a trace in the pr
 
 | File | Summary | Keywords |
 |------|---------|----------|
-| working-with-forge.md | Forge path format, read/write decision tree, common patterns — loaded at every session bootstrap. | forge, MCP, path, roots, read, write, native, structured, patterns |
 | project-setup-process.md | Process to create a new Claude project. References best practices at each step. Includes scaffolding, file templates, checklist, and examples. | project-setup, process, initialization, configuration, best-practices, scaffolding |
 | best-practices.md | Design principles for Claude project structure | best-practices, structure, instructions, conventions, clarity, context, design-principles |
 | audit-process.md | Process to verify project conformance to best practices. Rules of engagement: session dedication, corrections, guide updates, re-audit separation. Structured findings, proposals, approval workflow. Includes checkpoint + batching workflow. | audit, verification, best-practices, compliance, quality-assurance, process, methodology |
@@ -153,6 +151,18 @@ index, conventions, workflows, guides, navigation, discoverability, knowledge-ba
 
 ## Changelog
 
+### Version 3.9 - Forge references removed
+**Date:** 2026-06-20
+**Reason:** Forge abandoned — too abstract, AI Assistants could not use it reliably. All references removed. Changelog entries kept with notes for traceability.
+
+**Modifications:**
+- Decision Layer: sentence "Use Forge to read all KB documents." removed
+- Table conventions/: entry `forge.md` removed
+- Table guides/: entry `working-with-forge.md` removed
+- Changelog v3.8: note "Forge abandoned" added
+
+---
+
 ### Version 3.8 - working-with-forge.md recreated + Session Bootstrap updated
 **Date:** 2026-06-18
 **Reason:** Guide recreated for Forge v2 — minimal, no architecture, focused on path format and read/write decision. Decision reversed from v3.6: describes alone are insufficient — the global decision flow and path format require a dedicated guide. Added to Session Bootstrap (step 2) so it is loaded at every session.
@@ -160,6 +170,8 @@ index, conventions, workflows, guides, navigation, discoverability, knowledge-ba
 **Modifications:**
 - Session Bootstrap: step 2 added — `working-with-forge.md`; steps 3–7 renumbered
 - Table guides/: entry `working-with-forge.md` added (first row)
+
+*Note: Forge abandoned — 2026-06-20. See v3.9.*
 
 ---
 

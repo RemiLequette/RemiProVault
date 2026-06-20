@@ -1,0 +1,28 @@
+filters:
+  and:
+    - file.inFolder("KB/TODO/ITEMS")
+views:
+  - type: table
+    name: Table
+    order:
+      - file.name
+      - Status
+      - importance
+      - effort
+  - type: kanban-view
+    name: Kanban
+    columnOrders:
+      file.file:
+        - KB/TODO/ITEMS/Refactor idea-inbox convention.md
+      note.Status:
+        - Todo
+    cardOrders:
+      file.file: {}
+      note.Status: {}
+    columnColors:
+      file.file: {}
+      note.Status:
+        Todo: blue
+    groupByProperty: note.Status
+    cardTitleProperty: file.name
+    wrapPropertyValues: true

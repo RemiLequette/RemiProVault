@@ -1,5 +1,3 @@
-## Partie 2
-
-## 10. Cas pratiques
+## 11. Discours de la méthode
 
 *À développer en session dédiée.*

@@ -1,3 +1,3 @@
-## 15. Attention is all you need
+## 16. L'apprentissage par renforcement
 
 *À développer en session dédiée.*

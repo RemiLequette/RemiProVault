@@ -1,57 +1,48 @@
-## 6. C'est quoi le contexte ?
+## 7. Le problème de l'attention
 
-On a déjà croisé ce mot plusieurs fois. Il est temps de le définir proprement.
+Ce chapitre revient sur le mécanisme qui a tout changé — et explique pourquoi les contextes longs peuvent nuire à la qualité des réponses.
 
-### Définition
+### L'insight fondateur
 
-Le {{def:mk:contexte}} — ou {{def:mk:prompt_étendu}} — c'est tout ce qu'on envoie au modèle, au-delà de votre question immédiate. On en a déjà vu deux exemples : le prompt système, ajouté par l'opérateur, et l'historique de la session. Le contexte a plusieurs rôles : contrôler le style de la réponse, orienter les priorités, et donner de la mémoire artificielle au modèle.
+Le langage est ambigu par nature. Ce n'est pas un défaut — c'est sa caractéristique fondamentale. Le sens d'un mot dépend des mots qui l'entourent.
 
-### Pourquoi "contexte" est bien choisi
+{{def:enc:polysemie}}
 
-Le langage humain est par essence ambigu. *"Tu peux me passer le sel ?"* n'est pas une question sur vos capacités physiques. Comprendre ce que veulent dire les mots dépend des autres mots autour d'eux — c'est précisément ce mécanisme qui a débloqué la technologie des LLM. On y reviendra au chapitre suivant.
+Prenez le mot *tour*. Tour Eiffel, Tour de France, tour de potier, pièce aux échecs, tour de chant, tour de vis, ordre dans une file, donjon médiéval... Et *"il grimpe dans les tours"* : régime moteur ou quelqu'un qui s'énerve ?
 
-### Une limite fondamentale : du texte plat
+C'est précisément ce défi — résoudre l'ambiguïté du langage — qui a conduit à la percée technologique des LLM : l'**{{def:mk:attention}}**. Chaque mot "regarde" tous les autres et calcule à quel point ils sont pertinents pour lui. Ce mécanisme permet de pondérer l'ensemble du contexte simultanément, et non mot à mot.
 
-Le LLM ne se regarde pas travailler. Il reçoit un grand texte à compléter — et c'est tout. Il ne peut pas hiérarchiser mécaniquement les éléments du contexte : on lui dit ce qui est important, et on espère qu'il comprend.
+### Ce que ça coûte
 
-Point crucial : le contexte est toujours **déclaratif, jamais impératif**. Quand vous écrivez *"réponds en trois points"*, comprenez : *"la probabilité que la réponse contienne trois points est plus forte"*. Ce n'est pas un ordre exécuté — c'est une intention formulée. Certaines formulations sont plus efficaces que d'autres, et on verra comment en tirer parti.
+Ce mécanisme est puissant mais exigeant : son coût de calcul croît très vite avec la longueur du contexte. Plus le contexte est long, plus le calcul est lourd — et plus la qualité peut se dégrader.
 
-### Ce que l'opérateur vous offre
+### Le problème de la dilution
 
-L'opérateur propose des outils pour enrichir le contexte de façon statique. Vous pouvez enregistrer des {{def:mk:instructions_utilisateur}} personnelles qui seront automatiquement insérées dans chaque prompt étendu.
+Un contexte long ne signifie pas une meilleure compréhension. L'{{ref:mk:attention}} doit se répartir sur l'ensemble du texte. Si ce texte contient beaucoup d'éléments peu pertinents, la concentration se dilue sur des informations inutiles.
 
-{{def:fig:prompt-etendu-complet}}
+{{def:fig:attention-dilution}}
 
-Certains opérateurs vont plus loin. Claude propose par exemple la notion de **{{def:mk:projet}}** : un contexte partagé par un groupe de sessions — des instructions, des documents de référence, une mémoire commune.
+C'est contre-intuitif : on a l'impression qu'en donnant plus d'informations, on aide. En réalité, on peut nuire.
 
-Un projet peut inclure des fichiers de référence — documentations, notes, exemples — injectés dans chaque prompt. Utile quand leur contenu est fondamental. Mais attention : ce sont des tokens supplémentaires, et un contexte qui grossit trop risque de diluer le focus. On retrouve ici le conseil du chapitre précédent : sessions courtes et centrées.
+Analogie : un jury qui doit trancher un litige. Lui soumettre 10 documents clairs est plus efficace que 200 pièces dont 190 sont hors sujet. La pertinence prime sur le volume.
 
-### La mémoire
+### Le "lost in the middle"
 
-L'opérateur peut gérer une {{def:mk:mémoire}} — globale ou par projet. Elle est injectée dans le prompt, clairement balisée. Le prompt système indique au modèle qu'une mémoire est disponible, et l'invite à proposer des mises à jour si la session apporte des éléments pertinents. En résumé : le modèle peut prendre des notes pour les prochaines sessions.
+Dans un contexte très long, les informations placées au milieu sont statistiquement moins bien traitées que celles en début ou en fin de contexte. C'est ce qu'on appelle le phénomène de {{def:mk:lost_in_the_middle}}.
 
-Avantage : une mémoire qui se construit dans le temps. Inconvénient : on ne maîtrise pas toujours bien ce qui s'y accumule — un peu comme les cookies publicitaires.
+Implication pratique : si vous avez une information critique, ne la noyez pas au milieu d'un long document.
 
-Pour un usage professionnel : restreindre la mémoire au niveau projet, voire s'en passer. La réserver aux usages plus personnels.
+### La {{ref:mk:fenêtre_de_contexte}} et la {{def:mk:dilution}}
 
-### Le contexte dynamique
+Ces deux contraintes — taille maximale et dégradation par dilution — convergent vers les mêmes conseils pratiques :
 
-Jusqu'ici, le contexte était statique : défini à l'avance, injecté mécaniquement. Il existe une approche plus subtile : laisser le modèle lui-même choisir le contexte dont il a besoin.
+- Des prompts courts et ciblés
+- Les informations importantes en tête ou en queue de contexte
+- Ne pas injecter des documents entiers si seules quelques sections sont pertinentes
+- Reconnaître les signes de dégradation : réponses qui ignorent des instructions données, incohérences avec des éléments mentionnés plus tôt dans la session
 
-Concrètement, au lieu d'un seul tour de génération par question, on en fait plusieurs. Une génération peut inclure des demandes de contexte supplémentaire, que l'opérateur va chercher avant de relancer la génération.
+### La {{def:mk:self-attention}} et la {{def:mk:polysémie}}
 
-Exemple : *"Fait-il beau à Nice ?"* Les données d'entraînement du modèle sont passées — la météo du jour n'y figure pas. Le modèle sait pourtant beaucoup de choses utiles : que cette question relève de la météo, que la météo s'applique à un lieu, que Nice est une ville, et que la façon la plus pratique d'obtenir la météo en temps réel est de faire une recherche web. Il sait probablement quel service appeler.
+Le mécanisme d'attention résout la polysémie — mais il le fait dans les deux sens. Tout comme le contexte aide à désambiguïser un mot, un contexte trop chargé ou mal structuré peut introduire de nouvelles ambiguïtés. Un document qui traite de plusieurs sujets à la fois peut amener le modèle à mélanger des fils pourtant distincts.
 
-Sa réponse va donc contenir une demande : effectuer cette recherche et lui communiquer le résultat. L'opérateur exécute, récupère l'information, reconstruit le prompt avec le résultat, et relance la génération. Le modèle produit alors une réponse utile.
-
-*(Tout l'anthropomorphisme de cet exemple est assumé pour la lisibilité — il n'y a bien sûr ni intention ni mémoire d'une demande à l'autre.)*
-
-### Skills et MCP
-
-La recherche web n'est qu'un exemple. Le {{def:mk:contexte_dynamique}} repose sur un concept plus général : des {{def:mk:outil}}s que le modèle peut solliciter.
-
-Un **{{def:mk:skill}}** est un ensemble d'instructions décrivant une compétence à activer à la volée. Exemple : comment lire un fichier Excel. Le modèle reçoit le contenu brut du fichier et des instructions décrivant sa structure — il peut alors l'exploiter correctement.
-
-Le concept ultime est le **{{def:mk:MCP}}** — *Model Context Protocol*, défini par Anthropic. Un MCP est une description fournie à l'opérateur pour accéder à un service externe. Il expose une liste de commandes disponibles et des instructions en langage naturel décrivant quand et comment les utiliser.
-
-L'industrie a réagi avec enthousiasme : on trouve maintenant des centaines de MCP permettant, en langage naturel, de lire et envoyer des emails, d'accéder à des fichiers et au cloud, d'interroger des bases de données, de créer des factures dans un ERP, de générer des modèles 3D...
+C'est une raison supplémentaire pour la règle d'or : une session, un sujet.

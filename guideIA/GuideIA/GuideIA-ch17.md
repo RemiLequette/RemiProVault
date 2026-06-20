@@ -1,3 +1,3 @@
-## 17. Le fantôme dans la machine
+## 18. De la gouvernance des IA
 
 *À développer en session dédiée.*

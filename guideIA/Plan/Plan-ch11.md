@@ -1,6 +1,6 @@
-# Plan — Chapitre 11
+# Plan — Chapitre 12
 
-### 11. Discours de la méthode
+### 12. Développer sa base de connaissance
 
 #### Mots-clés
 

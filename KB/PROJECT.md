@@ -30,25 +30,7 @@ public/
 - **Journal.md** — session log
 - **howto/** — practical guides for humans
 - **tests/** — test suites (private, not part of public KB)
-  - **tests/forge/** — fixtures and tests for the Forge tool
 - **tmp/** — temporary working files (not committed)
-
-### Tools — sub-projects hosted in public/tools/
-
-A tool is a self-contained npm package. Typical structure:
-```
-<name>/
-├── src/          ← source code
-├── handlers/     ← type handlers (if applicable)
-├── tests/        ← vitest test suite
-├── package.json
-└── vitest.config.js
-```
-
-| Tool | Path | Role | Spec | Guide |
-|------|------|------|------|-------|
-| Forge | `public/tools/forge/` | MCP server — structured artifact read/write | `public/conventions/forge.md` | `public/guides/working-with-forge.md` |
-
 
 ### Tests
 Do not laucnh tests yourself, ask the user to launch with VSCode vitest extension
@@ -109,6 +91,17 @@ project, knowledge-base, conventions, workflows, guides, structure, audit, metad
 
 ## Changelog
 
+### Version 1.9 - Forge references removed
+**Date:** 2026-06-20
+**Reason:** Forge abandoned — too abstract, AI Assistants could not use it reliably. All references removed from structure. Changelog entries kept with notes for traceability.
+
+**Modifications:**
+- Structure / Project files: `tests/forge/` removed
+- Structure / Tools: entire sub-section removed (Forge was the only tool)
+- Changelog v1.8, v1.7, v1.6: note "Forge abandoned" added
+
+---
+
 ### Version 1.8 - Tools sub-section + project files completed
 **Date:** 2026-06-11
 **Reason:** Forge tool location was hard to find — no entry point in PROJECT.md. Added Tools sub-section with generic structure and tool catalogue. Completed Project files list (Journal.md and tests/ were missing).
@@ -116,6 +109,8 @@ project, knowledge-base, conventions, workflows, guides, structure, audit, metad
 **Modifications:**
 - Structure / Project files: added Journal.md, tests/, tests/forge/
 - Structure / Tools: new sub-section with generic npm package structure and Forge entry
+
+*Note: Forge abandoned — 2026-06-20. Too abstract, AI Assistants could not use it reliably.*
 
 ---
 
@@ -126,6 +121,8 @@ project, knowledge-base, conventions, workflows, guides, structure, audit, metad
 **Modifications:**
 - Structure / Project files: `tests/forge/` description updated
 
+*Note: Forge abandoned — see v1.8.*
+
 ---
 
 ### Version 1.6 - tests/ documented
@@ -134,6 +131,8 @@ project, knowledge-base, conventions, workflows, guides, structure, audit, metad
 
 **Modifications:**
 - Structure / Project files: `tests/` added with `forge/` sub-entry
+
+*Note: Forge abandoned — see v1.8.*
 
 ---
 

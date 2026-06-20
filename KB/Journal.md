@@ -99,3 +99,18 @@ Livrer le Milestone 2 de Forge v2 (MCP tools layer) et adapter forge-browser à 
 - `public/tools/forge/tests/` — 4 nouveaux fichiers de tests
 - `public/tools/forge/ROADMAP.md` — M2 + MVP-1 Done
 - `TODO.md` — W5 mis à jour, versions 5.13→5.15
+
+## 2026-06-20 — Nouvelle approche pour les TODOs — Obsidian Bases
+
+### Décisions
+
+- **TODO.md abandonné** — remplacé par une structure dossier `TODO/ITEMS/` avec un fichier `.md` par item.
+- **Obsidian Bases** comme board Kanban — source de vérité via YAML front matter (`Status`, `importance`, `effort`). Board géré par l'utilisateur, ignoré par l'AI Assistant.
+- **Progressive disclosure** — `list_directory` sur `TODO/ITEMS/` pour l'aperçu, lecture ciblée uniquement si nécessaire.
+- **todo-filter.js** — outil générique à développer dans `110-Projects/tools/` pour filtrer les items par propriété YAML sans lire tous les fichiers (use case principal : WIP au bootstrap).
+- **CHANGELOG.md** créé dans la KB — première entrée.
+
+### Fichiers modifiés
+
+- `conventions/todo-list.md` — réécriture complète (v3.0) + section Tools ajoutée
+- `CHANGELOG.md` — créé, 2 entrées

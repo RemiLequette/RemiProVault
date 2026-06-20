@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "01d9b2e2fe03355f",
+        "id": "308cc36b0b4d6cc7",
         "type": "tabs",
         "children": [
           {
-            "id": "723d34aa1fbccbff",
+            "id": "35ce131fee5a9e1c",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "guideIA/Encadre.md",
+                "file": "guideIA/GuideIA/GuideIA-ch16.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Encadre"
+              "title": "GuideIA-ch16"
             }
           }
         ]
@@ -180,44 +180,44 @@
       "bases:Create new base": false
     }
   },
-  "active": "723d34aa1fbccbff",
+  "active": "35ce131fee5a9e1c",
   "lastOpenFiles": [
+    "guideIA/METHODE.md.7d501827b63eec83ea423bc4a3c7862d.tmp",
+    "guideIA/Plan/Plan-meta.md.0888cf76a20edc240b87bc56b8cb403d.tmp",
+    "guideIA/GuideIA/GuideIA-ch15.md",
+    "guideIA/GuideIA/GuideIA-ch16.md",
+    "guideIA/GuideIA/GuideIA-ch17.md",
+    "guideIA/Plan/Plan-ch01.md",
+    "guideIA/GuideIA/GuideIA-ch01.md",
+    "guideIA/Plan/Plan-ch02.md",
+    "guideIA/Plan/_tmp_ch04.md",
+    "guideIA/Plan/_tmp_ch03.md",
+    "guideIA/Plan/_tmp_ch02.md",
+    "guideIA/GuideIA/GuideIA-ch03.md",
+    "guideIA/GuideIA/GuideIA-ch02.md",
+    "guideIA/GuideIA/_tmp_ch08.md",
+    "guideIA/GuideIA/_tmp_ch07.md",
+    "guideIA/GuideIA/_tmp_ch06.md",
+    "guideIA/GuideIA/_tmp_ch05.md",
+    "guideIA/GuideIA/_tmp_ch04.md",
+    "guideIA/GuideIA/_tmp_ch03.md",
+    "Blogging/Cinéma/08-09 Truffaut.md",
+    "guideIA/Plan/Plan-ch17.md",
+    "guideIA/Plan/_temp_ch16.md",
+    "Blogging/Cinéma/07-I, Robot.md",
+    "guideIA/TODO/Todo list.base",
+    "guideIA/Journal.md.a8db77217ddd91a1050ca5b0b76486e9.tmp",
+    "guideIA/METHODE.md.79abc7aa897517794c6fa74dcefbe688.tmp",
+    "guideIA/Plan/Plan-meta.md.1d412cfe0dc79c5ed6c43bda64a7f3fc.tmp",
+    "guideIA/GuideIA/GuideIA-ch14.md.aab9d3320c80c07457249c3547ab8abd.tmp",
+    "guideIA/GuideIA/GuideIA-ch10.md.82dce8786138b8589100ca49b31709cf.tmp",
+    "guideIA/GuideIA/GuideIA-ch02.md.e2280a6952f990d53fb1cf4a42962ca7.tmp",
+    "guideIA/Plan/Plan-introduction.md",
     "guideIA/GuideIA/GuideIA-introduction.md",
-    "guideIA/relecture/Projet de mail.md",
+    "guideIA/GuideIA/GuideIA-introduction.md.313761f4edddbbfa7d997f27315a6d0e.tmp",
+    "guideIA/Encadre.md",
+    "guideIA/persona.md",
     "guideIA/relecture/relecteurs.base",
-    "guideIA/relecture/Relecteurs/Caroline Mondon.md",
-    "guideIA/relecture/Relecteurs/Laetitia Balac-Ruscher.md",
-    "guideIA/relecture/Relecteurs/Jean-Marc Lehu.md",
-    "guideIA/relecture/Relecteurs/Guillaume Lequette.md",
-    "guideIA/relecture/Relecteurs/Domitille Lequette.md",
-    "guideIA/relecture/Relecteurs/Barbara Smith.md",
-    "guideIA/relecture/Relecteurs/Anne-Marie Ergis.md",
-    "guideIA/relecture/Relecteurs/Nicolas Lequette.md",
-    "guideIA/relecture/Relecteurs/Pascal Maryniak.md",
-    "guideIA/relecture/Relecteurs/Régis Martin.md",
-    "guideIA/relecture/Relecteurs/Anne de Chastenet.md",
-    "guideIA/relecture/Relecteurs/Yves Bréchet.md",
-    "guideIA/relecture/Relecteurs/Daniel Godard.md",
-    "guideIA/relecture/Relecteurs/Filippo Focacci.md",
-    "guideIA/bootstrap.md",
-    "Blogging/Cinéma/06-L'infobésité de Xanadu.md",
-    "Untitled 1.base",
-    "Untitled.base",
-    "guideIA/relecture/Relecteurs",
-    "guideIA/relecture/Relecteurs.md",
-    "guideIA/relecture",
-    "Blogging/Cinéma/05-Citizen Kane, la quête de Rosebud.md",
-    "Blogging/Cinéma/04-Citizen Kane, la vérité fragmentée.md",
-    "Blogging/LE PROMPT QUI TUE.md",
-    "Blogging/Cinéma/03-La méthode Phil Connors.md",
-    "Blogging/Cinéma/02-Une Intuition d'Arthur C. Clarke.md",
-    "Blogging/Cinéma/01-2001 L'Odyssée de l'espace.md",
-    "Blogging/Cinéma/2001 L'Odyssée de l'espace.md",
-    "Blogging/Misc LinkedIn",
-    "Blogging/Cinéma",
-    "Blogging/Philo",
-    "Blogging",
-    "Untitled.canvas",
-    "RemiProVault/guideIA/TODO.md.8e56cb5e425d15635395ad027b8ffa06.tmp"
+    "Untitled.canvas"
   ]
 }

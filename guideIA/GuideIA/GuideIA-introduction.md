@@ -10,6 +10,7 @@ J'ai toujours eu beaucoup de respect pour les travaux menés dans ce domaine. Et
 
 {{def:enc:vrai-ecossais}}
 > ### Le sophisme du vrai Écossais
+> *L'IA vous explique*
 >
 > Un sophisme est un raisonnement qui *semble* valide mais ne l'est pas — une faille logique habillée en argument. Celui du vrai Écossais a été formalisé par le philosophe britannique Antony Flew en 1975 : « Aucun Écossais ne mettrait de sucre dans son porridge. » On lui cite un Écossais qui en met. Réponse : « Aucun *vrai* Écossais ne ferait ça. » La définition se rétrécit pour exclure le contre-exemple. La thèse reste invincible — parce qu'elle est devenue indéfendable.
 >
@@ -56,6 +57,7 @@ Ah, j'oubliais. Vous avez croisé le premier encadré de ce guide quelques pages
 
 {{def:enc:encadres-ia}}
 > ### Les encadrés de ce guide ont été rédigés par une IA
+> *L'IA vous explique*
 >
 > Tous les encadrés que vous lirez dans ce guide ont été rédigés exclusivement par un assistant IA, à partir d'un prompt dédié, co-produit lui aussi avec une IA. Celui-ci ne fait pas exception.
 >

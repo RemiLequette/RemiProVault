@@ -10,9 +10,9 @@ Définir le contenu attendu du guide guideIA : chapitres et ce qu'on veut y dire
 - [Guide de style figures](#guide-de-style-figures)
 - [Chapitres](#chapitres)
   - [Introduction](#introduction)
-  - [Partie 1](#partie-1)
-  - [Partie 2](#partie-2)
-  - [Partie 3](#partie-3)
+  - [Première Partie](#première-partie)
+  - [Deuxième Partie](#deuxième-partie)
+  - [Troisième Partie](#troisième-partie)
   - [Conclusion](#conclusion)
 
 ## Méta — hors guide
@@ -161,30 +161,30 @@ Figures : `immo-regression`, `immo-outliers`, `immo-deux-segments`, `immo-underf
 
 **[[Plan-introduction|Introduction]]** *(hors partie)*
 
-### Partie 1
+### Première Partie
 
-1. [[Plan-ch02|Travailler avec une IA]]
-2. [[Plan-ch03|Le modèle et l'opérateur]]
-3. [[Plan-ch04|C'est quoi la génération ?]]
-4. [[Plan-ch05|Le problème du poisson rouge]]
-5. [[Plan-ch06|C'est quoi le contexte ?]]
-6. [[Plan-ch07|Le problème de l'attention]]
-7. [[Plan-ch08|Recueil de bonnes pratiques]]
-8. [[Plan-ch09|Un jour sans fin]]
+1. [[Plan-ch01|Travailler avec une IA]]
+2. [[Plan-ch02|Le modèle et l'opérateur]]
+3. [[Plan-ch03|C'est quoi la génération ?]]
+4. [[Plan-ch04|Le problème du poisson rouge]]
+5. [[Plan-ch05|C'est quoi le contexte ?]]
+6. [[Plan-ch06|Le problème de l'attention]]
+7. [[Plan-ch07|Recueil de bonnes pratiques]]
+8. [[Plan-ch08|Un jour sans fin]]
 
-### Partie 2
+### Deuxième Partie
 
-9. [[Plan-ch10|Cas pratiques]]
-10. [[Plan-ch11|Discours de la méthode]]
-11. [[Plan-ch12|Développer sa base de connaissance]]
-12. [[Plan-ch13|Exemples de conversations]]
+9. [[Plan-ch09|Cas pratiques]]
+10. [[Plan-ch10|Discours de la méthode]]
+11. [[Plan-ch11|Développer sa base de connaissance]]
+12. [[Plan-ch12|Exemples de conversations]]
 
-### Partie 3
+### Troisième Partie
 
-13. [[Plan-ch14|Les secrets du prompt système]]
-14. [[Plan-ch15|Attention is all you need]]
-15. [[Plan-ch16|L'apprentissage par renforcement]]
-16. [[Plan-ch17|Le fantôme dans la machine]]
-17. [[Plan-ch18|De la gouvernance des IA]]
+13. [[Plan-ch13|Les secrets du prompt système]]
+14. [[Plan-ch14|Attention is all you need]]
+15. [[Plan-ch15|L'apprentissage par renforcement]]
+16. [[Plan-ch16|Le fantôme dans la machine]]
+17. [[Plan-ch17|De la gouvernance des IA]]
 
 **[[Plan-conclusion|Conclusion]]** *(hors partie)*

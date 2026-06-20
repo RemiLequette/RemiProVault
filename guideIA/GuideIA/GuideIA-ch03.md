@@ -1,42 +1,57 @@
-## 3. Le modèle et l'opérateur
+## 4. C'est quoi la génération ?
 
-Un assistant IA n'est pas un seul composant monolithique. Sous le capot, il y en a au moins deux — et comprendre leur rôle respectif change la façon dont on l'utilise.
+Il y a quelque chose de presque magique dans ce que fait un LLM. On comprend que ses connaissances viennent de textes humains — mais nulle part dans la littérature humaine il n'existe un texte aussi spécifique que le verbiage d'un prompt système sur mesure. Comment le modèle peut-il produire quelque chose d'utile à partir de ça ?
 
-### Le modèle de langage
+La réponse tient en un mot : interpolation. Pour l'expliquer, partons d'un exemple volontairement simple.
 
-Le premier composant est le {{def:mk:modèle_de_langage}} — souvent désigné par l'acronyme {{def:mk:LLM}} (*Large Language Model*). Son rôle est précis : compléter un texte inachevé.
+### Un modèle immobilier
 
-Prenons un exemple simple. La phrase *"La capitale de la France est"* reste suspendue. Sa complétion la plus probable est *"Paris"*. Le consensus est fort — c'est ce que dit la grande majorité des textes sur lesquels le modèle a été entraîné. Vichy reste une réponse techniquement plausible, mais très minoritaire.
+Je veux estimer la valeur d'un appartement. Je dispose d'une liste de transactions immobilières avec les surfaces et les prix.
 
-Maintenant : *"La meilleure équipe de foot en France est"*. C'est plus intéressant. Plusieurs complétions sont plausibles, le consensus moins net.
+Approche classique : calculer le prix moyen au m², puis multiplier par la surface de mon appartement.
 
-Reformulons encore : *"De l'avis des principaux commentateurs sportifs, les trois meilleures équipes de foot en France sont"*. La {{def:mk:complétion}} devient plus riche, plus nuancée. C'est déjà une introduction au rôle du {{ref:mk:prompt}} : la façon de formuler oriente le résultat.
+{{def:fig:immo-regression}}
 
-### L'opérateur
+Sans le savoir, je viens de construire un modèle. Un modèle, c'est trois choses :
 
-Le second composant est l'{{def:mk:opérateur}}. C'est lui qui fait l'interface avec vous. Il reçoit votre message, le prépare pour le modèle, envoie le tout, récupère la réponse, et vous l'affiche.
+- une **procédure de calcul** : multiplier par le prix au m²
+- des **paramètres** qui règlent ce calcul : ici un seul, le prix moyen au m²
+- une **méthode d'apprentissage** pour trouver les paramètres à partir de données connues — ici les transactions immobilières, et la méthode le calcul de la moyenne
 
-{{def:fig:flux-opérateur}}
+Même si la surface de mon appartement ne figure dans aucune transaction historique, ou si plusieurs transactions ont la même surface avec des prix différents, j'obtiens une estimation raisonnable. C'est ça, la magie de l'interpolation : généraliser à partir d'exemples, sans avoir besoin d'un exemple pour chaque cas.
 
-### Le secret de fabrication
+### Le LLM : même concept, autre échelle
 
-Personne ne veut parler directement au modèle brut — en lui soumettant des débuts de phrase à compléter. C'est là qu'intervient l'opérateur : avant votre question, il glisse un ensemble d'instructions que vous ne voyez pas. C'est ce qu'on appelle le {{def:mk:prompt_système}}.
+Un LLM fonctionne sur le même principe, à une échelle radicalement différente :
 
-Ça ressemble à quelque chose comme :
+- **Entrées/sorties** : des débuts de texte et leur complétion
+- **Données d'{{def:mk:données_dentraînement}}** : une immense base de textes, chacun découpé en couples (début, complétion)
+- **Procédure de calcul** : c'est la {{def:mk:génération}} — complexe, mais rapide à exécuter une fois le modèle construit (les fameux GPU y contribuent)
+- **Paramètres** : plusieurs milliards, parfois dizaines de milliards
+- **Apprentissage** : extrêmement coûteux en calcul, qui ne se refait pas tous les jours
 
-```
-Tu es un assistant IA qui répond à une question posée par un utilisateur. Tu dois donner
-des informations claires et précises, avec une explication courte, voire plusieurs
-possibilités s'il y a des ambiguïtés. Tu poses des questions de clarification si
-nécessaire. Tu peux ajouter quelques informations complémentaires qui restent dans le
-thème, et tu relances la conversation avec une question ouverte pour engager des demandes
-d'informations complémentaires. [...]
-```
+### D'où viennent les hallucinations
 
-Avec ce prompt système, la complétion de *"La capitale de la France est"* pourrait donner :
+Notre modèle immobilier peut donner des évaluations irréalistes. Pourquoi ? Deux raisons : la qualité des données et la puissance du modèle.
 
-> *La capitale de la France est Paris, sur la Seine. C'est aussi la plus grande ville du pays avec 2 millions d'habitants. Y a-t-il d'autres pays dont vous voudriez connaître la capitale ?*
+**La qualité des données.** *Garbage in, garbage out.* Un exemple typique : des valeurs aberrantes — un bien bradé, un vendu très au-dessus du marché — qui faussent le calcul des paramètres.
 
-Cet exemple est imaginaire — il illustre simplement l'importance du prompt système : ton, format, gestion des relances, comportement face aux ambiguïtés. C'est un secret de fabrication complexe, finement réglé, propre à chaque assistant.
+{{def:fig:immo-outliers}}
 
-Votre propre formulation compte autant. Mais si on comprend le principe, c'est d'abord du bon sens : être clair, fournir du contexte. N'écoutez pas trop les pseudo-gourous qui vendent des prompts soi-disant tunés — *"Tu es un professeur de danse spécialisé dans les claquettes..."* Ce genre de formule peut même être contre-productif, comme on le verra plus loin.
+Pour les LLM, c'est le même principe : gros travail de préparation des données, filtrage, nettoyage. Wikipedia, c'est bien. Les forums complotistes, beaucoup moins.
+
+**La puissance du modèle.** Il y a peut-être plus que juste la surface : quartier, âge de l'immeuble, étage... Et même avec une seule variable, la puissance du modèle joue. Les petites surfaces sont souvent plus chères au m² — notre droite ne capture pas ça. On peut enrichir le modèle : deux pentes, une pour les petites surfaces, une pour les grandes.
+
+{{def:fig:immo-deux-segments}}
+
+Quand un modèle n'est pas assez puissant pour produire des résultats satisfaisants, on dit qu'il fait de l'{{def:mk:underfitting}}. Vous aurez beau l'entraîner davantage, il ne progressera pas — il lui manque la structure pour répondre à la question.
+
+À l'inverse, un modèle très complexe avec trop de paramètres par rapport aux données disponibles peut "apprendre par cœur" les exemples sans généraliser. Sa courbe passe par tous les points connus, mais part dans des directions improbables entre eux. C'est l'{{def:mk:overfitting}}.
+
+{{def:fig:immo-underfitting}}
+
+{{def:fig:immo-overfitting}}
+
+Techniquement, on parle d'{{def:mk:interpolation}} quand les questions tombent *entre* les données d'entraînement, et d'{{def:mk:extrapolation}} quand elles tombent *en dehors*. Dans les deux cas, le modèle fait de son mieux — mais extrapoler l'amène encore plus facilement dans la science-fiction.
+
+{{def:fig:immo-interpolation-extrapolation}}

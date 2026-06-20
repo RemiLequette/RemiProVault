@@ -1,6 +1,6 @@
-# Plan — Chapitre 12
+# Plan — Chapitre 13
 
-### 12. Développer sa base de connaissance
+### 13. Exemples de conversations
 
 #### Mots-clés
 

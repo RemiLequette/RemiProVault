@@ -1,6 +1,6 @@
-# Plan — Chapitre 16
+# Plan — Chapitre 18
 
-### 16. L'apprentissage par renforcement
+### 18. De la gouvernance des IA
 
 #### Mots-clés
 

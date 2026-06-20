@@ -1,57 +1,33 @@
-## 4. C'est quoi la génération ?
+## 5. Le problème du poisson rouge
 
-Il y a quelque chose de presque magique dans ce que fait un LLM. On comprend que ses connaissances viennent de textes humains — mais nulle part dans la littérature humaine il n'existe un texte aussi spécifique que le verbiage d'un prompt système sur mesure. Comment le modèle peut-il produire quelque chose d'utile à partir de ça ?
+Le poisson rouge a la réputation d'oublier tout toutes les trente secondes. C'est inexact — mais c'est une bonne métaphore pour décrire un aspect fondamental des LLM.
 
-La réponse tient en un mot : interpolation. Pour l'expliquer, partons d'un exemple volontairement simple.
+### Pas de mémoire
 
-### Un modèle immobilier
+Entre deux générations, le modèle repart de zéro. Aucune mémoire, aucun état — on dit qu'il est {{def:mk:stateless}} ({{def:mk:sans_état}}). Chaque génération est entièrement indépendante de la précédente.
 
-Je veux estimer la valeur d'un appartement. Je dispose d'une liste de transactions immobilières avec les surfaces et les prix.
+C'est un choix d'architecture, pas un oubli de conception. Mais ça pose un problème évident : comment tenir une conversation si on oublie tout à chaque réponse ?
 
-Approche classique : calculer le prix moyen au m², puis multiplier par la surface de mon appartement.
+### La solution de l'opérateur
 
-{{def:fig:immo-regression}}
+L'{{ref:mk:opérateur}} s'en charge. À chaque échange, il reconstruit un message complet incluant tout l'{{def:mk:historique}} de la conversation, et l'envoie au modèle. Le modèle ne se souvient de rien — mais il reçoit tout.
 
-Sans le savoir, je viens de construire un modèle. Un modèle, c'est trois choses :
+{{def:fig:prompt-etendu-historique}}
 
-- une **procédure de calcul** : multiplier par le prix au m²
-- des **paramètres** qui règlent ce calcul : ici un seul, le prix moyen au m²
-- une **méthode d'apprentissage** pour trouver les paramètres à partir de données connues — ici les transactions immobilières, et la méthode le calcul de la moyenne
+Ce message complet s'appelle tantôt "prompt", tantôt "{{def:mk:contexte}}" — parce qu'il contient à la fois votre question et les éléments de contexte nécessaires pour y répondre. C'est la même chose, vue sous deux angles différents. Le contexte, c'est de la mémoire artificielle.
 
-Même si la surface de mon appartement ne figure dans aucune transaction historique, ou si plusieurs transactions ont la même surface avec des prix différents, j'obtiens une estimation raisonnable. C'est ça, la magie de l'interpolation : généraliser à partir d'exemples, sans avoir besoin d'un exemple pour chaque cas.
+*(Parenthèse involontairement illustrative : ce paragraphe vient d'utiliser le mot "contexte" en lui donnant deux sens légèrement différents — exactement le genre d'ambiguïté que les chapitres suivants vont explorer.)*
 
-### Le LLM : même concept, autre échelle
+### La fenêtre de contexte
 
-Un LLM fonctionne sur le même principe, à une échelle radicalement différente :
+Ce message a une taille limite : la {{def:mk:fenêtre_de_contexte}}. Elle dépend du modèle, et elle est très grande — mais l'historique croît à chaque échange. Quand on approche de la limite, l'opérateur peut compresser les échanges anciens pour faire de la place.
 
-- **Entrées/sorties** : des débuts de texte et leur complétion
-- **Données d'{{def:mk:données_dentraînement}}** : une immense base de textes, chacun découpé en couples (début, complétion)
-- **Procédure de calcul** : c'est la {{def:mk:génération}} — complexe, mais rapide à exécuter une fois le modèle construit (les fameux GPU y contribuent)
-- **Paramètres** : plusieurs milliards, parfois dizaines de milliards
-- **Apprentissage** : extrêmement coûteux en calcul, qui ne se refait pas tous les jours
+Tout ce texte a un coût : c'est ce qu'on appelle les {{def:mk:token}}s — l'unité de mesure des LLM. Roughly un mot ou un fragment de mot.
 
-### D'où viennent les hallucinations
+Un contexte très long peut aussi créer de la confusion pour le modèle. On verra pourquoi dans le chapitre sur l'attention.
 
-Notre modèle immobilier peut donner des évaluations irréalistes. Pourquoi ? Deux raisons : la qualité des données et la puissance du modèle.
+### Conclusion pratique
 
-**La qualité des données.** *Garbage in, garbage out.* Un exemple typique : des valeurs aberrantes — un bien bradé, un vendu très au-dessus du marché — qui faussent le calcul des paramètres.
+Des conversations courtes, centrées sur un seul sujet. Si le sujet change, commencez une nouvelle session.
 
-{{def:fig:immo-outliers}}
-
-Pour les LLM, c'est le même principe : gros travail de préparation des données, filtrage, nettoyage. Wikipedia, c'est bien. Les forums complotistes, beaucoup moins.
-
-**La puissance du modèle.** Il y a peut-être plus que juste la surface : quartier, âge de l'immeuble, étage... Et même avec une seule variable, la puissance du modèle joue. Les petites surfaces sont souvent plus chères au m² — notre droite ne capture pas ça. On peut enrichir le modèle : deux pentes, une pour les petites surfaces, une pour les grandes.
-
-{{def:fig:immo-deux-segments}}
-
-Quand un modèle n'est pas assez puissant pour produire des résultats satisfaisants, on dit qu'il fait de l'{{def:mk:underfitting}}. Vous aurez beau l'entraîner davantage, il ne progressera pas — il lui manque la structure pour répondre à la question.
-
-À l'inverse, un modèle très complexe avec trop de paramètres par rapport aux données disponibles peut "apprendre par cœur" les exemples sans généraliser. Sa courbe passe par tous les points connus, mais part dans des directions improbables entre eux. C'est l'{{def:mk:overfitting}}.
-
-{{def:fig:immo-underfitting}}
-
-{{def:fig:immo-overfitting}}
-
-Techniquement, on parle d'{{def:mk:interpolation}} quand les questions tombent *entre* les données d'entraînement, et d'{{def:mk:extrapolation}} quand elles tombent *en dehors*. Dans les deux cas, le modèle fait de son mieux — mais extrapoler l'amène encore plus facilement dans la science-fiction.
-
-{{def:fig:immo-interpolation-extrapolation}}
+*(Si toutes les réunions étaient organisées comme ça...)*

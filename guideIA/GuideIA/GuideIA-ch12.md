@@ -1,3 +1,3 @@
-## 12. Développer sa base de connaissance
+## 13. Exemples de conversations
 
 *À développer en session dédiée.*

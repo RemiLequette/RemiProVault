@@ -1,0 +1,17 @@
+filters:
+  and:
+    - file.inFolder("guideIA/TODO/ITEMS")
+views:
+  - type: table
+    name: Table
+    filters:
+      and:
+        - Status != "Done"
+    order:
+      - file.name
+      - Status
+      - importance
+      - effort
+    sort:
+      - property: Status
+        direction: ASC

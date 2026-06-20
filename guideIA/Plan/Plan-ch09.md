@@ -1,6 +1,8 @@
-# Plan — Chapitre 9
+# Plan — Chapitre 10
 
-### 9. Un jour sans fin
+## Partie 2
+
+### 10. Cas pratiques
 
 #### Mots-clés
 
@@ -10,6 +12,14 @@
 
 #### Contenu
 
-*Contenu à développer à partir du texte de l'auteur — session dédiée.*
+Cas tirés de l'expérience de l'auteur :
 
-Inspiré du film Groundhog Day : arc narratif frustration → positif. Comment la répétition des sessions avec une IA, qui repart de zéro à chaque fois, se transforme en méthode et en fluide de travail.
+1. Écriture de documentation technique
+2. Gouvernance
+3. Codage
+4. Comment nous avons écrit ce guide — Claude et moi (bouclage narratif)
+
+Cas supplémentaires à envisager :
+
+- Recommandations instructions / setup du système — comment bien configurer son assistant
+- Gérer deux IA : une perso et une pro — séparation des contextes, des données, des usages

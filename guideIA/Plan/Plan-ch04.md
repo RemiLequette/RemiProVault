@@ -1,119 +1,63 @@
-# Plan — Chapitre 4
+# Plan — Chapitre 5
 
-### 4. C'est quoi la génération ?
+### 5. Le problème du poisson rouge
 
 #### Mots-clés
 
-- génération
-- données d'entraînement
-- interpolation
-- extrapolation
-- hallucination
-- underfitting
-- overfitting
+- stateless
+- sans état
+- historique
+- contexte
+- fenêtre de contexte
+- token
 
 #### Figures
 
-> 🖼️ **figure** `immo-regression`
-> Graphique axes surface (x) / prix (y). Points représentant les transactions.
-> Droite de régression représentant le prix moyen au m². Ligne verticale rouge
-> partant de la surface de l'appartement cible, ligne horizontale arrivant à son
-> prix estimé. Style pédagogique, épuré.
-
-> 🖼️ **figure** `immo-outliers`
-> Mêmes données que immo-regression, avec quelques points aberrants bien exagérés
-> (un bien bradé, un vendu très au-dessus du marché). Montrer comment ils dévient
-> la droite de régression.
-
-> 🖼️ **figure** `immo-deux-segments`
-> Modèle à deux pentes : une pour les petites surfaces (prix/m² élevé), une pour
-> les grandes (prix/m² plus faible). Illustre l'enrichissement du modèle par rapport
-> à immo-regression.
-
-> 🖼️ **figure** `immo-underfitting`
-> Données avec une structure visible (courbe), modèle trop simple (droite) qui ne
-> capture pas la tendance. Le modèle "n'est pas assez intelligent".
-
-> 🖼️ **figure** `immo-overfitting`
-> Même données, modèle trop complexe dont la courbe passe par tous les points mais
-> part dans des directions improbables entre les données. Le modèle "apprend par
-> cœur" au lieu de généraliser.
-
-> 🖼️ **figure** `immo-interpolation-extrapolation`
-> Zones colorées fond vert/rouge délimitant les données d'entraînement.
-> Labels "interpolation" / "extrapolation" de part et d'autre.
+> 🖼️ **figure** `prompt-etendu-historique`
+> Schéma de la structure du message envoyé au modèle :
+> [prompt système] + [historique de la conversation] + [dernière question].
+> Mettre en évidence que l'historique grossit à chaque échange.
 
 #### Encadrés
 
+> 📦 **encadré** `tokens`
+> Les tokens
+> Définition des tokens : unité de mesure des LLM, roughly un mot ou un fragment de mot.
+> Ordre de grandeur, coût (calcul GPU, donc énergie) — sans jugement de valeur, juste
+> les faits qui permettent de comprendre ce que les gens entendent.
+> Lien avec la fenêtre de contexte.
+
 #### Contenu
 
-**Accroche**
-Il y a quelque chose de magique dans cette génération : on comprend que la connaissance
-vient des données d'entraînement, mais on se doute bien que nulle part dans la littérature
-humaine il n'y a un texte aussi tarabiscoté que le verbiage d'un prompt système ! Comment
-ça marche alors ?
+**Les LLM n'ont aucune mémoire**
+Aspect fondamental : entre deux générations, le modèle repart de zéro.
+Pas de mémoire, pas d'état — stateless. Chaque génération est indépendante.
+Le titre du chapitre fait référence à la réputation (humoristique) des poissons rouges
+qui oublient tout — plus élégant que d'autres métaphores.
 
-Ça repose sur le concept d'interpolation. Je vais l'expliquer en partant d'un exemple
-volontairement très simple.
+**Le problème pour l'opérateur**
+Difficile de soutenir une conversation quand on oublie tout à chaque étape.
+Solution : l'opérateur renvoie tout l'historique dans le texte à compléter.
+Utiliser la figure prompt-etendu-historique ici.
 
-**L'exemple immobilier**
-Je voudrais estimer la valeur d'un appartement. Je dispose d'une liste de transactions
-immobilières avec les surfaces et les prix.
+Ce message complet s'appelle tantôt "prompt", tantôt "contexte" — parce qu'il contient
+à la fois la question et les éléments de contexte nécessaires pour y répondre. La note
+d'humour sur la double signification de "contexte" est intégrée dans le guide de façon
+naturelle — plan aligné sur la structure du guide.
 
-Approche classique : calculer le prix moyen au m², puis multiplier par la surface.
+**L'importance de maîtriser la longueur**
+Le message envoyé au modèle a une taille limite — la fenêtre de contexte —
+qui dépend du LLM. Elle est très grande, mais l'historique croît vite.
+Quand on approche de la limite, l'opérateur peut compresser l'historique
+(résumer les échanges anciens) pour faire de la place.
 
-Utiliser la figure immo-regression ici.
+Tout ce texte a un coût : c'est ce qu'on appelle les tokens — voir encadré tokens.
+(Inclure dans l'encadré : coût énergétique — calcul GPU, donc énergie — sans jugement
+de valeur, pour raccrocher ce que les gens entendent aux bons concepts.)
 
-Sans le savoir, comme Monsieur Jourdain faisait de la prose, je viens de construire un modèle. Un modèle c'est :
+Un contexte très long peut aussi créer de la confusion pour le modèle — on verra
+pourquoi dans le chapitre sur l'attention.
 
-- une procédure pour calculer une sortie à partir d'une entrée : multiplier la surface par le prix moyen au m² (c'est la génération)
-- des paramètres qui influencent le calcul : ici un seul, le prix moyen au m²
-- des données d'entrainement pour pouvoir calibrer les paramètres: ici les transactions immobilières
-- une méthode d'apprentissage pour trouver les paramètres qui reflètent le mieux les données d'entraînement: le calcul du prix moyen au m2
-
-Même si la surface de mon bien ne figure pas dans les transactions historiques, ou qu'il y en a plusieurs avec la même surface et des prix différents, je trouve une valeur qui est une bonne base de réflexion. C'est la magie de l'interpolation.
-
-**Le LLM, même concept, échelle différente**
-
-- Les entrées/sorties : des débuts de texte et leur complétion
-- Les données d'entraînement : une immense base de textes, chacun découpé en plusieurs couples (début, complétion)
-- La procédure de calcul : c'est la fameuse génération, complexe, mais pas besoin d'entrer dans les détails
-- Les paramètres : plusieurs milliards, voire dizaines de milliards
-- L'apprentissage : extrêmement complexe, des capacités de calcul gigantesques, ça ne se fait pas tous les jours
-
-**D'où viennent les hallucinations**
-
-On voit tout de suite que notre modèle immobilier peut halluciner et donner des
-évaluations plus ou moins irréalistes. Pourquoi ? Deux sources : les données et la puissance du modèle.
-
-*La qualité des données*
-Garbage in, garbage out. Un exemple typique est la présence de valeurs aberrantes — un bien bradé, un vendu très au-dessus du marché — qui vont dérailler le calcul des paramètres.
-
-Utiliser la figure immo-outliers ici.
-
-Biais de positivité. Biais culturels (anglophonie). Wikipedia c'est bien, les forums conspirationnistes c'est moins bien.
-
-RLHF : améliore l'acceptabilité humaine des réponses mais introduit aussi des biais.
-
-Interpolation vs extrapolation : plus on sort de son domaine de compétence, plus il y a des chances de dire n'importe quoi.
-
-Utiliser la figure immo-interpolation-extrapolation ici.
-
-*La puissance du modèle*
-Les petites surfaces sont souvent plus chères au m² — notre modèle ne capture pas ça.
-
-Utiliser la figure immo-deux-segments ici.
-
-Underfitting : quand un modèle n'est pas assez puissant, il ne peut pas progresser même avec plus d'entraînement.
-
-Utiliser la figure immo-underfitting ici.
-
-Overfitting : modèle très complexe qui "apprend par cœur" sans généraliser.
-
-Utiliser la figure immo-overfitting ici.
-
-La question du raisonnement : l'interpolation qui se passe en une seule étape n'est pas très compatible avec l'idée de poser des étapes de raisonnement. "Justifie ta réponse" — l'interpolation va s'accrocher aux connaissances où "justifier la réponse" est associé à une structure de phrase. Compliqué, et il ne va pas vraiment raisonner, juste interpoler des schémas.
-
-Exemple Joconde / aveugles de Jéricho / noces de Cana — illustration du mécanisme de croyance sans raisonnement.
-
-Une IA n'a que des croyances et n'a aucune notion "d'avoir tort".
+**Conclusion pratique**
+Des conversations courtes et centrées sur un sujet. Nouvelle session si le sujet change.
+(Si toutes les réunions étaient comme ça !)
