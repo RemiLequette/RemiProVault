@@ -418,3 +418,20 @@ Le renommage en cascade sans fichiers intermédiaires produit des collisions fat
 
 **Correctif du cadratin**
 Le script PowerShell a introduit `u{2014}` littéral au lieu du cadratin `—`. Corrigé en injectant `[char]0x2014` directement dans la chaîne PowerShell.
+
+---
+
+## Session 2026-06-29 — Chapitre 1 : révision des mots-clés
+
+### Décisions
+- Audit complet des mots-clés du chapitre 1 : 7 balises `{{def:mk:...}}` existantes vérifiées, toutes cohérentes entre plan et guide
+- Ajout de 3 nouveaux mots-clés : `systeme1`, `systeme2`, `kahneman`
+- `fabulation` écarté (synonyme d'`hallucination`, pas un concept distinct) ; `theorie_de_lesprit` écarté (déjà couvert par l'encadré)
+- `METHODE.md` — ajout d'une phrase dans `### Principe général` clarifiant la double finalité des mots-clés : navigation lecteur (index) et renvois internes entre chapitres
+- 3 fichiers modifiés : `METHODE.md`, `Plan/Plan-ch01.md`, `GuideIA/GuideIA-ch01.md`
+
+### Collaboration
+
+**Moment clé — Une lacune dans la méthode révélée en passant**
+
+En validant les mots-clés candidats, l'utilisateur a signalé que la finalité des mots-clés pour le lecteur (index de navigation) n'était pas documentée dans `METHODE.md`. La méthode décrivait le mécanisme technique (balise → index → lien) mais pas l'intention : un index est un outil de navigation, pas seulement un système de références internes. Correction immédiate dans `METHODE.md`. Exemple typique d'une session contenu qui améliore la méthode au passage.
