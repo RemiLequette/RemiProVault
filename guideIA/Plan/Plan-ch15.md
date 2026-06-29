@@ -1,4 +1,4 @@
-﻿# Plan — Chapitre 15
+# Plan — Chapitre 15
 
 ### 15. Le fantome dans la machine
 

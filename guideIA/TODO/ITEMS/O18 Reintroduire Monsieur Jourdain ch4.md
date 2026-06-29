@@ -1,5 +1,5 @@
 ---
-Status: Todo
+Status: Done
 importance: Medium
 effort: XS
 type: todo

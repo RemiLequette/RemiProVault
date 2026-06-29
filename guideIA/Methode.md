@@ -130,7 +130,7 @@ Les sessions doivent être **focalisées** : un sujet par session, clairement d�
 C'est l'utilisateur qui signale la fin de session en prononçant le mot-clé **`clôture`**. Ce signal déclenche obligatoirement l'écriture du journal :
 1. L'assistant propose une entrée de journal (décisions + collaboration)
 2. L'utilisateur valide ou ajuste
-3. L'assistant écrit l'entrée dans `Journal.md`
+3. L'assistant écrit l'entrée dans `Journal.md` via `append-journal.js`
 
 L'assistant n'écrit jamais le journal de sa propre initiative — il attend le mot-clé.
 
@@ -361,13 +361,11 @@ Les scripts d'outillage et leur documentation sont dans des répertoires distinc
 
 **Exécution depuis une session :** l'outil `commands` peut lancer des scripts directement même sans accès shell complet. C'est le moyen privilégié pour tester les scripts sans quitter la session.
 
-Des outils seront développés pour automatiser les tâches mécaniques :
-- **plan-editor** : outil de navigation et d'édition du plan et du guide — spec dans `outils/plan-editor.md`
-- **Check** : vérification de la cohérence entre `Plan.md` et `GuideIA.md` (voir section Balises)
-- **Rendu** : transformation des balises et génération des index (voir section Balises)
-- Génération de la TOC du guide
-- Génération du sommaire des sessions dans `Journal.md`
-- Export vers PDF, HTML, etc.
+Des outils automatisent les tâches mécaniques :
+- **render-html** : assemblage des chapitres, résolution des balises, génération des index, production de `output/GuideIA.html` — `tools/render_html.js`, doc dans `outils/render-html.md`
+- **append-journal** : insertion d'une nouvelle entrée en tête de `Journal.md` — `tools/append-journal.js`
+- **Check** : vérification de la cohérence entre les fichiers `Plan/` et `GuideIA/` (voir section Balises) — à développer
+- Export vers PDF, etc. — à définir
 
 Le LLM se concentre sur le contenu sémantique ; les tâches structurelles (assemblage, numérotation, index, rendu) sont déléguées aux outils.
 
@@ -387,7 +385,15 @@ Format d'une entrée :
 - ...
 ```
 
-Le fichier commence par un sommaire des sessions avec liens vers chaque entrée. Ce sommaire est destiné à être généré automatiquement par un outil.
+Le fichier commence par un sommaire des sessions avec liens vers chaque entrée.
+
+**Écriture du journal — workflow :**
+1. L'assistant rédige l'entrée dans un fichier temporaire `tools/tmp-entry.md` (répertoire guideIA-tools)
+2. L'assistant exécute `node tools/append-journal.js <chemin-journal> tools/tmp-entry.md`
+3. Le script insère l'entrée en tête de `Journal.md` et met à jour le sommaire — sans que Claude lise le fichier existant
+4. Le fichier temporaire peut être supprimé après exécution
+
+**Ne jamais réécrire `Journal.md` en entier depuis Claude** — coûteux en tokens et risqué. Toujours passer par `append-journal.js`. Le script crée automatiquement un backup `.bak` avant chaque écriture.
 
 Chaque entrée doit couvrir deux dimensions :
 - **Décisions** : ce qui a été produit ou arrêté durant la session

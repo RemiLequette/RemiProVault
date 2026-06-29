@@ -1,16 +1,26 @@
-﻿# Plan — Chapitre 3
+# Plan — Chapitre 3
+
+## Première Partie
 
 ### 3. C'est quoi la génération ?
+
+#### Objectifs
+
+- Expliquer ce qu'est un modèle et comment il génère une réponse — par interpolation, pas par raisonnement
+- Faire comprendre d'où viennent les hallucinations : qualité des données et puissance du modèle
+- Poser la distinction interpolation / extrapolation comme boussole pratique pour le lecteur
+- Introduire l'idée centrale : une IA n'a que des croyances, pas de notion d'avoir tort
 
 #### Mots-clés
 
 - génération
-- données d'entraînement
+- données_dentraînement
 - interpolation
 - extrapolation
 - hallucination
 - underfitting
 - overfitting
+- raisonnement
 
 #### Figures
 
@@ -45,6 +55,13 @@
 
 #### Encadrés
 
+> 📦 **encadré** `biais-de-positivite`
+> Le biais de positivité
+> Pourquoi le modèle affirme plutôt qu'il ne doute. La littérature humaine décrit
+> rarement ce qu'on ignore — donc le modèle a peu appris à dire "je ne sais pas".
+> Effet sur les hallucinations : le modèle comble les blancs avec confiance plutôt
+> que d'admettre une limite.
+
 #### Contenu
 
 **Accroche**
@@ -68,8 +85,8 @@ Sans le savoir, comme Monsieur Jourdain faisait de la prose, je viens de constru
 
 - une procédure pour calculer une sortie à partir d'une entrée : multiplier la surface par le prix moyen au m² (c'est la génération)
 - des paramètres qui influencent le calcul : ici un seul, le prix moyen au m²
-- des données d'entrainement pour pouvoir calibrer les paramètres: ici les transactions immobilières
-- une méthode d'apprentissage pour trouver les paramètres qui reflètent le mieux les données d'entraînement: le calcul du prix moyen au m2
+- des données d'entraînement pour pouvoir calibrer les paramètres : ici les transactions immobilières
+- une méthode d'apprentissage pour trouver les paramètres qui reflètent le mieux les données d'entraînement : le calcul du prix moyen au m²
 
 Même si la surface de mon bien ne figure pas dans les transactions historiques, ou qu'il y en a plusieurs avec la même surface et des prix différents, je trouve une valeur qui est une bonne base de réflexion. C'est la magie de l'interpolation.
 
@@ -87,33 +104,25 @@ On voit tout de suite que notre modèle immobilier peut halluciner et donner des
 évaluations plus ou moins irréalistes. Pourquoi ? Deux sources : les données et la puissance du modèle.
 
 *La qualité des données*
-Garbage in, garbage out. Un exemple typique est la présence de valeurs aberrantes — un bien bradé, un vendu très au-dessus du marché — qui vont dérailler le calcul des paramètres.
+Garbage in, garbage out. Valeurs aberrantes — figure immo-outliers ici.
 
-Utiliser la figure immo-outliers ici.
+Biais de positivité — encadré `biais-de-positivite` ici.
 
-Biais de positivité. Biais culturels (anglophonie). Wikipedia c'est bien, les forums conspirationnistes c'est moins bien.
+Biais culturels (anglophonie, Wikipedia vs forums complotistes) et RLHF : un feedback humain qui oriente l'entraînement vers des réponses jugées acceptables, ce qui introduit ses propres biais. Renvoi ch15 pour aller plus loin.
 
-RLHF : améliore l'acceptabilité humaine des réponses mais introduit aussi des biais.
-
-Interpolation vs extrapolation : plus on sort de son domaine de compétence, plus il y a des chances de dire n'importe quoi.
-
-Utiliser la figure immo-interpolation-extrapolation ici.
+Interpolation vs extrapolation : plus on sort du domaine de compétence, plus les hallucinations sont probables — figure immo-interpolation-extrapolation ici.
 
 *La puissance du modèle*
-Les petites surfaces sont souvent plus chères au m² — notre modèle ne capture pas ça.
+Les petites surfaces sont souvent plus chères au m² — notre modèle ne capture pas ça. Figure immo-deux-segments ici.
 
-Utiliser la figure immo-deux-segments ici.
+Underfitting : modèle trop simple, ne progresse pas même avec plus d'entraînement — figure immo-underfitting ici.
 
-Underfitting : quand un modèle n'est pas assez puissant, il ne peut pas progresser même avec plus d'entraînement.
+Overfitting : modèle trop complexe qui apprend par cœur sans généraliser — figure immo-overfitting ici.
 
-Utiliser la figure immo-underfitting ici.
+**Le raisonnement — ce que l'interpolation ne fait pas**
+L'interpolation se fait en une étape. "Justifie ta réponse" ne déclenche pas un raisonnement — ça interpole des schémas de justification. Le modèle reproduit la *forme* d'une démonstration sans en faire le *fond*.
 
-Overfitting : modèle très complexe qui "apprend par cœur" sans généraliser.
+Exemple : la Joconde, les aveugles de Jéricho, les noces de Cana. Le modèle associe des éléments connus (Léonard de Vinci, la Bible, Vinci encore) sans vérifier leur cohérence. Il croit — il n'a pas tort, il n'a pas raison, il interpole.
 
-Utiliser la figure immo-overfitting ici.
-
-La question du raisonnement : l'interpolation qui se passe en une seule étape n'est pas très compatible avec l'idée de poser des étapes de raisonnement. "Justifie ta réponse" — l'interpolation va s'accrocher aux connaissances où "justifier la réponse" est associé à une structure de phrase. Compliqué, et il ne va pas vraiment raisonner, juste interpoler des schémas.
-
-Exemple Joconde / aveugles de Jéricho / noces de Cana — illustration du mécanisme de croyance sans raisonnement.
-
-Une IA n'a que des croyances et n'a aucune notion "d'avoir tort".
+**Conclusion**
+Une IA n'a que des croyances. Elle n'a aucune notion d'avoir tort — ce qui est une notion de raisonnement, pas d'interpolation. C'est le fil directeur de tout ce qui suit.

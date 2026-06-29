@@ -4,7 +4,7 @@
 
 ### L'anthropomorphisme
 
-Nous avons tendance à humaniser l'IA, en terme savant, à l'{{def:mk:anthropomorphisme}}iser. Ce n'est pas nouveau. Un nuage qui « menace », une voiture qui « refuse de démarrer », un chat qui « boude ». La tendance naturelle à projeter des caractéristiques humaines sur ce qui n'est pas humain. Ce n'est pas un défaut de raisonnement : c'est une stratégie cognitive ancienne, efficace pour naviguer dans un monde social complexe.
+Nous avons tendance à humaniser l'IA, en terme savant, à l'{{def:mk:anthropomorphisme}}. Ce n'est pas nouveau. Un nuage qui « menace », une voiture qui « refuse de démarrer », un chat qui « boude ». La tendance naturelle à projeter des caractéristiques humaines sur ce qui n'est pas humain. Ce n'est pas un défaut de raisonnement : c'est une stratégie cognitive ancienne, efficace pour naviguer dans un monde social complexe.
 
 {{def:enc:theorie-de-lesprit}}
 > ### La théorie de l'esprit
@@ -26,7 +26,7 @@ L'anthropomorphisme est bien sympathique, défoulant, même, quand on parle à s
 
 Avec les animaux et avec les IA, le paradigme peut avoir beaucoup d'efficacité si on en connaît bien les limites. Ça marche parce qu'on partage quelque chose.
 
-Qu'est-ce qu'on partage avec les animaux ? Les intentions, les émotions, un corps. Avec les IA ? Le langage, ou plus généralement, la capacité à extraire de l'information de sources diverses et à la rapprocher de connaissances mémorisées de façon flexible, disons *conceptuelle* faute de mieux. Et ce que {{def:mk:kahneman}}Daniel Kahneman appelle le {{def:mk:systeme1}}système 1 : la reconnaissance immédiate de formes et de signaux pour pouvoir agir immédiatement. Les animaux le partagent aussi, c'est un héritage très ancien.
+Qu'est-ce qu'on partage avec les animaux ? Les intentions, les émotions, un corps. Avec les IA ? Le langage, ou plus généralement, la capacité à extraire de l'information de sources diverses et à la rapprocher de connaissances mémorisées de façon flexible, disons *conceptuelle* faute de mieux. Et ce que {{def:mk:kahneman}}Daniel Kahneman appelle le {{def:mk:systeme1}}: la reconnaissance immédiate de formes et de signaux pour pouvoir agir immédiatement. Les animaux le partagent aussi, c'est un héritage très ancien.
 
 {{def:fig:Humains-Animaux-IAs}}
 
@@ -44,7 +44,7 @@ Qu'est-ce qu'on partage avec les animaux ? Les intentions, les émotions, un cor
 >
 > Une IA ? Système 1 pur, d'une puissance extraordinaire. Pas de système 2 pour surveiller, recadrer, dire *"attends, vérifie ça"*. Ce qui explique beaucoup de choses dans ce guide. Et pose une question : dans cette collaboration, qui joue le rôle du système 2 ?
 
-Ce qui reste spécifique aux humains, dans notre domaine, c'est le raisonnement et la conscience ce que Kahneman appelle le {{def:mk:systeme2}}système 2. On verra que c'est précisément ce socle qui est la source principale des limitations de l'IA : elle ne contrôle pas bien son système 1. Et ces limitations nous sont familières, parce que notre système 2 ne peut pas les supprimer entièrement non plus, ce n'est pas un problème de l'IA, c'est un problème de gouvernance. On y reviendra en annexe.
+Ce qui reste spécifique aux humains, dans notre domaine, c'est le raisonnement et la conscience ce que Kahneman appelle le {{def:mk:systeme2}}. On verra que c'est précisément ce socle qui est la source principale des limitations de l'IA : elle ne contrôle pas bien son système 1. Et ces limitations nous sont familières, parce que notre système 2 ne peut pas les supprimer entièrement non plus, ce n'est pas un problème de l'IA, c'est un problème de gouvernance. On y reviendra en annexe.
 
 Mon conseil, provocateur, mais j'espère que la suite vous rangera à mon avis. Ne luttez pas contre l'anthropomorphisme, embrassez-le. Il vous ressemble, vous vous connaissez, donc vous le connaissez. Audacieux syllogisme, dont vous tirerez plus d'avantages que d'inconvénients si vous gardez les limites en tête. Et elles sont simples : pas de système 2, pas de corps, pas d'émotions, pas de motivations, pas d'intentions, pas d'humour une des meilleures récompenses de notre système 2.
 

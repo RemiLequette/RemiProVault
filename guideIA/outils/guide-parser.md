@@ -1,6 +1,6 @@
 # Guide Parser
 
-Spec du format de `Plan.md` et `GuideIA.md`, et de la librairie `tools/lib/guide-parser.js`.
+Spec du format des fichiers `Plan/` et `GuideIA/`, et de la librairie `tools/lib/guide-parser.js`.
 
 *Document type: Process spec*
 
@@ -8,52 +8,43 @@ Spec du format de `Plan.md` et `GuideIA.md`, et de la librairie `tools/lib/guide
 
 ## Quick Start
 
-Spec de référence pour tout code qui lit `Plan.md` ou `GuideIA.md`.
-Couvre le format exact des deux fichiers (délimiteur, sections, syntaxe des blocs), et l'API de la librairie partagée `guide-parser.js`.
-Charger avant toute modification du parsing dans `render_html.js`, `plan-editor.html`, ou `guide-parser.js`.
-Ne couvre pas le contenu éditorial du guide — voir `Plan.md` et `Methode.md`.
-Ne couvre pas l'outil plan-editor — voir `tools/plan-editor.md`.
+Spec de référence pour tout code qui lit les fichiers `Plan/Plan-chNN.md` ou `GuideIA/GuideIA-chNN.md`.
+Couvre le format exact des deux familles de fichiers (délimiteur, sections, syntaxe des blocs), et l'API de la librairie partagée `guide-parser.js`.
+Charger avant toute modification du parsing dans `render_html.js` ou `guide-parser.js`.
+Ne couvre pas le contenu éditorial du guide — voir `Plan-meta.md` et `Methode.md`.
 
 ## Keywords
-guide-parser, Plan.md, GuideIA.md, format, parsing, librairie, figures, encadrés, mots-clés, balises, API
+guide-parser, Plan, GuideIA, format, parsing, librairie, figures, encadrés, mots-clés, balises, API
 
 ## Table of Contents
 
 1. [Pourquoi une librairie partagée](#pourquoi-une-librairie-partagee)
-2. [Format de Plan.md](#format-de-planmd)
-3. [Format de GuideIA.md](#format-de-guideiamnd)
+2. [Format des fichiers Plan/](#format-des-fichiers-plan)
+3. [Format des fichiers GuideIA/](#format-des-fichiers-guideia)
 4. [API de guide-parser.js](#api-de-guide-parserjs)
 5. [Index](#index)
 
 ## Pourquoi une librairie partagée
 [up](#table-of-contents)
 
-`Plan.md` et `GuideIA.md` sont parsés par deux consommateurs distincts :
+Les fichiers `Plan/` et `GuideIA/` sont parsés par `render_html.js`, qui assemble les chapitres et produit le rendu HTML. La librairie centralise le parsing — tout changement de format se fait en un seul endroit.
 
-- `render_html.js` — script Node.js qui génère `output/GuideIA.html`
-- `plan-editor.html` — outil HTML qui lit et écrit les deux fichiers via le serveur local
-
-Sans librairie partagée, chaque consommateur maintient son propre parser. Quand le format évolue, il faut mettre à jour les deux — et le risque de divergence est élevé. C'est exactement ce qui s'est produit : au moment de la création de `guide-parser.js`, les deux parsers avaient déjà divergé sur la syntaxe des blocs figures et encadrés.
-
-La librairie centralise le parsing. Tout changement de format se fait en un seul endroit.
-
-## Format de Plan.md
+## Format des fichiers Plan/
 [up](#table-of-contents)
 
 ### Structure générale
 
-`Plan.md` contient deux zones séparées par un commentaire délimiteur HTML.
+Chaque fichier `Plan/Plan-chNN.md` (ainsi que `Plan-introduction.md` et `Plan-conclusion.md`) contient deux zones séparées par un commentaire délimiteur HTML.
 
-**Zone méta** — avant le délimiteur : objectif, sommaire, guide de style figures, liste des chapitres. Cette zone n'est pas parsée par `guide-parser.js`.
+**Zone méta** — avant le délimiteur : objectif, sommaire, mots-clés du fichier. Cette zone n'est pas parsée par `guide-parser.js`.
 
-**Zone contenu** — après le délimiteur : chapitres avec leurs sections. C'est la zone parsée.
+**Zone contenu** — après le délimiteur : le chapitre avec ses sections. C'est la zone parsée.
 
 Le délimiteur est une ligne de commentaire HTML contenant le mot `CONTENU` (en majuscules) :
 
 ```
 <!-- ============================================================
      CONTENU DU GUIDE
-     ...
      ============================================================ -->
 ```
 
@@ -62,7 +53,7 @@ Tout ce qui précède le délimiteur est ignoré.
 
 ### Chapitres
 
-Chaque chapitre est introduit par un titre de niveau 3 :
+Chaque fichier de chapitre numéroté contient un titre de niveau 3 :
 
 ```
 ### N. Titre du chapitre
@@ -71,8 +62,6 @@ Chaque chapitre est introduit par un titre de niveau 3 :
 - `N` est le numéro du chapitre (entier, sans zéro de tête)
 - Le séparateur entre numéro et titre peut être `.`, `-`, ou un espace
 - Expression régulière : `/^### +(\d+)[.\-\s]+(.+)$/`
-
-Un chapitre s'étend du titre jusqu'au début du chapitre suivant (ou la fin du fichier).
 
 ### Sections d'un chapitre
 
@@ -136,7 +125,7 @@ Expression régulière pour extraire l'identifiant : `/>\s*📦\s*\*\*encadré\*
 
 ### Contenu
 
-Texte libre en Markdown. Peut contenir des balises `{{def:...}}` et `{{ref:...}}` (voir section Format de GuideIA.md). Peut être vide si le chapitre n'est pas encore rédigé dans le plan.
+Texte libre en Markdown. Peut contenir des balises `{{def:...}}` et `{{ref:...}}` (voir section Format des fichiers GuideIA/). Peut être vide si le chapitre n'est pas encore rédigé dans le plan.
 
 ```markdown
 #### Contenu
@@ -146,18 +135,18 @@ L'architecture d'un assistant IA repose sur deux éléments distincts.
 [...]
 ```
 
-## Format de GuideIA.md
+## Format des fichiers GuideIA/
 [up](#table-of-contents)
 
 ### Structure générale
 
-`GuideIA.md` commence par un titre `# ...` suivi du texte du guide. Il n'y a pas de délimiteur — le fichier entier est la zone parsée.
+Chaque fichier `GuideIA/GuideIA-chNN.md` commence par un titre `## N. Titre` suivi du texte rédigé du chapitre. Il n'y a pas de délimiteur — le fichier entier est la zone parsée.
 
 ### Chapitres
 
 Convention des niveaux de titres : voir `Methode.md`, section **Structure technique du guide** (source de vérité).
 
-Un chapitre s'étend de son titre jusqu'au début du chapitre suivant (ou la fin du fichier). Le corps du chapitre est tout ce qui suit la ligne de titre, après suppression des espaces de tête et de queue.
+Le corps du chapitre est tout ce qui suit la ligne de titre, après suppression des espaces de tête et de queue.
 
 ### Balises
 
@@ -184,50 +173,51 @@ Format : `{{(def|ref):(mk|fig|enc):identifiant}}`
 - `fig` — figure
 - `enc` — encadré
 
-Ces balises sont extraites par `parseGuide()` pour alimenter la vue de cohérence de `plan-editor.html`, et résolues en HTML par `render_html.js`.
+Ces balises sont résolues en HTML par `render_html.js`.
 
 ## API de guide-parser.js
 [up](#table-of-contents)
 
 ### Contexte d'exécution
 
-`guide-parser.js` est conçu pour fonctionner dans deux contextes :
-
-- **Node.js** — chargé via `require('./lib/guide-parser')` dans `render_html.js`
-- **Navigateur** — chargé via `<script src="...">` dans `plan-editor.html`
-
-Le fichier utilise un wrapper UMD minimal pour exporter dans les deux contextes.
+`guide-parser.js` est conçu pour fonctionner en Node.js, chargé via `require('./lib/guide-parser')` dans `render_html.js`. Le fichier utilise un wrapper UMD minimal pour être compatible aussi bien en Node.js qu'en navigateur si besoin.
 
 ### parsePlan(text)
 
-Parse le contenu de `Plan.md` et retourne la liste des chapitres de la zone contenu.
+Parse le contenu assemblé des fichiers `Plan/` et retourne la liste des chapitres.
 
-**Paramètre :** `text` — contenu complet de `Plan.md` (string)
+**Paramètre :** `text` — contenu assemblé (string)
 
-**Retour :** tableau d'objets chapitre, dans l'ordre d'apparition.
+**Retour :** objet `{ chapters, parts }`.
 
 ```javascript
-[
-  {
-    num:     "3",                  // numéro du chapitre (string)
-    title:   "Le modèle et l'orchestrateur",
-    planContent: "**Les deux composants**\n...",  // texte de #### Contenu
-    keywords: ["modèle de langage", "LLM", "orchestrateur"],
-    figures: [
-      {
-        id:      "flux-orchestrateur",
-        caption: "Diagramme du flux entre les deux composants : [...]"
-      }
-    ],
-    encadres: [
-      {
-        id:    "tokens",
-        title: "Définition des tokens : unité de mesure des LLM [...]"
-      }
-    ]
-  },
-  ...
-]
+{
+  chapters: [
+    {
+      num:     "3",                  // numéro du chapitre (string)
+      title:   "Le modèle et l'orchestrateur",
+      planContent: "**Les deux composants**\n...",  // texte de #### Contenu
+      keywords: ["modèle de langage", "LLM", "orchestrateur"],
+      figures: [
+        {
+          id:      "flux-orchestrateur",
+          caption: "Diagramme du flux entre les deux composants : [...]"
+        }
+      ],
+      encadres: [
+        {
+          id:    "tokens",
+          title: "Définition des tokens : unité de mesure des LLM [...]"
+        }
+      ]
+    },
+    ...
+  ],
+  parts: [
+    { num: "1", label: "Partie 1", pos: 0 },
+    ...
+  ]
+}
 ```
 
 - `num` : toujours une string (le numéro tel qu'il apparaît dans le fichier)
@@ -238,9 +228,9 @@ Parse le contenu de `Plan.md` et retourne la liste des chapitres de la zone cont
 
 ### parseGuide(text)
 
-Parse le contenu de `GuideIA.md` et retourne un dictionnaire indexé par numéro de chapitre.
+Parse le contenu assemblé des fichiers `GuideIA/` et retourne un dictionnaire indexé par numéro de chapitre.
 
-**Paramètre :** `text` — contenu complet de `GuideIA.md` (string)
+**Paramètre :** `text` — contenu assemblé (string)
 
 **Retour :** objet `{ [num]: chapitre }`.
 
@@ -255,8 +245,8 @@ Parse le contenu de `GuideIA.md` et retourne un dictionnaire indexé par numéro
 }
 ```
 
-- Clés : numéros de chapitres (strings)
-- `content` : texte brut du chapitre (hors ligne de titre), vide si le chapitre n'existe pas
+- Clés : numéros de chapitres (strings), `'introduction'`, `'conclusion'`
+- `content` : texte brut du chapitre (hors ligne de titre)
 - `defs` : tableau des identifiants définis dans ce chapitre (tous types confondus)
 - `refs` : tableau des identifiants référencés dans ce chapitre (tous types confondus)
 
@@ -275,6 +265,18 @@ Les fonctions suivantes sont internes à la librairie et ne font pas partie de l
 
 ## Changelog
 
+### Version 1.2 - Adaptation structure par fichiers
+**Date:** 2026-06-29
+**Raison:** Le projet est passé de fichiers monolithiques `Plan.md` / `GuideIA.md` à une structure par chapitre (`Plan/Plan-chNN.md`, `GuideIA/GuideIA-chNN.md`). Mise à jour de la doc en conséquence. Suppression des références à `plan-editor` (outil retiré).
+
+**Modifications :**
+- Quick Start : retrait de la mention `plan-editor.html`
+- Pourquoi une librairie partagée : section simplifiée, historique de la divergence retiré
+- Format : renommage "Plan.md" → "fichiers Plan/" et "GuideIA.md" → "fichiers GuideIA/"
+- API parsePlan : retour enrichi avec `parts`
+
+---
+
 ### Version 1.1 - Renvoi vers Methode.md pour la convention des titres
 **Date:** 2026-06-05
 **Reason:** La section "Chapitres" de GuideIA.md dupliquait la convention des niveaux de titres au lieu de pointer vers la source de vérité (`Methode.md`). Suppression de la duplication, renvoi explicite.
@@ -286,10 +288,4 @@ Les fonctions suivantes sont internes à la librairie et ne font pas partie de l
 
 ### Version 1.0 - Création
 **Date:** 2026-06-05
-**Reason:** Aucune source de vérité documentée pour le format de Plan.md et GuideIA.md. Les deux parsers existants (render_html.js et plan-editor.html) avaient divergé silencieusement. Ce document fixe le format de référence et spécifie l'API de la librairie partagée guide-parser.js.
-
-**Contenu initial :**
-- Pourquoi une librairie partagée — historique de la divergence
-- Format de Plan.md — délimiteur, chapitres, quatre sous-sections, syntaxe figures/encadrés/mots-clés/contenu
-- Format de GuideIA.md — chapitres, balises def/ref
-- API de guide-parser.js — parsePlan(), parseGuide(), fonctions internes, wrapper UMD
+**Reason:** Aucune source de vérité documentée pour le format de Plan.md et GuideIA.md. Ce document fixe le format de référence et spécifie l'API de la librairie partagée guide-parser.js.
