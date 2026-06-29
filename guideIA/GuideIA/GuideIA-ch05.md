@@ -1,4 +1,4 @@
-## 6. C'est quoi le contexte ?
+﻿## 5. C'est quoi le contexte ?
 
 On a déjà croisé ce mot plusieurs fois. Il est temps de le définir proprement.
 

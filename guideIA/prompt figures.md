@@ -1,0 +1,1 @@
+pour illustrer le debut de ce chapitre, peux tu me generer la figure suivante sous forme de SVG, ne pas inclure le titre

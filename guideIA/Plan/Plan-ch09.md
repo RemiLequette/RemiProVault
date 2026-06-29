@@ -1,8 +1,8 @@
-# Plan — Chapitre 10
+﻿# Plan — Chapitre 9
 
 ## Partie 2
 
-### 10. Cas pratiques
+### 9. Cas pratiques
 
 #### Mots-clés
 

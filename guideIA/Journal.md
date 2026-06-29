@@ -18,6 +18,8 @@
 - [Session 2026-06-02g — Outillage : script de rendu HTML](#session-2026-06-02g--outillage--script-de-rendu-html)
 - [Session 2026-06-02h — Figures SVG](#session-2026-06-02h--figures-svg)
 - [Session 2026-06-05 — plan-editor : bugs, thème, poubelle](#session-2026-06-05--plan-editor--bugs-thème-poubelle)
+- [Session 2026-06-20 — Convention nommage des parties](#session-2026-06-20--convention-nommage-des-parties)
+- [Session 2026-06-20b — Renommage chapitres ch02→ch18 vers ch01→ch17](#session-2026-06-20b--renommage-chapitres-ch02ch18-vers-ch01ch17)
 
 ---
 
@@ -395,3 +397,24 @@ Plutôt que de corriger le code seul, on a corrigé les trois endroits cohéremm
 
 ### Collaboration
 - Session courte et chirurgicale : audit complet des occurrences avant toute modification, go explicite, exécution en une passe sans retour arrière.
+
+---
+
+## Session 2026-06-20b — Renommage chapitres ch02→ch18 vers ch01→ch17
+
+### Décisions
+- Numérotation des chapitres corrigée : les fichiers commençaient à ch02, ils commencent désormais à ch01
+- 34 fichiers renommés : `Plan/Plan-ch02→ch18` → `Plan/Plan-ch01→ch16` ; `GuideIA/GuideIA-ch02→ch18` → `GuideIA/GuideIA-ch01→ch17`
+- Contenu interne corrigé : titres `# Plan — Chapitre N`, `### N.` dans Plan/ et `## N.` dans GuideIA/
+- `Plan-meta.md`, `METHODE.md` et `render_html.js` mis à jour en conséquence
+
+### Collaboration
+
+**Incident — Collision lors du premier renommage de Plan/**
+La première tentative de renommage par PowerShell (ch18→ch02 dans l’ordre inverse) a écrasé `Plan-ch17.md` (« Le fantôme dans la machine ») lors d’une collision avec le fichier existant. Contenu récupéré depuis git (`git show HEAD:./Plan/Plan-ch17.md`).
+
+**Leçon technique — Toujours passer par des noms temporaires**
+Le renommage en cascade sans fichiers intermédiaires produit des collisions fatales. La solution correcte : passe 1 → `chNN.md` en `_tmp_chNN.md`, passe 2 → `_tmp_chNN.md` en `ch(N-1).md`. Appliqué avec succès pour GuideIA/ et la correction finale de Plan/.
+
+**Correctif du cadratin**
+Le script PowerShell a introduit `u{2014}` littéral au lieu du cadratin `—`. Corrigé en injectant `[char]0x2014` directement dans la chaîne PowerShell.

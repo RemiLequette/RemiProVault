@@ -1,6 +1,6 @@
-# Plan — Chapitre 12
+﻿# Plan — Chapitre 11
 
-### 12. Développer sa base de connaissance
+### 11. Développer sa base de connaissance
 
 #### Mots-clés
 

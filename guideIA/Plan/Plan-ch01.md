@@ -1,8 +1,8 @@
-# Plan — Chapitre 2
+# Plan — Chapitre 1
 
 ## Partie 1
 
-### 2. Travailler avec une IA
+### 1. Travailler avec une IA
 
 #### Mots-clés
 
@@ -13,10 +13,13 @@
 - attention
 - boucle_d_or
 - biais_de_positivité
+- systeme1
+- systeme2
+- kahneman
 
 #### Figures
 
-> 🖼️ **figure** `Humains, Animaux, IAs`
+> 🖼️ **figure** Humains-Animaux-IAs
 > Trois cercles en triangle, type diagramme de Venn : Les Humains en haut, les animaux à gauche, les IAs à droite.
 > Commun aux trois : Système 1 : réponse rapide
 > Animaux et Humains : Intentions, émotions

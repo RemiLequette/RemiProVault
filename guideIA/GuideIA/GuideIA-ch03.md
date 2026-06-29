@@ -1,4 +1,4 @@
-## 4. C'est quoi la génération ?
+﻿## 3. C'est quoi la génération ?
 
 Il y a quelque chose de presque magique dans ce que fait un LLM. On comprend que ses connaissances viennent de textes humains — mais nulle part dans la littérature humaine il n'existe un texte aussi spécifique que le verbiage d'un prompt système sur mesure. Comment le modèle peut-il produire quelque chose d'utile à partir de ça ?
 

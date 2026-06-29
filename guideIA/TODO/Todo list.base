@@ -13,5 +13,9 @@ views:
       - importance
       - effort
     sort:
+      - property: importance
+        direction: ASC
       - property: Status
         direction: ASC
+    columnSize:
+      file.name: 310

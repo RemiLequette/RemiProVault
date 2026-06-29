@@ -1,4 +1,4 @@
-## 5. Le problème du poisson rouge
+﻿## 4. Le problème du poisson rouge
 
 Le poisson rouge a la réputation d'oublier tout toutes les trente secondes. C'est inexact — mais c'est une bonne métaphore pour décrire un aspect fondamental des LLM.
 

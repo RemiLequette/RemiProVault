@@ -1,6 +1,6 @@
-# Plan — Chapitre 8
+﻿# Plan — Chapitre 7
 
-### 8. Recueil de bonnes pratiques
+### 7. Recueil de bonnes pratiques
 
 #### Mots-clés
 

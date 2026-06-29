@@ -213,6 +213,8 @@ Les balises permettent de déclarer dans le plan des éléments nommés (mots-cl
 
 ### Principe général
 
+Les mots-clés servent deux usages distincts : la navigation pour le lecteur (index alphabétique avec lien vers la définition) et les renvois internes entre chapitres (balises `{{ref:...}}`).
+
 Chaque balise a :
 - un **type** (`mk`, `fig`, `enc`)
 - un **identifiant** unique dans l'ensemble du document

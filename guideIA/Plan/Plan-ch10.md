@@ -1,6 +1,6 @@
-# Plan — Chapitre 11
+﻿# Plan — Chapitre 10
 
-### 11. Discours de la méthode
+### 10. Discours de la méthode
 
 #### Mots-clés
 

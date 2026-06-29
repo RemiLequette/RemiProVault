@@ -56,7 +56,7 @@ Ces règles gouvernent la façon dont les concepts et les idées sont introduits
 
 ### Conventions
 
-- **Langue** : français — y compris les labels des figures
+- **Langue** : français — y compris les labels des figures. Eviter les incises avec tirets.
 - **Fichier source** : `GuideIA/` — répertoire de fichiers par chapitre
 - **Structure** : définie par les chapitres ci-dessous
 - **Balises** : système `{{def:...}}` / `{{ref:...}}` décrit dans `Methode.md`

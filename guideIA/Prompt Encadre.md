@@ -13,7 +13,7 @@ Règle d'or de l'encadré (L'étanchéité optionnelle) :
 Un bon encadré apporte un complément utile (zoom technique, définition, coulisses), mais il doit être ÉTANCHE. Si le lecteur le saute, il doit pouvoir comprendre le reste du chapitre et appliquer la méthode sans aucun problème. L'information est indispensable pour comprendre les coulisses, mais optionnelle pour l'action immédiate.
 
 Consignes de style et de fond :
-1. Style : Direct, accessible, neutre et concret. Pas de jargon inutile, pas de fioritures ni de style publicitaire.
+1. Style : Direct, accessible, neutre et concret. Pas de jargon inutile, pas de fioritures ni de style publicitaire. Eviter les incises avec des tirets.
 2. Structure : Court et visuel. Utilise des paragraphes brefs, des listes à puces pour l'efficacité, et termine par une phrase de synthèse percutante.
 3. Vigilance "Attentes Lecteur" : Ne te contente pas de la théorie. Identifie l'enjeu concret ou émotionnel pour le lecteur (coût, gain de temps, crainte, bogue bizarre) et mets-le en valeur.
 

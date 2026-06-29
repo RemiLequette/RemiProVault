@@ -1,6 +1,6 @@
-# Plan — Chapitre 7
+﻿# Plan — Chapitre 6
 
-### 7. Le problème de l'attention
+### 6. Le problème de l'attention
 
 #### Mots-clés
 

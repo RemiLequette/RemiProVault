@@ -1,4 +1,4 @@
-## 3. Le modèle et l'opérateur
+﻿## 2. Le modèle et l'opérateur
 
 Un assistant IA n'est pas un seul composant monolithique. Sous le capot, il y en a au moins deux — et comprendre leur rôle respectif change la façon dont on l'utilise.
 

@@ -1,4 +1,4 @@
-## 7. Le problème de l'attention
+﻿## 6. Le problème de l'attention
 
 Ce chapitre revient sur le mécanisme qui a tout changé — et explique pourquoi les contextes longs peuvent nuire à la qualité des réponses.
 

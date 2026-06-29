@@ -1,6 +1,6 @@
-# Plan — Chapitre 18
+﻿# Plan — Chapitre 16
 
-### 18. De la gouvernance des IA
+### 16. De la gouvernance des IA
 
 #### Mots-clés
 

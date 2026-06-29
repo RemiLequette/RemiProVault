@@ -8,7 +8,7 @@
 | [[Plan-meta\|Plan-meta]] | Plan général, méta, style |
 | [[guideIA/Journal]] | Journal de bord |
 | [[guideIA/TODO]] | Tâches en attente |
-| [[Encadre]] | Prompt de rédaction des encadrés |
+| [[Prompt Encadre]] | Prompt de rédaction des encadrés |
 
 ---
 

@@ -1,6 +1,6 @@
-# Plan — Chapitre 3
+﻿# Plan — Chapitre 2
 
-### 3. Le modèle et l'opérateur
+### 2. Le modèle et l'opérateur
 
 #### Mots-clés
 

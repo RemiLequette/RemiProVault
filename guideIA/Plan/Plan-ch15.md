@@ -1,6 +1,6 @@
-﻿# Plan --- Chapitre 17
+﻿# Plan — Chapitre 15
 
-### 17. Le fantome dans la machine
+### 15. Le fantome dans la machine
 
 #### Mots-cles
 
