@@ -68,7 +68,7 @@ This convention applies to all Markdown files except those governed by a specifi
 
 | Type           | Convention                         | Remarque                   |
 | -------------- | ---------------------------------- | -------------------------- |
-| `GLOSSARY.md`  | `conventions/glossary.md`          | Structure glossaire        |
+| `GLOSSARY.md`  | `[[glossary-rules]]`               | Structure glossaire        |
 | `Journal.md`   | `conventions/journal-changelog.md` | Append-only session log    |
 | `CHANGELOG.md` | `conventions/journal-changelog.md` | Centralized file changelog |
 
@@ -78,7 +78,7 @@ For exempt files, apply their specific convention instead.
 
 Every document must declare its type. This declaration is part of the document header, governed by `conventions/documentation-style.md`.
 
-See `conventions/documentation-style.md [section Document Type Declaration]` for the format and valid types.
+See `conventions/documentation-style.md [section Document Taxonomy]` for the format and valid types.
 
 ## Load when
 Creating or editing a .md file

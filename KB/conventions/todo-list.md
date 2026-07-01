@@ -31,7 +31,8 @@ levels:
 
 - Todo List Convention
     - Quick Start
-    - Keywords
+    - Load when
+    - Table of Contents
     - Scope
     - Features
     - Files
@@ -41,10 +42,20 @@ levels:
     - Tools
         - todo-filter.js
     - AI Assistant
-    - Index
 ```
 
+## Table of Contents
+
+1. [Load when](#load-when)
+2. [Scope](#scope)
+3. [Features](#features)
+4. [Files](#files)
+5. [Format](#format)
+6. [Tools](#tools)
+7. [AI Assistant](#ai-assistant)
+
 ## Scope
+[up](#table-of-contents)
 
 The todo list is a **lightweight backlog** — it captures ideas and tasks for a project.
 
@@ -59,6 +70,7 @@ The todo list is a **lightweight backlog** — it captures ideas and tasks for a
 - Detailed project management
 
 ## Features
+[up](#table-of-contents)
 
 - **Capture** — create a new item at any time during a session
 - **Status** — Idea / Todo / WIP / Done
@@ -68,6 +80,7 @@ The todo list is a **lightweight backlog** — it captures ideas and tasks for a
 - **WIP** — items with `Status: WIP` represent what is currently in progress across sessions. The WIP is the bridge between sessions: a session closes by reviewing WIP items, the next session opens by reading them.
 
 ## Files
+[up](#table-of-contents)
 
 One folder per project at the project root:
 
@@ -86,11 +99,12 @@ TODO/
 There is no archive file. Done items remain in `TODO/ITEMS/` with `Status: Done`.
 
 ## Format
-
+[up](#table-of-contents)
 ### ITEM template.md
 
 ```markdown
 ---
+id: 
 Status: Todo
 importance: Medium
 effort: M
@@ -108,6 +122,7 @@ Each item is a `.md` file in `TODO/ITEMS/`. The filename is the item title.
 
 ```markdown
 ---
+id: T-001
 Status: Todo
 importance: High
 effort: S
@@ -121,11 +136,14 @@ Optional free-form content.
 ## Notes
 ```
 
+**ID format:** `T-NNN` — prefix `T-` + sequential 3-digit number, zero-padded, assigned once and never reused or renumbered. Stable across renames (unlike the filename, which is the item title and can change).
+
 **Status values:** `Idea` / `Todo` / `WIP` / `Done`
 **Importance values:** `High` / `Medium` / `Low`
 **Effort values:** `XS` / `S` / `M` / `L` / `XL`
 
 ## Tools
+[up](#table-of-contents)
 
 ### todo-filter.js
 
@@ -152,11 +170,11 @@ node tools/todo-filter.js /path/to/TODO/ITEMS effort XS
 ```
 
 ## AI Assistant
-
+[up](#table-of-contents)
 - **Overview** — `list_directory` on `TODO/ITEMS/` gives the list of all items. Read individual files only when detail is needed.
 - **Filtered view** — use `todo-filter.js` to get items matching a specific property value (e.g. `Status WIP` at session start).
-- **Create an item** — copy `TODO/ITEM template.md` to `TODO/ITEMS/<title>.md`, fill in the YAML front matter.
-- **Update an item** — write only the targeted file.
+- **Create an item** — copy `TODO/ITEM template.md` to `TODO/ITEMS/<title>.md`, fill in the YAML front matter, assign the next available `id` (max existing `T-NNN` + 1).
+- **Update an item** — write only the targeted file. Never change an item's `id` once assigned.
 - **Change status** — update only the `Status` property in the YAML front matter.
 - **Board** — `TODO/TodoList.base` is managed by the user. The AI Assistant does not read or modify it.
 

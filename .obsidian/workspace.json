@@ -4,21 +4,20 @@
     "type": "split",
     "children": [
       {
-        "id": "7e4b406a4ce86551",
+        "id": "05d7bdc0eb77e40a",
         "type": "tabs",
         "children": [
           {
-            "id": "a39782ce984621db",
+            "id": "b0203ef42ca8b9ac",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "bases",
               "state": {
-                "file": "KB/project-ideas-inbox.md",
-                "mode": "source",
-                "source": false
+                "file": "KB/TodoList.base",
+                "viewName": "Table"
               },
-              "icon": "lucide-file",
-              "title": "project-ideas-inbox"
+              "icon": "lucide-table",
+              "title": "TodoList"
             }
           }
         ]
@@ -181,44 +180,44 @@
       "bases:Create new base": false
     }
   },
-  "active": "a39782ce984621db",
+  "active": "b0203ef42ca8b9ac",
   "lastOpenFiles": [
+    "KB/TODO/ITEMS/Etudier multi-read sections mcp-doc-index.md",
+    "KB/conventions/todo-list.md",
+    "KB/TODO/ITEMS/Revoir project-structure.md.md.2ee70de2b1f37b27f9372096bb77f527.tmp",
+    "KB/TODO/ITEMS/Etudier fusion documentation et documentation-style.md.4714ed14e36a55ee8eefedcba2536170.tmp",
+    "KB/TODO/ITEMS/Completer mcp-doc-index avec create_document et regle ecriture doc.md.35cf59c5a82db1dbfecddbcfd3bbe6b7.tmp",
+    "KB/TODO/ITEM template.md.30a849321e202d126cd03c4650f54b55.tmp",
+    "KB/TodoList.base",
+    "KB/README.md",
+    "KB/conventions/documentation-style.md",
+    "KB/conventions/documentation.md",
+    "KB/conventions/glossary-rules.md",
+    "KB/TODO/ITEMS/Etudier fusion conventions scaffolding projet.md.9ef452e52fad3c5bbf277875d800b187.tmp",
+    "KB/conventions/glossary.md",
+    "KB/Persona.md",
+    "KB/KB_BOOTSTRAP.md",
+    "KB/PROJECT.md",
+    "KB/project-ideas-inbox.md",
     "KB/CHANGELOG.md.0137c246ad9d4845d40f0d4a9ea8bf66.tmp",
     "KB/TODO/ITEMS/Etudier fusion documentation et documentation-style.md",
     "KB/TODO/ITEMS/Refactor idea-inbox convention.md",
-    "KB/TodoList.base",
-    "KB/README.md",
     "KB/GLOSSARY.md",
     "KB/TODO/ITEMS/Decision Layer et INDEX.md remplaces par recherche dynamique.md.52cbfe387d2e4990e35e94b257ca8d42.tmp",
     "KB/conventions/mcp-doc-index.md",
     "KB/INDEX.md",
-    "KB/Persona.md",
-    "KB/PROJECT.md",
-    "KB/conventions/documentation.md",
     "KB/conventions/project-structure.md",
     "KB/INDEX.md.33f19cc9fe83804950ad3474108fc426.tmp",
     "KB/conventions/mcp-doc-index.md.4e7c78f7e6322bfb0e117a05a9417c77.tmp",
-    "KB/conventions/mcp-doc-index.md.1f923ea13051e76676afd434af65c9dc.tmp",
-    "KB/conventions/mcp-doc-index.md.1bd59c44de2ca55862de7806fc5f6ced.tmp",
-    "KB/conventions/mcp-doc-index.md.671ef621f593cddda079fb54a126f296.tmp",
-    "KB/Persona.md.5a6e2762984b01b93411225f4e7f017f.tmp",
-    "KB/conventions/mcp-doc-index.md.6718f782dd72c09d5fd910a5e2735817.tmp",
-    "KB/Persona.md.c409a1338d29c6d4cc7c64ac5432ee42.tmp",
     "KB/guides/how-to-get-things-done.md",
     "KB/guides/editor-tool.md",
     "KB/guides/guide-maintenance.md",
     "KB/guides/best-practices.md",
     "KB/guides/audit-process.md",
     "KB/conventions/tools.md",
-    "KB/conventions/todo-list.md",
     "KB/conventions/sqlite.md",
     "KB/TODO/ITEMS/Revoir project-structure.md.md",
     "KB/conventions/idea-inbox.md",
-    "KB/conventions/project-registry.md",
-    "KB/conventions/obsidian-links.md",
-    "KB/conventions/modular-architecture.md",
-    "KB/conventions/local-server.md",
-    "KB/conventions/journal-changelog.md",
     "guideIA/GuideIA/Untitled.canvas",
     "Untitled.canvas"
   ]

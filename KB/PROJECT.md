@@ -7,31 +7,42 @@ Project dedicated to the maintenance of the Knowledge Base shared by all AI Assi
 ## Load when
 Always — this is the KB's own project file, loaded unconditionally at the start of every session as part of the Bootstrap Sequence, not gated by the decision layer.
 
-## Table of Contents
+```insta-toc
+---
+title:
+  name:
+  level:
+  center:
+exclude:
+style:
+  listType:
+omit:
+levels:
+  min:
+  max:
+---
 
-1. [Load when](#load-when)
-2. [Purpose](#purpose)
-3. [Bootstrap Sequence](#bootstrap-sequence)
-4. [Structure](#structure)
-5. [KB Maintenance](#kb-maintenance)
-6. [Decisions projet](#decisions-projet)
-7. [Glossary](#glossary)
-8. [Audit](#audit)
+# Table of Contents
+
+- Project Knowledge Base Maintenance
+    - Quick Start
+    - Load when
+    - Purpose
+    - Structure
+        - Root — KB content, accessible to all projects
+        - Project files — specific to this KB project
+        - Tests
+    - KB Maintenance
+    - Decisions projet
+    - Glossary
+    - Audit
+```
 
 ## Purpose
-[up](#table-of-contents)
 Centralized knowledge repository shared across all projects.
 Contains conventions, workflows, and best practices to ensure consistency.
 
-## Bootstrap Sequence
-[up](#table-of-contents)
-
-- Au debut de la session, appelle list_triggers(repo=kb) via kb-doc-index.
-- Lire `KB/guides/how-to-get-things-done.md` for session control
-- Lire `conventions/todo-list.md` to manage TODOs and logs
-
 ## Structure
-[up](#table-of-contents)
 
 ### Root — KB content, accessible to all projects
 Decision layer exposed live by the `kb-doc-index` MCP server — call `list_triggers(repo=kb)` for the full navigation map.
@@ -56,8 +67,6 @@ tools/           ← development tooling
 Do not launch tests yourself, ask the user to launch with VSCode vitest extension
 
 ## KB Maintenance
-[up](#table-of-contents)
-
 **When to add content:**
 - A tool behaves unexpectedly and a workaround is found — document it.
 - A pattern proves reliable across multiple sessions — promote it.
@@ -75,18 +84,15 @@ Do not launch tests yourself, ask the user to launch with VSCode vitest extensio
 
 
 ## Decisions projet
-[up](#table-of-contents)
 
 - Les conventions (`conventions/`) et best practices (`guides/best-practices.md`) de ce projet sont **universelles** — elles s'appliquent à tous les projets, pas uniquement à cette KB.
 - Chaque convention devrait avoir une best practice associée quand ça a du sens — la BP pointe vers la convention, elle ne duplique pas son contenu.
 
 ## Glossary
-[up](#table-of-contents)
 
 See `GLOSSARY.md` at project root.
 
 ## Audit
-[up](#table-of-contents)
 
 To audit this project's conformance to best practices:
 
@@ -95,5 +101,3 @@ To audit this project's conformance to best practices:
 
 See `guides/audit-process.md` for the complete process.
 
-## Keywords
-project, knowledge-base, conventions, workflows, guides, structure, audit, metadata

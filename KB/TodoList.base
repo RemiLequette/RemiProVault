@@ -5,6 +5,7 @@ views:
   - type: table
     name: Table
     order:
+      - id
       - file.name
       - Status
       - importance

@@ -166,7 +166,7 @@ Always load:
 - conventions/filesystem.md
 - conventions/sqlite.md
 - conventions/documentation.md
-- conventions/glossary.md
+- conventions/glossary-rules.md
 ...
 ```
 
@@ -193,7 +193,6 @@ WHY: Duplicating knowledge base conventions in every project defeats the purpose
 ```
 
 WHY: Backtracking creates confusion, increases token usage, and makes session startup unpredictable.
-
 
 ## 7. Documentation: Brief, Actionable
 [up](#table-of-contents)
@@ -321,7 +320,6 @@ Running tests after writing only the test, before writing the implementation, fo
 [up](#table-of-contents)
 
 All guides in the knowledge base follow standardized maintenance rules.
-See `guides/guide-maintenance.md` for the full specification.
 
 Required for every modification to any guide: update TOC and Changelog.
 

@@ -48,7 +48,15 @@ levels:
     - WWH by Document Type
 ```
 
+## Table of Contents
+
+1. [Load when](#load-when)
+2. [Why-What-How Hierarchy](#why-what-how-hierarchy)
+3. [Document Taxonomy](#document-taxonomy)
+4. [WWH by Document Type](#wwh-by-document-type)
+
 ## Why-What-How Hierarchy
+[up](#table-of-contents)
 
 Documents describing a system, process, or decision must make three levels of content explicitly separable. This hierarchy is abbreviated **WWH**.
 
@@ -127,10 +135,10 @@ Replaces the navigation role md-doc/TOC previously played for AI Assistants.
 Mentioning a deprecated mechanism, an old role a section used to play, or what something "replaces" makes that obsolete thing more visible, not less — a reader (human or AI) notices the explicit warning and pays attention to exactly what they were told to ignore. State the current behavior only; let the absence of the old reference do the work.
 
 ## Document Taxonomy
+[up](#table-of-contents)
 
 Every document must declare its type. The type declaration format is governed by `conventions/documentation.md [section Scope]`.
 
----
 
 ### Convention
 
@@ -140,7 +148,6 @@ A convention leaves a trace in the artifacts — conformance is auditable by exa
 
 **Style:** Precise and imperative. Rules are stated clearly, with a WHY when non-obvious. Anti-patterns illustrate what to avoid. Exceptions are explicitly listed.
 
----
 
 ### Process spec
 
@@ -150,7 +157,6 @@ A document that describes a repeatable process end-to-end: what it accomplishes,
 
 **Style:** Layered — the three WWH levels must be explicitly separable. A reader must be able to understand the intent without reading the implementation, and the model without reading the technical details.
 
----
 
 ### Guide
 
@@ -160,7 +166,6 @@ A guide leaves a trace in the process — auditing whether it was followed requi
 
 **Style:** Action-oriented. Steps are numbered and executable. Prerequisites stated upfront. No implementation details unless directly necessary to execute the step.
 
----
 
 ### Reference
 
@@ -170,15 +175,13 @@ A document that defines a schema, API, data structure, or lookup table. Read sel
 
 **Style:** Tabular and precise. Each entry is self-contained. No narrative prose. Units, types, and constraints always stated.
 
----
 
 ### Project file
 
 Files that structure a project: `PROJECT.md`, `README.md`, `GLOSSARY.md`, `TODO/`. Each is governed by its own convention.
 
-**Style:** Governed by the relevant convention — see `conventions/glossary.md`, `conventions/todo-list.md`, `conventions/project-structure.md`.
+**Style:** Governed by the relevant convention — see `[[glossary-rules]]`, `conventions/todo-list.md`, `conventions/project-structure.md`.
 
----
 
 ### Log
 
@@ -187,6 +190,7 @@ Chronological records: session journals, decision logs, activity traces.
 **Style:** Chronological, append-only. Entries dated. No imposed narrative structure.
 
 ## WWH by Document Type
+[up](#table-of-contents)
 
 | Type | Why | What | How |
 |---|---|---|---|
