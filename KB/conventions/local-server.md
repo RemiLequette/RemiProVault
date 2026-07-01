@@ -13,24 +13,78 @@ Load when implementing or modifying the server, writing project HTML pages that 
 or setting up a new project that needs local file access, Forge access, or terminal execution.
 Does not cover project-specific logic — that belongs in the project's own spec.
 
-## Keywords
-local-server, HTTP, file-access, static-serving, allowed-roots, API, ping, CORS,
-multi-project, development, Node.js, batch, convention, forge, proxy, exec, SSE, streaming, session, process
+## Load when
+Setting up or using the local development server
 
-## Table of Contents
 
-1. [Why a local server](#why-a-local-server)
-2. [Model](#model)
-3. [Startup](#startup)
-4. [API Contract](#api-contract)
-5. [Session model](#session-model)
-6. [How projects use the server](#how-projects-use-the-server)
-7. [Security](#security)
-8. [What the server does not do](#what-the-server-does-not-do)
-9. [Index](#index)
+```insta-toc
+---
+title:
+  name:
+  level:
+  center:
+exclude:
+style:
+  listType:
+omit:
+levels:
+  min:
+  max:
+---
+
+# Table of Contents
+
+- Local Server Convention
+    - Quick Start
+    - Keywords
+    - Why a local server
+    - Model
+        - Pure HTTP server
+        - Allowed roots
+        - URL scheme for static files
+        - Forge proxy
+        - Process execution
+    - Startup
+        - Command
+        - Batch file
+        - Confirmation output
+        - Port conflict
+    - API Contract
+        - GET /ping
+        - GET /file
+        - POST /file
+        - DELETE /file
+        - GET /dir
+        - POST /forge
+        - POST /forge-reload
+        - POST /exec
+        - GET /exec/stream
+        - DELETE /exec
+        - GET /
+        - OPTIONS (preflight CORS)
+    - Session model
+        - What a session is
+        - Session lifecycle
+        - Inactivity timeout
+        - Session map
+    - How projects use the server
+        - Bootstrap file
+        - Building API paths in pages
+        - Using exec sessions
+        - Availability indicator
+    - Security
+        - Path traversal prevention
+        - Process execution scope
+        - Local only
+        - No authentication
+    - What the server does not do
+    - Index
+    - Changelog
+        - Version 1.1 - Forge proxy and exec session endpoints added
+        - Version 1.0 - Creation
+```
 
 ## Why a local server
-[up](#table-of-contents)
 
 Browsers block local file access from HTML pages opened via `file://` protocol:
 - `fetch()` calls to other local files fail (CORS / same-origin restrictions)
@@ -45,7 +99,6 @@ A **single shared server** is preferable to one server per project:
 - The server is generic — no project-specific knowledge embedded in it
 
 ## Model
-[up](#table-of-contents)
 
 ### Pure HTTP server
 
@@ -96,7 +149,6 @@ stdout and stderr are streamed to the browser via Server-Sent Events (SSE).
 See [Session model](#session-model) for the full lifecycle.
 
 ## Startup
-[up](#table-of-contents)
 
 ### Command
 
@@ -145,7 +197,6 @@ Error: port 3000 is already in use. A server may already be running.
 ```
 
 ## API Contract
-[up](#table-of-contents)
 
 All paths in `path=` and `dir=` parameters are **absolute paths** on the local filesystem.
 The server validates each path against the allowed roots before acting.
@@ -414,7 +465,6 @@ allowed roots, and serves the file with the appropriate `Content-Type`.
 **Response:** `204` with CORS headers. Handles browser preflight requests transparently.
 
 ## Session model
-[up](#table-of-contents)
 
 ### What a session is
 
@@ -456,7 +506,6 @@ Multiple SSE connections to the same session receive the same output stream —
 useful if the dashboard is open in several tabs.
 
 ## How projects use the server
-[up](#table-of-contents)
 
 ### Bootstrap file
 
@@ -525,7 +574,6 @@ Each project HTML page should display a discrete status indicator reflecting ser
 | Error | red dot | Server reachable but write failed |
 
 ## Security
-[up](#table-of-contents)
 
 ### Path traversal prevention
 
@@ -549,7 +597,6 @@ The server has no authentication mechanism. It is intended for single-user local
 development only. Do not expose it to a network.
 
 ## What the server does not do
-[up](#table-of-contents)
 
 - No JSON validation — body is written as-is
 - No business logic — no knowledge of artifacts, revisions, or schemas
@@ -558,43 +605,3 @@ development only. Do not expose it to a network.
 - No automatic startup — must be launched manually (or via Startup folder shortcut)
 - No session persistence — exec sessions are lost on server restart
 - No command allowlist — any executable can be launched via `/exec` from within an allowed root
-
-## Index
-
-| Term | Occurrences |
-|------|-------------|
-
-## Changelog
-
-### Version 1.1 - Forge proxy and exec session endpoints added
-**Date:** 2026-06-17
-**Reason:** Two sets of endpoints were implemented but undocumented — the Forge v2 proxy
-(`/forge`, `/forge-reload`) and the process execution family (`/exec`, `/exec/stream`, `DELETE /exec`).
-Added before implementing the exec endpoints to use this convention as the specification.
-
-**Changes:**
-- `## Quick Start`: updated to mention Forge proxy and process execution
-- `## Keywords`: added `forge, proxy, exec, SSE, streaming, session, process`
-- `## Model`: added `### Forge proxy` and `### Process execution` subsections
-- `## API Contract`: added `POST /forge`, `POST /forge-reload`, `POST /exec`, `GET /exec/stream`, `DELETE /exec`
-- `## Session model`: new section — session lifecycle, inactivity timeout, session map, multiple SSE clients
-- `## How projects use the server`: added `### Using exec sessions` with code example
-- `## Security`: added `### Process execution scope`
-- `## What the server does not do`: added session persistence and command allowlist notes
-- `## Table of Contents`: updated to include Session model
-
----
-
-### Version 1.0 - Creation
-**Date:** 2026-06-04
-**Reason:** Generic local server convention extracted from AfrSCM project.
-Covers shared server model, allowed roots, pure HTTP API, project usage pattern.
-
-**Content:**
-- Why a local server (file:// restrictions, single shared server)
-- Model (pure HTTP, allowed roots, URL scheme)
-- Startup (command, batch, confirmation, port conflict)
-- API Contract (/ping, /file GET/POST/DELETE, /dir, GET /*, OPTIONS)
-- How projects use the server (bootstrap, path building, availability indicator)
-- Security (path traversal, local only, no auth)
-- What the server does not do

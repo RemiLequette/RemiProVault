@@ -25,31 +25,37 @@
 #### Figures
 
 > 🖼️ **figure** `immo-regression`
+> Régression linéaire : estimer le prix d'un appartement par sa surface
 > Graphique axes surface (x) / prix (y). Points représentant les transactions.
 > Droite de régression représentant le prix moyen au m². Ligne verticale rouge
 > partant de la surface de l'appartement cible, ligne horizontale arrivant à son
 > prix estimé. Style pédagogique, épuré.
 
 > 🖼️ **figure** `immo-outliers`
+> Valeurs aberrantes et leur effet sur la droite de régression
 > Mêmes données que immo-regression, avec quelques points aberrants bien exagérés
 > (un bien bradé, un vendu très au-dessus du marché). Montrer comment ils dévient
 > la droite de régression.
 
 > 🖼️ **figure** `immo-deux-segments`
+> Modèle à deux segments : petites et grandes surfaces
 > Modèle à deux pentes : une pour les petites surfaces (prix/m² élevé), une pour
 > les grandes (prix/m² plus faible). Illustre l'enrichissement du modèle par rapport
 > à immo-regression.
 
 > 🖼️ **figure** `immo-underfitting`
+> Sous-ajustement : un modèle trop simple qui ne suit pas la tendance
 > Données avec une structure visible (courbe), modèle trop simple (droite) qui ne
 > capture pas la tendance. Le modèle "n'est pas assez intelligent".
 
 > 🖼️ **figure** `immo-overfitting`
+> Surajustement : un modèle trop complexe qui apprend par cœur
 > Même données, modèle trop complexe dont la courbe passe par tous les points mais
 > part dans des directions improbables entre les données. Le modèle "apprend par
 > cœur" au lieu de généraliser.
 
 > 🖼️ **figure** `immo-interpolation-extrapolation`
+> Interpolation et extrapolation : dans et hors du domaine de compétence
 > Zones colorées fond vert/rouge délimitant les données d'entraînement.
 > Labels "interpolation" / "extrapolation" de part et d'autre.
 

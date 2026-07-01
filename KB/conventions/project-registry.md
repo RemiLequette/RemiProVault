@@ -14,27 +14,59 @@ Load when registering a new project, querying project dependencies, or posting a
 Does not cover per-project task management — see `conventions/todo-list.md`.
 Does not cover per-project idea channels (email, Notion) — see `conventions/idea-inbox.md`.
 
-## Keywords
-project-registry, projects, directory, dependencies, cross-project, idea-inbox, inbox, triage, registration
+## Load when
+Registering a project, querying project dependencies, posting or triaging cross-project ideas
 
-## Table of Contents
+```insta-toc
+---
+title:
+  name:
+  level:
+  center:
+exclude:
+style:
+  listType:
+omit:
+levels:
+  min:
+  max:
+---
 
-1. [Why](#why)
-2. [Model](#model)
-3. [Project Directory](#project-directory)
-4. [Cross-Project Idea Inbox](#cross-project-idea-inbox)
-5. [AI Assistant Behavior](#ai-assistant-behavior)
-6. [Index](#index)
+# Table of Contents
+
+- Project Registry Convention
+    - Quick Start
+    - Keywords
+    - Why
+    - Model
+        - Two artifacts
+        - Project entry
+        - Idea lifecycle
+    - Project Directory
+        - File: public/projects.md
+        - Entry format
+        - Registration
+        - Keeping entries current
+    - Cross-Project Idea Inbox
+        - File: public/project-ideas-inbox.md
+        - Posting an idea
+        - Triage
+        - Rules
+    - AI Assistant Behavior
+    - Index
+    - Changelog
+        - Version 1.2 - Tag as primary project identifier + subchannels
+        - Version 1.1 - Entry format — list instead of table
+        - Version 1.0 - Creation
+```
 
 ## Why
-[up](#table-of-contents)
 
 Projects using the same KB share conventions and may share tools, data, or outputs. Without a central directory, an AI Assistant working on one project has no reliable way to locate another project, understand its purpose, or identify dependencies — it must either guess or ask.
 
 Without a cross-project idea inbox, ideas that arise during a session for another project are either lost, pollute the current project's TODO, or require switching context. A lightweight inbox allows capture with minimum friction and deferred triage in the target project.
 
 ## Model
-[up](#table-of-contents)
 
 ### Two artifacts
 
@@ -58,7 +90,6 @@ No intermediate states. No log. An idea is either in the inbox or it has been co
 Triage is **on demand** — done in a dedicated session in the target project, not automatically at session start.
 
 ## Project Directory
-[up](#table-of-contents)
 
 ### File: `public/projects.md`
 
@@ -101,7 +132,6 @@ Minimum viable entry: Path, Status, Description, Idea inbox tag.
 Update the entry when: the project is archived, a dependency changes, or a new convention is adopted. There is no automated sync — entries reflect the last manual update.
 
 ## Cross-Project Idea Inbox
-[up](#table-of-contents)
 
 ### File: `public/project-ideas-inbox.md`
 
@@ -148,7 +178,6 @@ No archiving. No log. Removed entries leave no trace in the inbox — the target
 - **Inbox tag must exist** — only post to a tag declared in `public/projects.md`
 
 ## AI Assistant Behavior
-[up](#table-of-contents)
 
 | Situation | Behavior |
 |-----------|----------|
@@ -158,35 +187,3 @@ No archiving. No log. Removed entries leave no trace in the inbox — the target
 | User triggers inbox triage | Read entries for the current project's tag, handle each, remove processed lines, confirm before writing |
 | Registering a new project | Draft the `projects.md` entry, confirm with user before writing |
 | Inbox tag not found in `projects.md` | Flag it — do not post to an unregistered tag |
-
-## Index
-
-| Term | Occurrences |
-|------|-------------|
-
-## Changelog
-
-### Version 1.2 - Tag as primary project identifier + subchannels
-**Date:** 2026-06-06
-**Reason:** Tag generalized as the primary identifier of a project (not just for the inbox). Subchannels added as optional syntax for finer inbox routing.
-
-**Changes:**
-- `### Entry format`: `Idea inbox tag` field renamed `Tag`, moved to first position
-- `### Fields` table: `Tag` row replaces `Idea inbox tag`
-- `### Posting an idea`: subchannel syntax `target-tag/subchannel` added; explanation paragraph added
-- `### Fields` table in inbox: `/subchannel` row added
-
----
-
-### Version 1.1 - Entry format — list instead of table
-**Date:** 2026-06-06
-**Reason:** Markdown table inside a code block rendered poorly. Replaced with bold key-value list, consistent with other KB conventions.
-
-**Changes:**
-- `### Entry format`: code block replaced — table replaced by `- **Field:** value` list
-
----
-
-### Version 1.0 - Creation
-**Date:** 2026-06-06
-**Reason:** New convention — centralized project directory and cross-project idea inbox.

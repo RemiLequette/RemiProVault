@@ -7,27 +7,65 @@ They complement the conventions: where a convention defines the "how", a best pr
 Most best practices are standalone principles that did not fit naturally into a single convention.
 Load when auditing a project or setting up a new one.
 
+## Load when
+Auditing a project for conformance
+Setting up a new Claude project
+
+
+```insta-toc
 ---
+title:
+  name:
+  level:
+  center:
+exclude:
+style:
+  listType:
+omit:
+levels:
+  min:
+  max:
+---
+
+# Table of Contents
+
+- AI-Assisted Project Best Practices
+    - Quick Start
+    - Load when
+    - 1. Bootstrap File Minimalism
+    - 2. No Circular References
+    - 3. Reference External Knowledge via Decision Layer
+    - 4. Imperative Rules with Comments
+    - 5. Minimal Project-Specific Overrides
+    - 6. Structure: Top-Down, Linear
+    - 7. Documentation: Brief, Actionable
+    - 8. Project Naming & Transportability
+        - Rule 1: Canonical name in PROJECT.md
+        - Rule 2: No project name in subfolder names
+        - Rule 3: No absolute paths inside the project
+        - Rule 4: Project name in metadata only
+        - What Gets Audited
+    - 9. Documentation Convention
+    - 10. Testing — TDD and debug distinction
+    - Guide Maintenance Standards
+    - Quick Checklist
+```
 
 ## Table of Contents
 
-1. [Bootstrap File Minimalism](#1-bootstrap-file-minimalism)
-2. [No Circular References](#2-no-circular-references)
-3. [Reference External Knowledge via Decision Layer](#3-reference-external-knowledge-via-decision-layer)
-4. [Imperative Rules with Comments](#4-imperative-rules-with-comments)
-5. [Minimal Project-Specific Overrides](#5-minimal-project-specific-overrides)
-6. [Structure: Top-Down, Linear](#6-structure-top-down-linear)
-7. [Documentation: Brief, Actionable](#7-documentation-brief-actionable)
-8. [Project Naming & Transportability](#8-project-naming--transportability)
-9. [Documentation Convention](#9-documentation-convention)
-10. [Testing — TDD and debug distinction](#10-testing--tdd-and-debug-distinction)
-- [Guide Maintenance Standards](#guide-maintenance-standards)
-- [Quick Checklist](#quick-checklist)
-- [Index](#index)
-- [Changelog](#changelog)
-- [Keywords](#keywords)
-
----
+1. [Load when](#load-when)
+2. [1. Bootstrap File Minimalism](#1-bootstrap-file-minimalism)
+3. [2. No Circular References](#2-no-circular-references)
+4. [3. Reference External Knowledge via Decision Layer](#3-reference-external-knowledge-via-decision-layer)
+5. [4. Imperative Rules with Comments](#4-imperative-rules-with-comments)
+6. [5. Minimal Project-Specific Overrides](#5-minimal-project-specific-overrides)
+7. [6. Structure: Top-Down, Linear](#6-structure-top-down-linear)
+8. [7. Documentation: Brief, Actionable](#7-documentation-brief-actionable)
+9. [8. Project Naming & Transportability](#8-project-naming--transportability)
+10. [9. Documentation Convention](#9-documentation-convention)
+11. [10. Testing — TDD and debug distinction](#10-testing--tdd-and-debug-distinction)
+12. [Guide Maintenance Standards](#guide-maintenance-standards)
+13. [Quick Checklist](#quick-checklist)
 
 ## 1. Bootstrap File Minimalism
 [up](#table-of-contents)
@@ -47,8 +85,6 @@ Also remember these rules...
 
 WHY: A bloated bootstrap file is hard to maintain and obscures the entry point. The bootstrap file is the only place with absolute paths — everything else flows from there.
 
----
-
 ## 2. No Circular References
 [up](#table-of-contents)
 
@@ -67,15 +103,13 @@ It does not reference itself.
 
 WHY: Circular references create infinite loops or silent failures at session start.
 
----
-
 ## 3. Reference External Knowledge via Decision Layer
 [up](#table-of-contents)
 
-**Principle:** Conventions are loaded on demand by the decision layer in `INDEX.md` — not pre-loaded exhaustively in the bootstrap file or `PROJECT.md`.
+**Principle:** Conventions are loaded on demand by the decision layer, exposed live via `list_triggers(repo=kb)` on the `kb-doc-index` MCP server — not pre-loaded exhaustively in the bootstrap file or `PROJECT.md`.
 
 **Correct Pattern ✅**
-The bootstrap file loads `INDEX.md`. The decision layer in `INDEX.md` matches the current task to the relevant convention and loads only what is needed.
+The bootstrap file loads `PROJECT.md`. `PROJECT.md`'s Bootstrap Sequence calls `list_triggers(repo=kb)`, which matches the current task to the relevant convention and loads only what is needed.
 
 **Anti-Pattern ❌**
 ```
@@ -90,8 +124,6 @@ Always load:
 WHY: Pre-loading everything wastes context window. The decision layer exists precisely to make loading selective and task-driven.
 
 **Exception:** A convention that must always load regardless of the task can be listed explicitly in `## AI Agent Setup` in `PROJECT.md`. This should be rare.
-
----
 
 ## 4. Imperative Rules with Comments
 [up](#table-of-contents)
@@ -111,8 +143,6 @@ Do not modify files in data/.
 ```
 
 WHY: Without context, the AI Agent cannot judge edge cases correctly. A rule without a reason is opaque to future sessions and other agents.
-
----
 
 ## 5. Minimal Project-Specific Overrides
 [up](#table-of-contents)
@@ -142,8 +172,6 @@ Always load:
 
 WHY: Duplicating knowledge base conventions in every project defeats the purpose of a shared knowledge base and creates maintenance burden.
 
----
-
 ## 6. Structure: Top-Down, Linear
 [up](#table-of-contents)
 
@@ -151,23 +179,21 @@ WHY: Duplicating knowledge base conventions in every project defeats the purpose
 
 **Correct Pattern ✅**
 ```
-1. Bootstrap file loads INDEX.md
-2. INDEX.md decision layer loads relevant conventions
-3. Bootstrap file loads PROJECT.md
-4. AI Agent proceeds with the user request
+1. Bootstrap file loads PROJECT.md
+2. PROJECT.md's Bootstrap Sequence calls list_triggers(repo=kb) — decision layer, live query
+3. AI Agent proceeds with the user request, loading conventions per the decision layer
 ```
 
 **Anti-Pattern ❌**
 ```
 1. Read PROJECT.md
-2. Go back and read INDEX.md
+2. Go back and read some other navigation file
 3. Return to PROJECT.md for the AI Agent Setup section
 4. Also read this other file first
 ```
 
 WHY: Backtracking creates confusion, increases token usage, and makes session startup unpredictable.
 
----
 
 ## 7. Documentation: Brief, Actionable
 [up](#table-of-contents)
@@ -189,8 +215,6 @@ so use your judgment depending on the situation...
 ```
 
 WHY: Ambiguous instructions produce inconsistent behavior across sessions.
-
----
 
 ## 8. Project Naming & Transportability
 [up](#table-of-contents)
@@ -262,8 +286,6 @@ WHY: When renaming, you replace the name in one metadata line — not throughout
 - No absolute paths inside the project
 - Project name not scattered through content
 
----
-
 ## 9. Documentation Convention
 [up](#table-of-contents)
 
@@ -274,8 +296,6 @@ See `conventions/documentation.md` for the full specification.
 Covers: file structure, headings, TOC, Keywords, Index, Changelog, Quick Start.
 
 WHY: A single convention makes all files auditable and consistent across projects without adaptation.
-
----
 
 ## 10. Testing — TDD and debug distinction
 [up](#table-of-contents)
@@ -297,8 +317,6 @@ WHY: Witnessing red on a new feature adds no value — the code does not exist y
 **Anti-pattern ❌**
 Running tests after writing only the test, before writing the implementation, for every new feature. This wastes a round trip and adds no signal.
 
----
-
 ## Guide Maintenance Standards
 [up](#table-of-contents)
 
@@ -306,8 +324,6 @@ All guides in the knowledge base follow standardized maintenance rules.
 See `guides/guide-maintenance.md` for the full specification.
 
 Required for every modification to any guide: update TOC and Changelog.
-
----
 
 ## Quick Checklist
 [up](#table-of-contents)
@@ -325,63 +341,3 @@ Required for every modification to any guide: update TOC and Changelog.
 - [ ] Project name not scattered through content?
 - [ ] All Markdown files follow `conventions/documentation.md`?
 - [ ] Tests follow TDD discipline — run once to confirm green; red→green only for bug fixes?
-
----
-
-## Index
-
-| Terme | Occurrences |
-|-------|-------------|
-
----
-
-## Changelog
-
-### Version 1.9 — BP#10 Testing TDD and debug distinction
-**Date:** 2026-06-12
-**Reason:** Session observation — red state on new features adds no value. Captured the distinction between TDD (test + impl together, run once) and bug fix (red→green proves the test catches the regression).
-
-**Changes:**
-- TOC: BP#10 added
-- Content: `## 10. Testing — TDD and debug distinction` added
-- Quick Checklist: TDD item added
-
----
-
-### Version 1.8 — Refactoring complet
-**Date:** 2026-05-31
-**Raison:** Suppression de Claude.md. Generalisation AI-assisted. Elimination des doublons avec les conventions. BP#8 (absolute paths) supprimee (incorrecte). 15 BP -> 9 BP. Quick Start reecrit en anglais sans liste.
-
-**Modifications :**
-- Titre : "Claude.ai Best Practices" -> "AI-Assisted Project Best Practices"
-- Quick Start : reecrit en anglais, principes generaux, sans liste
-- BP#1 : "Instruction Minimalism" -> "Bootstrap File Minimalism" — pointeur vers project-structure.md
-- BP#2 : "Separate Claude-Specific" supprimee (migree dans project-structure.md) ; "No Circular References" devient BP#2
-- BP#3 : "Reference External Knowledge via Decision Layer" — standalone enrichi
-- BP#4 : "Imperative Rules with Comments" — standalone
-- BP#5 : "Minimal Project-Specific Overrides" — fusion BP#6 + BP#7
-- BP#6 : "Structure: Top-Down, Linear" — standalone
-- BP#7 : "Documentation: Brief, Actionable" — standalone
-- BP#8 : "Project Naming & Transportability" — fusion BP#11 + BP#11a + BP#11b
-- BP#8 ancienne (File Paths Always Absolute) : supprimee (incorrecte)
-- BP#9 : "Documentation Convention" — pointeur vers conventions/documentation.md
-- BP#10-15 : supprimes (couverts par conventions/project-structure.md)
-- Quick Checklist : mise a jour complete
-- Keywords : mis a jour
-
----
-
-### Version 1.7 — Suppression session-startup
-**Date:** 2026-05-31
-**Raison:** session-startup.md supprime.
-
----
-
-### Version 1.0 — Initial Release
-**Date:** 2026-05-29
-**Raison:** 15 design principles pour structurer les projets Claude.
-
----
-
-## Keywords
-best-practices, project-structure, ai-assisted, conventions, audit, design-principles, naming, transportability, documentation

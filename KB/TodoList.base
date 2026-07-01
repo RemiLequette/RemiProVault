@@ -9,6 +9,8 @@ views:
       - Status
       - importance
       - effort
+    columnSize:
+      file.name: 452
   - type: kanban-view
     name: Kanban
     columnOrders:

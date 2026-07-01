@@ -147,6 +147,16 @@ Partis pris de mise en page :
 
 Les variables CSS sont définies dans `:root` — un seul endroit à modifier pour changer la palette ou la largeur.
 
+### Sauts de page et séparateurs de chapitres
+
+Le rendu combine deux mécanismes complémentaires selon le contexte de lecture :
+
+**À l'écran** : un séparateur visuel (`.chapter-break`) est injecté avant chaque `h2` à partir du deuxième. Il se présente comme un filet fin avec un espace généreux (4em) — chaque chapitre est clairement délimité sans interrompre le défilement.
+
+**À l'impression / export PDF** : un `page-break-before: always` est appliqué sur chaque `h2`. Chaque chapitre commence sur une nouvelle page. Le séparateur visuel est masqué en `@media print` pour éviter le doublon.
+
+Le premier `h2` du document (Introduction) est exclu du saut de page via `h2:first-of-type { page-break-before: avoid }` — il suit directement la TOC.
+
 ## Dépendances
 [up](#table-of-contents)
 

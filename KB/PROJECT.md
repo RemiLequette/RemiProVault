@@ -4,39 +4,59 @@
 
 Project dedicated to the maintenance of the Knowledge Base shared by all AI Assited projects.
 
+## Load when
+Always — this is the KB's own project file, loaded unconditionally at the start of every session as part of the Bootstrap Sequence, not gated by the decision layer.
+
+## Table of Contents
+
+1. [Load when](#load-when)
+2. [Purpose](#purpose)
+3. [Bootstrap Sequence](#bootstrap-sequence)
+4. [Structure](#structure)
+5. [KB Maintenance](#kb-maintenance)
+6. [Decisions projet](#decisions-projet)
+7. [Glossary](#glossary)
+8. [Audit](#audit)
+
 ## Purpose
+[up](#table-of-contents)
 Centralized knowledge repository shared across all projects.
 Contains conventions, workflows, and best practices to ensure consistency.
 
-## Structure
+## Bootstrap Sequence
+[up](#table-of-contents)
 
-### public/ — is the part accessible to all projects
-THe rest is private to the project and supports the maintenance of the public psart
-See `public/INDEX.md` for the full navigation map.
+- Au debut de la session, appelle list_triggers(repo=kb) via kb-doc-index.
+- Lire `KB/guides/how-to-get-things-done.md` for session control
+- Lire `conventions/todo-list.md` to manage TODOs and logs
+
+## Structure
+[up](#table-of-contents)
+
+### Root — KB content, accessible to all projects
+Decision layer exposed live by the `kb-doc-index` MCP server — call `list_triggers(repo=kb)` for the full navigation map.
 
 ```
-public/
-├── INDEX.md         ← session bootstrap + decision layer
-├── conventions/     ← technical conventions
-├── guides/          ← setup & best practices guides
-└── tools/           ← development tooling
+conventions/     ← technical conventions
+guides/          ← setup & best practices guides
+tools/           ← development tooling
 ```
 
 ### Project files — specific to this KB project
 - **PROJECT.md** — this file
 - **README.md** — human navigation
 - **GLOSSARY.md** — project terminology
-- **TODO.md** — active backlog
+- **TODO/ — active backlog
 - **Journal.md** — session log
 - **howto/** — practical guides for humans
 - **tests/** — test suites (private, not part of public KB)
 - **tmp/** — temporary working files (not committed)
 
 ### Tests
-Do not laucnh tests yourself, ask the user to launch with VSCode vitest extension
----
+Do not launch tests yourself, ask the user to launch with VSCode vitest extension
 
 ## KB Maintenance
+[up](#table-of-contents)
 
 **When to add content:**
 - A tool behaves unexpectedly and a workaround is found — document it.
@@ -45,152 +65,35 @@ Do not laucnh tests yourself, ask the user to launch with VSCode vitest extensio
 - An innovation improves quality or reduces token cost noticeably — capture it.
 
 **How to add:**
-- Check `public/INDEX.md` first — the convention may already exist or belong in an existing file.
-- Create a new file in `public/conventions/` if the topic is distinct enough to stand alone.
-- Always update `public/INDEX.md` after adding or modifying a file — it is the entry point for every session.
+- Search via `kb-doc-index` (`search`, `list_triggers`) first — the convention may already exist or belong in an existing file.
+- Create a new file in `conventions/` if the topic is distinct enough to stand alone.
+- New files are picked up automatically by `kb-doc-index` (lazy reindex on next query, or `reindex` for a full sweep) — no manual navigation file to update.
 
 **Format:** English only. Concise. Actionable. Prefer rules and examples over prose explanations.
 
 **Guard rail:** Never propose changes to KB files unless the current project is the KB itself. In other projects, propose to document a finding instead.
 
-## Decisions projet
 
-- Les conventions (`public/conventions/`) et best practices (`public/guides/best-practices.md`) de ce projet sont **universelles** — elles s'appliquent à tous les projets, pas uniquement à cette KB.
+## Decisions projet
+[up](#table-of-contents)
+
+- Les conventions (`conventions/`) et best practices (`guides/best-practices.md`) de ce projet sont **universelles** — elles s'appliquent à tous les projets, pas uniquement à cette KB.
 - Chaque convention devrait avoir une best practice associée quand ça a du sens — la BP pointe vers la convention, elle ne duplique pas son contenu.
 
----
-
 ## Glossary
+[up](#table-of-contents)
 
 See `GLOSSARY.md` at project root.
 
----
-
 ## Audit
+[up](#table-of-contents)
 
 To audit this project's conformance to best practices:
 
-1. Read: `public/guides/audit-process.md` — The audit methodology
-2. Verify against: `public/guides/best-practices.md` — The best practices
+1. Read: `guides/audit-process.md` — The audit methodology
+2. Verify against: `guides/best-practices.md` — The best practices
 
-See `public/guides/audit-process.md` for the complete process.
-
----
+See `guides/audit-process.md` for the complete process.
 
 ## Keywords
 project, knowledge-base, conventions, workflows, guides, structure, audit, metadata
-
----
-
-## Index
-
-| Terme | Occurrences |
-|-------|-------------|
-
----
-
-## Changelog
-
-### Version 1.9 - Forge references removed
-**Date:** 2026-06-20
-**Reason:** Forge abandoned — too abstract, AI Assistants could not use it reliably. All references removed from structure. Changelog entries kept with notes for traceability.
-
-**Modifications:**
-- Structure / Project files: `tests/forge/` removed
-- Structure / Tools: entire sub-section removed (Forge was the only tool)
-- Changelog v1.8, v1.7, v1.6: note "Forge abandoned" added
-
----
-
-### Version 1.8 - Tools sub-section + project files completed
-**Date:** 2026-06-11
-**Reason:** Forge tool location was hard to find — no entry point in PROJECT.md. Added Tools sub-section with generic structure and tool catalogue. Completed Project files list (Journal.md and tests/ were missing).
-
-**Modifications:**
-- Structure / Project files: added Journal.md, tests/, tests/forge/
-- Structure / Tools: new sub-section with generic npm package structure and Forge entry
-
-*Note: Forge abandoned — 2026-06-20. Too abstract, AI Assistants could not use it reliably.*
-
----
-
-### Version 1.7 - tests/forge description updated for v2
-**Date:** 2026-06-11
-**Reason:** Description referenced v1 concepts (RTFM, Brand gate) — replaced with neutral v2 label.
-
-**Modifications:**
-- Structure / Project files: `tests/forge/` description updated
-
-*Note: Forge abandoned — see v1.8.*
-
----
-
-### Version 1.6 - tests/ documented
-**Date:** 2026-06-07
-**Reason:** tests/ folder existed but was absent from the project structure.
-
-**Modifications:**
-- Structure / Project files: `tests/` added with `forge/` sub-entry
-
-*Note: Forge abandoned — see v1.8.*
-
----
-
-### Version 1.5 - Restructuration public/
-**Date:** 2026-05-31
-**Raison:** Contenu public de la KB deplace dans public/. Tous les chemins mis a jour. Ajout de howto/ dans la structure projet.
-
-**Modifications :**
-- Quick Start : reference mise a jour (public/INDEX.md)
-- Structure : section public/ ajoutee avec arborescence, tools/ retire de la racine
-- Structure projet : ajout de howto/
-- Usage : liens mis a jour vers public/
-- KB Maintenance : liens mis a jour vers public/
-- Decisions projet : chemins mis a jour
-- Audit : chemins mis a jour
-
----
-
-### Version 1.4 - Structure simplifiee
-**Date:** 2026-05-31
-**Raison:** Section Structure redondante avec INDEX.md. Simplifiee pour pointer vers INDEX.md pour la KB universelle.
-
-**Modifications :**
-- `## Structure` : KB universelle remplacee par un pointeur vers INDEX.md
-
----
-
-### Version 1.3 - Structure clarifiee
-**Date:** 2026-05-31
-**Raison:** Structure obsolete (workflows/ supprime, KNOWLEDGEBASE.md et Claude.md supprimes). Distinction KB universelle / fichiers projet absente. Lien project-setup.md incorrect.
-
-**Modifications :**
-- `## Structure` reecrite : separation KB universelle vs fichiers projet
-- `## Usage` : lien corrige vers `project-setup-process.md`, reference INDEX.md pour le bootstrap
-
----
-
-### Version 1.2 - KB Maintenance section
-**Date:** 2026-05-31
-**Raison:** Migration des regles editoriales depuis INDEX.md vers PROJECT.md — separation maintenance / navigation.
-
-**Modifications :**
-- Ajout de `## KB Maintenance` avec regles "When to add", "How to add", "Format", "Guard rail"
-
----
-
-### Version 1.1 - Glossary
-**Date:** 2026-05-30
-**Raison:** Ajout de la section Glossary requise par la convention glossary.md.
-
-**Modifications :**
-- Ajout de `## Glossary` avec reference vers GLOSSARY.md
-
-### Version 1.0 - Creation
-**Date:** 2026-05-30
-**Raison:** Metadonnees du projet claude-knowledge.
-
-**Contenu initial :**
-- Purpose, Structure, Usage
-- Decisions projet (universalite des conventions)
-- Section Audit

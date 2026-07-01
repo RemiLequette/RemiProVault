@@ -6,23 +6,84 @@ Convention for script-based tools — applies both to shared KB tools (`tools/` 
 Load when creating a new tool anywhere, invoking an existing one, auditing tool conformance, or working on the shared library.
 Does not cover project-specific business logic — only tool structure, interface, module design, invocation patterns, and the full development lifecycle (scope → spec → code → tests → doc → catalogue).
 
-## Keywords
-tools, scripts, node, commonjs, modules, lib, automation, cross-project, token-efficiency, interface, commands-mcp, output, tests, regression, convention
+## Load when
+Node.js automation script, cross-project tool
+
+
+```insta-toc
+---
+title:
+  name:
+  level:
+  center:
+exclude:
+style:
+  listType:
+omit:
+levels:
+  min:
+  max:
+---
+
+# Table of Contents
+
+- Tools Convention
+    - Quick Start
+    - Keywords
+    - Rationale
+    - Structure
+    - Shared Library
+        - Current modules
+        - Why a shared library
+    - Module Design Rules
+        - Single responsibility
+        - Stable interface, hidden implementation
+        - No side effects at require time
+        - Pure functions where possible
+        - Explicit errors
+        - Explicit naming
+        - JSDoc on every export
+        - CommonJS modules
+    - Standard Interface
+    - Script Self-Documentation
+        - WHY — the auto-regenerable script
+        - Required header block
+        - Separation of concerns — technical vs business
+    - Invocation
+    - Output
+    - Tests
+        - Structure
+        - Framework
+        - Test types
+        - Mandatory workflow
+        - Test file interface
+        - Naming
+        - Convention reference
+        - Regression tests
+    - Catalogue
+    - Adding a Tool
+        - Step 1 — Decide the scope
+        - Step 2 — Write the spec first
+        - Step 3 — Write the script
+        - Step 4 — Write tests first
+        - Step 5 — Update the catalogue
+        - Step 6 — Update INDEX.md if needed
+```
 
 ## Table of Contents
 
-1. [Rationale](#rationale)
-2. [Structure](#structure)
-3. [Shared Library](#shared-library)
-4. [Module Design Rules](#module-design-rules)
-5. [Standard Interface](#standard-interface)
-6. [Script Self-Documentation](#script-self-documentation)
-7. [Invocation](#invocation)
-8. [Output](#output)
-9. [Tests](#tests)
-10. [Catalogue](#catalogue)
-11. [Adding a Tool](#adding-a-tool)
-12. [Index](#index)
+1. [Load when](#load-when)
+2. [Rationale](#rationale)
+3. [Structure](#structure)
+4. [Shared Library](#shared-library)
+5. [Module Design Rules](#module-design-rules)
+6. [Standard Interface](#standard-interface)
+7. [Script Self-Documentation](#script-self-documentation)
+8. [Invocation](#invocation)
+9. [Output](#output)
+10. [Tests](#tests)
+11. [Catalogue](#catalogue)
+12. [Adding a Tool](#adding-a-tool)
 
 ## Rationale
 [up](#table-of-contents)
@@ -55,12 +116,10 @@ tools/
   lib/
     md-parser.js     # parse and access sections of a Markdown document
     fs-scan.js       # directory scan, file reading, path utilities
-  md-doc.js          # read, create, and update Markdown documents
   tests/
     fixtures/        # reference files, never modified
     sandbox/         # working copies for tests that write, gitignored
     md-parser.test.js
-    md-doc.test.js
 ```
 
 **Rules:**
@@ -377,45 +436,8 @@ test('regression: setSection inserts before Index when Changelog is absent', () 
 
 | Script | Description | Args |
 |--------|-------------|------|
-| `md-doc.js` | Read, create, and update Markdown documents conforming to documentation convention | See below |
 | `md-to-html.js` | Convert a Markdown document to a standalone HTML file with neutral CSS and generated TOC | `<source.md> <output.html>` |
 | `local-server.js` | Shared local HTTP server — serves static files and exposes `/file`, `/dir`, `/ping` API for all projects | `<root1> [<root2> ...] [--port <port>]` |
-
-**md-doc.js commands:**
-
-| Command | Args | Effect |
-|---------|------|--------|
-| `create` | `<file> <json-input>` | Create a new conformant document. Fails if file exists. json-input is `{ title, "Quick Start", ... }`. |
-| `update` | `<file> <json-input>` | Update elements in place. Creates backup. Creates section if absent (inserted before `## Index` by default). Supports `__positions` key for insert position control — see below. |
-| `check` | `<file>` | Verify conformance. stdout lines after OK are issues (empty = conformant). |
-| `restore` | `<file>` | Restore file from `.bak` backup and delete the backup. |
-| `delete` | `<file> <section-name>` | Remove a named section from the document. Creates backup. Returns `ERROR:SECTION_NOT_FOUND` if absent. Returns `ERROR:PROTECTED_SECTION` if the section is mandatory (`Quick Start`, `Keywords`, `Index`, `Changelog`). |
-
-**`update` — `__positions` key**
-
-When inserting a new section (absent from the document), the optional `__positions` key controls where it is inserted.
-
-```json
-{
-  "New Section": "content",
-  "__positions": {
-    "New Section": "after:Language"
-  }
-}
-```
-
-Valid position values:
-
-| Value | Effect |
-|-------|--------|
-| `"beginning"` | Before all existing sections |
-| `"before:<section>"` | Immediately before the named section |
-| `"after:<section>"` | Immediately after the named section |
-
-Rules:
-- `__positions` is optional — omitting it preserves current behaviour (insert before `## Index`)
-- Position is ignored when the section already exists (update in place, no move)
-- If the reference section (`before:X` / `after:X`) is absent from the document → `ERROR:SECTION_NOT_FOUND`
 
 ## Adding a Tool
 [up](#table-of-contents)
@@ -439,7 +461,7 @@ For a **KB tool**: add a spec section in this document or a dedicated `.md` in `
 For a **project tool**: add a spec section in the project's `Methode.md` or a dedicated `tools/<name>.md`.
 
 Follow `conventions/documentation.md` and `conventions/documentation-style.md` (type: *process spec*) when writing a doc file.
-After writing or updating any `.md`, run `node tools/md-doc.js update <file>` to regenerate TOC and Index — never write them by hand.
+If the doc has a `## Table of Contents`, keep it in sync (insert the `insta-toc` codeblock once if missing).
 
 ### Step 3 — Write the script
 
@@ -454,154 +476,6 @@ See `## Tests` for the mandatory TDD workflow.
 
 ### Step 5 — Update the catalogue
 
-For a **KB tool**: add a row to `## Catalogue` in this document, then run `node tools/md-doc.js update <this file>`.
-For a **project tool**: add an entry in the project's own tool spec or `Methode.md`, then run `node tools/md-doc.js update <that file>`.
-
-### Step 6 — Update INDEX.md if needed
-
-If a new keyword category emerges, update `knowledgebase/public/INDEX.md`.
-
-## Index
-
-| Terme | Occurrences |
-|-------|-------------|
-
-## Changelog
-
-### Version 2.3 - Adding a Tool lifecycle + KB vs project scope
-**Date:** 2026-06-05
-**Reason:** Three gaps addressed: (1) `Adding a Tool` was a flat 5-step list with no spec phase, no doc phase, and no reference to documentation conventions; (2) the convention implied KB-only scope; (3) `md-doc update` was never mentioned for doc files.
-
-**Changes:**
-- `## Quick Start`: rewritten — scope extended to project tools; lifecycle (scope → spec → code → tests → doc → catalogue) made explicit
-- `## Adding a Tool`: rewritten as 6 structured steps — Step 1 (KB vs project decision), Step 2 (spec first, with WWH, doc conventions, and `md-doc update` rule), Step 3 (script), Step 4 (tests), Step 5 (catalogue update with `md-doc update`), Step 6 (INDEX.md)
-
-
-### Version 2.2 - Script Self-Documentation
-**Date:** 2026-06-05
-**Reason:** Two principles formalized as a new section.
-
-1. **Auto-regenerable script** — a script whose header references all documents used to design it, plus a debt register for information not yet in those documents, can be reconstructed from sources alone. The debt register is a signal to update the referenced docs.
-2. **Technical/business separation** — a script is a mechanical operator (copy, inject, transform). It contains no conditional logic based on data content or business state. Those decisions belong to the operator.
-
-**Changes:**
-- TOC: new entry `Script Self-Documentation` at position 6 (Invocation and following shifted)
-- New section `## Script Self-Documentation` added before `## Invocation`: WHY, required header block format, rules, separation of concerns principle
-
-
-### Version 2.1 - Rationale generalized
-**Date:** 2026-06-04
-**Reason:** The tool-vs-AI principle applies to any deterministic artifact (scripts, HTML pages, etc.), not only Node.js scripts. Reliability added as a second explicit argument alongside token efficiency.
-
-**Changes:**
-- `## Rationale`: rewritten — scope generalized beyond Node.js scripts; reliability argument added; Use/Do-not-use rules restructured into three blocks (Use a tool / Use AI / Do not use AI)
-
-
-### Version 2.0 - local-server.js added
-**Date:** 2026-06-04
-**Reason:** New shared local development server — generic HTTP server for all projects. Includes `lib/server-core.js` (pure logic) and `local-server.js` (HTTP wrapper).
-
-**Changes:**
-- `## Shared Library`: `server-core.js` added to module table
-- `## Catalogue`: `local-server.js` added with args
-
-
-### Version 1.9 - md-renderer.js in Shared Library + md-to-html.js in Catalogue
-**Date:** 2026-06-04
-**Reason:** `md-renderer.js` existed in `lib/` but was not documented. New tool `md-to-html.js` added — converts a Markdown document to a standalone print-ready HTML file.
-
-**Changes:**
-- `## Shared Library`: `md-renderer.js` added to module table
-- `## Catalogue`: `md-to-html.js` added
-
-
-### Version 1.8 - read and dump removed from Catalogue
-**Date:** 2026-05-31
-**Reason:** read and dump commands removed — documentation files are read directly via filesystem MCP in full. md-doc is a write tool only.
-
-**Changes:**
-- Catalogue: `read` and `dump` rows removed
-
-
-### Version 1.7 - update position control documented
-**Date:** 2026-05-31
-**Reason:** New `__positions` key added to `update` command for insert position control.
-
-**Changes:**
-- Catalogue: `update` description updated to mention `__positions`
-- Catalogue: `__positions` block added with format, valid values, and rules
-
-
-### Version 1.6 - delete command added to Catalogue
-**Date:** 2026-05-31
-**Reason:** New `delete` command added to md-doc.js — removes a named section from a document.
-
-**Changes:**
-- Catalogue: `delete` command added with args and error codes
-
-
-### Version 1.5 - Convention reference comment
-**Date:** 2026-05-31
-**Reason:** Added `### Convention reference` subsection in `## Tests` — each test must carry a `@convention` comment referencing the convention it enforces, or `@convention none` for purely technical tests.
-
-**Changes:**
-- `### Convention reference` added under `## Tests`
-
-### Version 1.4 - Clarifications post-review
-**Date:** 2026-05-30
-**Raison:** Corrections identifiées après relecture en vue d'une future session sans mémoire de la session courante.
-
-**Modifications:**
-- Structure: mise à jour avec les fichiers réels (md-doc.js, tests/, fixtures/, sandbox/)
-- Tests: fixtures/ et sandbox/ documentés avec leurs rôles respectifs
-- Catalogue: md-doc.js détaillé avec tableau de commandes lisible
-- Changelog ajouté dans md-parser.js (v1.0 et v1.1)
-- Bug fix md-doc.js: setElement ne lève plus d'erreur si title est vide — laisse le titre existant inchangé
-
-### Version 1.3 - Tests
-**Date:** 2026-05-30
-**Raison:** Add testing convention — structure, framework, mandatory TDD workflow, fixtures/sandbox separation, regression pattern.
-
-**Modifications:**
-- New section: Tests (structure, framework, types, mandatory workflow, naming, regression)
-- Test types redefined: a priori written before code, regression written before fix
-- Mandatory workflow for new tools, bug fixes, and modifications
-- Principle: a test that has never failed proves nothing
-- TOC updated
-- Adding a Tool: step 3 now requires writing tests before code
-- Keywords updated
-
-### Version 1.2 - Machine-readable interface
-**Date:** 2026-05-30
-**Raison:** Tools are invoked by Claude only — no human reads the terminal. Redesigned stdout protocol, error handling, and output rules accordingly.
-
-**Modifications:**
-- Standard Interface: stdout is machine-readable; first line always `OK` or `ERROR:<code>:<message>`; exit code 0 always
-- Invocation: rules rewritten for Claude as invoker
-- Output: removed HTML, removed output_path argument, stdout-only
-- Script header: removed Usage line
-
-### Version 1.1 - Shared library and module design rules
-**Date:** 2026-05-30
-**Raison:** Introduction of `tools/lib/` shared library. Tools must not re-implement parsing or file scanning. Added module design rules (CommonJS, single responsibility, pure functions, explicit errors, JSDoc).
-
-**Modifications:**
-- New section: Shared Library (modules, rationale)
-- New section: Module Design Rules (8 rules with examples)
-- Structure: updated to show `lib/` subfolder
-- TOC updated
-- Keywords updated
-- Adding a Tool: step 2 now requires using lib modules
-
-### Version 1.0 - Creation
-**Date:** 2026-05-30
-**Raison:** Establish the tools convention — structure, interface, invocation, and catalogue for Node.js script-based tools.
-
-**Contenu initial:**
-- Rationale: when to use a tool vs inline
-- Structure: flat folder, naming rules, no dependencies
-- Standard interface: positional args, stdout/stderr/exit codes, header format
-- Invocation: commands MCP, node whitelisted
-- Output: caller-defined path, HTML or JSON
-- Catalogue: kb-index-keywords.js
-- Adding a tool: 3-step process
+For a **KB tool**: add a row to `## Catalogue` in this document.
+For a **project tool**: add an entry in the project's own tool spec or `Methode.md`.
+New or modified `.md` files are picked up automatically by `kb-doc-index` (lazy reindex) — no manual navigation file to update.

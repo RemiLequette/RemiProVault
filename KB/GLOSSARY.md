@@ -6,19 +6,79 @@ Glossary of key terms for the claude-knowledge project.
 Organized by domain. Read each domain description to assess relevance before loading its terms.
 Does not cover project-specific business rules — only the knowledge base's own vocabulary.
 
+## Load when
+Looking up KB-specific terminology encountered during a session
+
 ## Keywords
 glossary, knowledge-base, convention, workflow, guide, session, audit, markdown, domain, best-practice, TDD, fail-fast
 
+```insta-toc
+---
+title:
+  name:
+  level:
+  center:
+exclude:
+style:
+  listType:
+omit:
+levels:
+  min:
+  max:
+---
+
+# Table of Contents
+
+- Glossary — claude-knowledge
+    - Quick Start
+    - Load when
+    - Keywords
+    - Table of Contents
+    - Knowledge Base
+        - Convention
+        - Best Practice
+        - Guide
+        - Spec
+        - Workflow
+        - CLAUDE.md
+        - PROJECT.md
+        - GLOSSARY.md
+    - Session
+        - GTD (Get Things Done)
+        - Scope Drift
+        - Session Startup
+        - Context Window
+        - Selective Loading
+        - WIP
+    - Documentation
+        - Quick Start
+        - Load when
+        - Keywords
+        - Changelog
+        - TOC (Table of Contents)
+    - Audit
+        - Audit
+        - Deviation
+        - Conformance
+    - Editorial Principles
+        - Streisand Effect
+        - WWH (Why-What-How)
+        - Litmus Test
+    - Design Principles
+        - TDD (Test Driven Development)
+        - Constrain, Don't Forbid
+        - Fail Fast, Fail Clear
+```
+
 ## Table of Contents
 
-1. [Knowledge Base](#knowledge-base)
-2. [Session](#session)
-3. [Documentation](#documentation)
-4. [Audit](#audit)
-5. [Editorial Principles](#editorial-principles)
-6. [Design Principles](#design-principles)
-
----
+1. [Load when](#load-when)
+2. [Knowledge Base](#knowledge-base)
+3. [Session](#session)
+4. [Documentation](#documentation)
+5. [Audit](#audit)
+6. [Editorial Principles](#editorial-principles)
+7. [Design Principles](#design-principles)
 
 ## Knowledge Base
 [up](#table-of-contents)
@@ -54,12 +114,8 @@ in the Decision Layer — they are loaded explicitly when needed.
 ### Workflow
 **Definition:** Recurring sequence of steps to execute in a specific order,
 documented as a Markdown file. Currently not used — the session bootstrap is handled
-directly by `INDEX.md`.  
+directly by `PROJECT.md`'s Bootstrap Sequence.  
 **See also:** Convention, Guide
-
-### INDEX.md
-**Definition:** Entry point of the knowledge base. Lists all conventions, workflows,
-and guides with their keywords. Always read first at session startup.
 
 ### CLAUDE.md
 **Definition:** File placed at the root of a Claude project. Contains project-specific
@@ -72,8 +128,6 @@ and references GLOSSARY.md and the audit procedure.
 ### GLOSSARY.md
 **Definition:** File placed at the root of each project. Defines the project's business
 and technical terms, organized by domain.
-
----
 
 ## Session
 [up](#table-of-contents)
@@ -96,9 +150,10 @@ See GTD → Anti-patterns.
 
 ### Session Startup
 **Definition:** Sequence executed at the start of every Claude session. The Claude
-project instructions load `INDEX.md` directly (bootstrap + decision layer), then
-`PROJECT.md` for project-specific setup.  
-**See also:** [Knowledge Base — INDEX.md](#indexmd)
+project instructions load `PROJECT.md` directly; `PROJECT.md`'s Bootstrap Sequence calls
+`list_triggers(repo=kb)` on the `kb-doc-index` MCP server for the decision layer, then
+loads `guides/how-to-get-things-done.md` and `conventions/todo-list.md`.  
+**See also:** [Knowledge Base — PROJECT.md](#projectmd)
 
 ### Context Window
 **Definition:** Token limit available within a Claude session. Selective loading of
@@ -106,15 +161,13 @@ conventions is designed to preserve this resource.
 
 ### Selective Loading
 **Definition:** Strategy of loading only the conventions relevant to the current task,
-identified via keywords in INDEX.md.
+identified via the decision layer exposed by `kb-doc-index` (`list_triggers`).
 
 ### WIP
 **Definition:** Set of all `[WIP]` items in `TODO.md`. Represents what is currently in
 progress across sessions. The bridge between sessions — a session closes by reviewing WIP,
 the next session opens by reading it. See `conventions/todo-list.md`.  
 **See also:** GTD, todo-list.md
-
----
 
 ## Documentation
 [up](#table-of-contents)
@@ -126,25 +179,25 @@ Relevant for any task involving creating or modifying files in the knowledge bas
 **Definition:** Mandatory section at the top of every Markdown file. Contains 3 to 6
 lines describing what the file covers, when to load it, and what it does not cover.
 
-### Keywords
-**Definition:** Mandatory section in every Markdown file. List of terms allowing an
-AI Assistant to quickly assess the relevance of a file for a given task.
+### Load when
+**Definition:** Mandatory section following `## Quick Start`. Lists trigger phrases —
+situations or tasks that warrant loading the file. Indexed live by `kb-doc-index`
+(`list_triggers`) to build the decision layer. Replaces the older `## Keywords` section.
 
-### Index (section)
-**Definition:** `## Index` section present in every Markdown file. Table listing
-important terms with pointers to their occurrences within that specific file.
-Complementary to GLOSSARY.md which has project-wide scope.
+### Keywords
+**Definition:** Legacy section, superseded by `## Load when`. May still appear informally
+in files not yet migrated, or as an optional citation anchor — no longer mandatory.
 
 ### Changelog
-**Definition:** Mandatory `## Changelog` section in every Markdown file. Tracks
-modifications: version, date, reason, and content changed.
+**Definition:** File history is tracked centrally in `CHANGELOG.md` — see
+`conventions/journal-changelog.md`. This convention defines no inline `## Changelog`
+element.
 
 ### TOC (Table of Contents)
-**Definition:** `## Table of Contents` section required in any Markdown file with more
-than 2 content sections. Lists `##`-level sections with anchor links. Each content
-section carries a return link to the TOC.
+**Definition:** `## Table of Contents` section, optional, for human navigation inside
+Obsidian only. Rendered live by the Insta TOC plugin. AI Assistants navigate via the
+`kb-doc-index` MCP server instead of the TOC.
 
----
 
 ## Audit
 [up](#table-of-contents)
@@ -166,8 +219,6 @@ must be documented in `DEVIATIONS.md`.
 ### Conformance
 **Definition:** State of a project where every file respects the conventions and best
 practices defined in the knowledge base.
-
----
 
 ## Editorial Principles
 [up](#table-of-contents)
@@ -198,8 +249,6 @@ if no (purely descriptive), it's a spec. Specs are never listed in the Decision 
 they are loaded explicitly when needed.  
 **See also:** Convention, Guide, Spec, Decision Layer
 
----
-
 ## Design Principles
 [up](#table-of-contents)
 
@@ -223,76 +272,3 @@ A rule can be ignored or misunderstood; a constraint cannot be bypassed.
 return an error that contains its own correction. Not just "no" but "no, and here is what
 to do next." The error is the manual.  
 **See also:** Constrain, Don't Forbid
-
----
-
-## Index
-
-| Term | Occurrences |
-|------|-------------|
-
----
-
-## Changelog
-
-### Version 1.4 - Nettoyage entrées Forge v1
-**Date:** 2026-06-15
-**Reason:** W52 — working-with-forge.md supprimé, concepts Forge v1 obsolètes retirés du glossaire. RTFM et Brand supprimés (liés à forge_describe et FAL, disparus en v2). Constrain Don't Forbid et Fail Fast Fail Clear conservés en tant que principes génériques — références à RTFM/Brand retirées.
-
-**Changes:**
-- Keywords: `brand` et `RTFM` retirés
-- Editorial Principles: `### RTFM` supprimé
-- Design Principles: `### Brand` supprimé
-- Design Principles: `### Constrain, Don't Forbid` — See also nettoyé (Brand, RTFM retirés)
-- Design Principles: `### Fail Fast, Fail Clear` — exemples RTFM/Brand retirés de la définition, See also nettoyé
-
----
-
-### Version 1.3 - Design Principles domain
-**Date:** 2026-06-07
-**Reason:** Four design principles emerged from Forge design sessions — TDD, Brand,
-Constrain Don't Forbid, Fail Fast Fail Clear. Added new domain Design Principles.
-RTFM entry updated with cross-references to new principles.
-
-**Changes:**
-- TOC: `Design Principles` added
-- Keywords: brand, TDD, fail-fast added
-- Editorial Principles: RTFM updated — See also enriched
-- Design Principles: new domain with TDD, Brand, Constrain Don't Forbid, Fail Fast Fail Clear
-
----
-
-### Version 1.2 - GTD, Scope Drift, WIP
-**Date:** 2026-06-07
-**Reason:** Three session concepts missing from the glossary — useful for human readers
-and as cross-references. GTD points to the guide; Scope Drift points to GTD; WIP points
-to todo-list convention.
-
-**Changes:**
-- Session: GTD, Scope Drift, WIP added
-- Session: Session Startup — reference corrected (Claude.md → PROJECT.md)
-
----
-
-### Version 1.1 - Editorial Principles domain
-**Date:** 2026-06-07
-**Reason:** Four named principles accumulated in the KB without a glossary entry —
-Streisand Effect, RTFM, WWH, Litmus Test. Added new domain Editorial Principles.
-Spec entry added to Knowledge Base domain.
-
-**Changes:**
-- TOC: `Editorial Principles` added
-- Knowledge Base: `Spec` entry added
-- Editorial Principles: new domain with Streisand Effect, RTFM, WWH, Litmus Test
-
----
-
-### Version 1.0 - Initial creation
-**Date:** 2026-05-30
-**Reason:** Initial glossary for the claude-knowledge project.
-
-**Content:**
-- Domain Knowledge Base: Convention, Best Practice, Guide, Workflow, INDEX.md, CLAUDE.md, PROJECT.md, GLOSSARY.md
-- Domain Session: Session Startup, Context Window, Selective Loading
-- Domain Documentation: Quick Start, Keywords, Index (section), Changelog, TOC
-- Domain Audit: Audit, Deviation, Conformance

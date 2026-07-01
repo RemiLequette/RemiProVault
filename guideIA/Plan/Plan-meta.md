@@ -56,7 +56,7 @@ Ces règles gouvernent la façon dont les concepts et les idées sont introduits
 
 ### Conventions
 
-- **Langue** : français — y compris les labels des figures. Eviter les incises avec tirets.
+- **Langue** : français — y compris les labels des figures. Eviter les incises avec tirets. Les anglicismes ne sont admis que quand ils sont plus précis que leur équivalent français (*forgiving*, *big picture*) — pas comme réflexe (*roughly* → "en gros").
 - **Fichier source** : `GuideIA/` — répertoire de fichiers par chapitre
 - **Structure** : définie par les chapitres ci-dessous
 - **Balises** : système `{{def:...}}` / `{{ref:...}}` décrit dans `Methode.md`

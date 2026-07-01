@@ -8,21 +8,43 @@ Defines how to structure and use a lightweight backlog in a project.
 Load when creating or manipulating todo items, or when an AI Assistant needs to add or update items during a session.
 Does not cover bug tracking, tests, or development tasks.
 
-## Keywords
-todo, backlog, tasks, ideas, tracking, priority, session
+## Load when
+Creating or managing a TODO or backlog
 
-## Table of Contents
 
-1. [Scope](#scope)
-2. [Features](#features)
-3. [Files](#files)
-4. [Format](#format)
-5. [Tools](#tools)
-6. [AI Assistant](#ai-assistant)
-7. [Index](#index)
+```insta-toc
+---
+title:
+  name:
+  level:
+  center:
+exclude:
+style:
+  listType:
+omit:
+levels:
+  min:
+  max:
+---
+
+# Table of Contents
+
+- Todo List Convention
+    - Quick Start
+    - Keywords
+    - Scope
+    - Features
+    - Files
+    - Format
+        - ITEM template.md
+        - Item file
+    - Tools
+        - todo-filter.js
+    - AI Assistant
+    - Index
+```
 
 ## Scope
-[up](#table-of-contents)
 
 The todo list is a **lightweight backlog** — it captures ideas and tasks for a project.
 
@@ -37,7 +59,6 @@ The todo list is a **lightweight backlog** — it captures ideas and tasks for a
 - Detailed project management
 
 ## Features
-[up](#table-of-contents)
 
 - **Capture** — create a new item at any time during a session
 - **Status** — Idea / Todo / WIP / Done
@@ -47,7 +68,6 @@ The todo list is a **lightweight backlog** — it captures ideas and tasks for a
 - **WIP** — items with `Status: WIP` represent what is currently in progress across sessions. The WIP is the bridge between sessions: a session closes by reviewing WIP items, the next session opens by reading them.
 
 ## Files
-[up](#table-of-contents)
 
 One folder per project at the project root:
 
@@ -66,7 +86,6 @@ TODO/
 There is no archive file. Done items remain in `TODO/ITEMS/` with `Status: Done`.
 
 ## Format
-[up](#table-of-contents)
 
 ### ITEM template.md
 
@@ -107,7 +126,6 @@ Optional free-form content.
 **Effort values:** `XS` / `S` / `M` / `L` / `XL`
 
 ## Tools
-[up](#table-of-contents)
 
 ### todo-filter.js
 
@@ -134,7 +152,6 @@ node tools/todo-filter.js /path/to/TODO/ITEMS effort XS
 ```
 
 ## AI Assistant
-[up](#table-of-contents)
 
 - **Overview** — `list_directory` on `TODO/ITEMS/` gives the list of all items. Read individual files only when detail is needed.
 - **Filtered view** — use `todo-filter.js` to get items matching a specific property value (e.g. `Status WIP` at session start).
@@ -144,8 +161,3 @@ node tools/todo-filter.js /path/to/TODO/ITEMS effort XS
 - **Board** — `TODO/TodoList.base` is managed by the user. The AI Assistant does not read or modify it.
 
 An AI Assistant may only create, modify, or delete items with **explicit user approval**.
-
-## Index
-
-| Term | Occurrences |
-|------|-------------|

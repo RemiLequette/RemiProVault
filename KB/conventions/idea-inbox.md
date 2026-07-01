@@ -12,20 +12,42 @@ Load when a project uses one or more input channels to import ideas, requests, o
 Does not cover how processed ideas are integrated into the project backlog — see the project's own task management convention.
 For cross-project ideas (an idea arising in one project for another), see `conventions/project-registry.md` — that inbox has no status lifecycle; entries are deleted on triage.
 
-## Keywords
-idea-inbox, canal, channel, Gmail, Notion, statut, status, traitement, processing, inbox, import, idées
+## Load when
+Project uses input channels to import ideas (email, Notion, etc.)
 
-## Table of Contents
+```insta-toc
+---
+title:
+  name:
+  level:
+  center:
+exclude:
+style:
+  listType:
+omit:
+levels:
+  min:
+  max:
+---
 
-1. [Why](#why)
-2. [Model](#model)
-3. [Channel Configuration](#channel-configuration)
-4. [Processing Rules](#processing-rules)
-5. [AI Assistant Behavior](#ai-assistant-behavior)
-6. [Index](#index)
+# Table of Contents
+
+- Idea Inbox Convention
+    - Quick Start
+    - Load when
+    - Why
+    - Model
+        - Channel
+        - Status lifecycle
+        - Processing
+    - Channel Configuration
+        - Example - Gmail channel
+        - Example - Notion channel
+    - Processing Rules
+    - AI Assistant Behavior
+```
 
 ## Why
-[up](#table-of-contents)
 
 In projects where a responsible person collects ideas outside of structured sessions (on the go, by email, via a shared tool), those ideas risk being lost or duplicated if there is no defined intake mechanism.
 
@@ -37,7 +59,6 @@ The Idea Inbox pattern provides:
 This is intentionally lightweight — it is a capture mechanism, not a full task management system.
 
 ## Model
-[up](#table-of-contents)
 
 ### Channel
 
@@ -70,7 +91,6 @@ When triggered, the AI Assistant:
 3. Marks each entry as processed in its channel
 
 ## Channel Configuration
-[up](#table-of-contents)
 
 Each project using this convention defines its channels in its own instruction file (e.g. `AssistantIA.md`). The configuration format per channel:
 
@@ -97,7 +117,6 @@ Processed marker: set status to "Traité"
 ```
 
 ## Processing Rules
-[up](#table-of-contents)
 
 1. **On demand only** — never process channels automatically at session start
 2. **Never reprocess** — an entry already marked as processed must not be read again
@@ -105,7 +124,6 @@ Processed marker: set status to "Traité"
 4. **Confirmation before marking** — follow the project's confirmation rule before modifying channel data (adding labels, changing statuses)
 
 ## AI Assistant Behavior
-[up](#table-of-contents)
 
 | Situation | Behavior |
 |-----------|----------|
@@ -113,23 +131,3 @@ Processed marker: set status to "Traité"
 | User requests inbox processing | Read unprocessed entries → handle → propose marking → wait for confirmation |
 | Entry already marked processed | Skip without reading |
 | Marking requires write access | Apply project confirmation rule before acting |
-
-## Index
-
-| Term | Occurrences |
-|------|-------------|
-
-## Changelog
-
-### Version 1.1 - Cross-project inbox reference added
-**Date:** 2026-06-06
-**Reason:** The cross-project idea inbox (`project-ideas-inbox.md`) follows a different model — no status lifecycle, delete on triage. Added a pointer in Quick Start to avoid confusion.
-
-**Changes:**
-- `## Quick Start`: sentence added pointing to `conventions/project-registry.md` for cross-project ideas
-
----
-
-### Version 1.0 - Creation
-**Date:** 2026-06-04
-**Reason:** Extracted from ComiteRSE-AfrSCM project (AssistantIA.md § Envoi d'idées) — pattern generalized for reuse across projects.

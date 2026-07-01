@@ -319,7 +319,7 @@ Les outils de rendu produisent le document final à partir de `Plan.md`, `GuideI
 
 Les encadrés du guide sont rédigés par l'assistant IA sous la direction de l'auteur.
 
-Le prompt de rédaction est défini dans `Encadre.md` (racine du projet). Il doit être chargé en début de toute session consacrée à la rédaction d'encadrés.
+Le prompt de rédaction est défini dans `Prompt Encadre.md` (racine du projet). Il doit être chargé en début de toute session consacrée à la rédaction d'encadrés.
 
 Le processus est en deux étapes obligatoires : cadrage (proposition de plan, validation humaine) puis rédaction finale. L'assistant ne rédige jamais l'encadré final au premier tour.
 

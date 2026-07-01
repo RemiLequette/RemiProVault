@@ -9,18 +9,46 @@ This convention governs content style: every document must declare its type, and
 Load when creating a new document or auditing documentation content quality.
 Does not cover document structure rules — see `conventions/documentation.md`.
 
-## Keywords
-document-type, style, taxonomy, process, spec, convention, guide, reference, why-what-how, WWH, intent, model, implementation, content-structure
+## Load when
+Creating or editing a .md file
+Declaring a document type, auditing content style
 
-## Table of Contents
 
-1. [Why-What-How Hierarchy](#why-what-how-hierarchy)
-2. [Document Taxonomy](#document-taxonomy)
-3. [WWH by Document Type](#wwh-by-document-type)
-4. [Index](#index)
+```insta-toc
+---
+title:
+  name:
+  level:
+  center:
+exclude:
+style:
+  listType:
+omit:
+levels:
+  min:
+  max:
+---
+
+# Table of Contents
+
+- Documentation Style Convention
+    - Quick Start
+    - Keywords
+    - Why-What-How Hierarchy
+        - Why this matters
+        - Separation rule
+        - Anti-patterns
+    - Document Taxonomy
+        - Convention
+        - Process spec
+        - Guide
+        - Reference
+        - Project file
+        - Log
+    - WWH by Document Type
+```
 
 ## Why-What-How Hierarchy
-[up](#table-of-contents)
 
 Documents describing a system, process, or decision must make three levels of content explicitly separable. This hierarchy is abbreviated **WWH**.
 
@@ -92,8 +120,13 @@ actual: present | excuse | absent
 ```
 Without the Why, an AI cannot evaluate whether adding a new state (e.g. `late`) is appropriate — it does not know what the model is trying to capture.
 
+**Signalling what was replaced ❌**
+```
+Replaces the navigation role md-doc/TOC previously played for AI Assistants.
+```
+Mentioning a deprecated mechanism, an old role a section used to play, or what something "replaces" makes that obsolete thing more visible, not less — a reader (human or AI) notices the explicit warning and pays attention to exactly what they were told to ignore. State the current behavior only; let the absence of the old reference do the work.
+
 ## Document Taxonomy
-[up](#table-of-contents)
 
 Every document must declare its type. The type declaration format is governed by `conventions/documentation.md [section Scope]`.
 
@@ -101,10 +134,9 @@ Every document must declare its type. The type declaration format is governed by
 
 ### Convention
 
-See `public/INDEX.md [section conventions/]` for the foundational definition.
 A convention leaves a trace in the artifacts — conformance is auditable by examining documents, code, or data directly.
 
-**Examples:** `conventions/documentation.md`, `conventions/filesystem.md`
+**Examples:** `conventions/documentation.md`
 
 **Style:** Precise and imperative. Rules are stated clearly, with a WHY when non-obvious. Anti-patterns illustrate what to avoid. Exceptions are explicitly listed.
 
@@ -122,10 +154,9 @@ A document that describes a repeatable process end-to-end: what it accomplishes,
 
 ### Guide
 
-See `public/INDEX.md [section guides/]` for the foundational definition.
 A guide leaves a trace in the process — auditing whether it was followed requires a log.
 
-**Examples:** `guides/audit-process.md`, `guides/project-setup-process.md`
+**Examples:** `guides/audit-process.md`
 
 **Style:** Action-oriented. Steps are numbered and executable. Prerequisites stated upfront. No implementation details unless directly necessary to execute the step.
 
@@ -143,7 +174,7 @@ A document that defines a schema, API, data structure, or lookup table. Read sel
 
 ### Project file
 
-Files that structure a project: `PROJECT.md`, `README.md`, `GLOSSARY.md`, `TODO.md`. Each is governed by its own convention.
+Files that structure a project: `PROJECT.md`, `README.md`, `GLOSSARY.md`, `TODO/`. Each is governed by its own convention.
 
 **Style:** Governed by the relevant convention — see `conventions/glossary.md`, `conventions/todo-list.md`, `conventions/project-structure.md`.
 
@@ -156,7 +187,6 @@ Chronological records: session journals, decision logs, activity traces.
 **Style:** Chronological, append-only. Entries dated. No imposed narrative structure.
 
 ## WWH by Document Type
-[up](#table-of-contents)
 
 | Type | Why | What | How |
 |---|---|---|---|
@@ -171,40 +201,3 @@ Chronological records: session journals, decision logs, activity traces.
 **Recommended:** strongly encouraged — omitting it should be a conscious decision with a reason.
 **Optional:** include when relevant to the document's purpose.
 **—:** not applicable for this type.
-
-## Index
-
-| Term | Occurrences |
-|---|---|
-
-## Changelog
-
-### Version 1.2 - Convention and Guide definitions reference INDEX
-**Date:** 2026-06-06
-**Reason:** Foundational definitions of Convention and Guide moved to `public/INDEX.md` as the shared vocabulary for the whole KB. This file now references INDEX rather than re-stating the definitions.
-
-**Changes:**
-- `### Convention`: definition replaced by reference to `public/INDEX.md [section conventions/]`
-- `### Guide`: definition replaced by reference to `public/INDEX.md [section guides/]`
-
----
-
-### Version 1.1 - Restructuring and corrections
-**Date:** 2026-06-03
-**Reason:** WWH moved before taxonomy (taxonomy references it). WWH abbreviation introduced. Document Type Declaration section removed — format belongs to conventions/documentation.md. Design document type deferred to TODO. Convention type enriched with audit use. WWH descriptions rewritten in consistent English for all types. Table section renamed WWH by Document Type.
-
-**Changes:**
-- `## Table of Contents`: reordered — WWH Hierarchy first, Taxonomy second, new WWH by Document Type third
-- `## Why-What-How Hierarchy`: moved before taxonomy; WWH abbreviation introduced in opening paragraph
-- `## Document Type Declaration`: removed — format and valid types list moved to `conventions/documentation.md [section Scope]`; taxonomy section now opens with a single-line pointer
-- `## Document Taxonomy — Convention`: added "Can be used by audits to verify that best practices are enforced"; WWH rewritten in English
-- `## Document Taxonomy — Process spec`: WWH rewritten in English
-- `## Document Taxonomy — Guide`: WWH rewritten in English
-- `## Document Taxonomy — Reference`: WWH rewritten in English
-- `## Document Taxonomy — Project file / Log`: WWH "not applicable" note simplified
-- `## Applying the Hierarchy by Type` renamed `## WWH by Document Type`; "Obligatoire" replaced by "Required" throughout
-- Keywords: added `WWH`
-
-### Version 1.0 - Creation
-**Date:** 2026-06-03
-**Reason:** New convention — document types and Why-What-How content hierarchy. Complements conventions/documentation.md which governs form only.

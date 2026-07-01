@@ -266,25 +266,6 @@ Then rewrite with fixes.
 
 ---
 
-## Keywords
-structured-reasoning, thinking-tags, chain-of-thought, prompting, clarity, reasoning-patterns, analysis, decomposition, constraints, verification
+## Load when
+Complex analysis, structured reasoning, multi-step problem
 
----
-
-## Index
-
-| Terme | Occurrences |
-|-------|-------------|
-
----
-
-## Changelog
-
-### Version 1.0 - Creation
-**Date:** 2026-05-30
-**Raison:** Convention raisonnement structure — 8 techniques pour un thinking plus delibere.
-
-**Contenu initial :**
-- 8 techniques : thinking tags, decomposition, CoT, roles, structure, adversarial, contraintes, reference
-- Patterns avances : Think First, Error Check, Three Perspectives
-- Anti-patterns et indicateurs d'efficacite

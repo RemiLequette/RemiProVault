@@ -1,6 +1,7 @@
 # Journal
 
 ## Sessions
+- [Session 2026-06-29c — Chapitre 4 : révision du plan et rédaction du guide](#session-2026-06-29c-chapitre-4-revision-du-plan-et-redaction-du-guide)
 - [Session 2026-06-29b — Chapitre 3 : révision du plan et rédaction du guide](#session-2026-06-29b-chapitre-3-revision-du-plan-et-redaction-du-guide)
 - [Session 2026-06-29 — Chapitre 2 : révision du plan et rédaction du guide](#session-2026-06-29--chapitre-2--révision-du-plan-et-rédaction-du-guide)
 - [Session 2026-06-19 — Intégration Obsidian](#session-2026-06-19--intégration-obsidian)
@@ -22,6 +23,31 @@
 - [Session 2026-06-05 — plan-editor : bugs, thème, poubelle](#session-2026-06-05--plan-editor--bugs-thème-poubelle)
 - [Session 2026-06-20 — Convention nommage des parties](#session-2026-06-20--convention-nommage-des-parties)
 - [Session 2026-06-20b — Renommage chapitres ch02→ch18 vers ch01→ch17](#session-2026-06-20b--renommage-chapitres-ch02ch18-vers-ch01ch17)
+
+---
+
+## Session 2026-06-29c — Chapitre 4 : révision du plan et rédaction du guide
+
+### Décisions
+- `Plan-ch04.md` révisé : mots-clés `session` et `chat` ajoutés, contenu restructuré en 5 blocs avec arc narratif complet (poisson rouge → problème concret → solution opérateur → session → fenêtre/tokens → conclusion)
+- `GuideIA-ch04.md` entièrement réécrit : analogie call center pour expliquer stateless, exemple Paris/habitants pour rendre le problème concret, section "La session" avec choix terminologique assumé, encadré `tokens` rédigé
+- Encadré `tokens` : rédigé en deux étapes conformément au prompt encadrés — part de l'idée forte (LLM raisonne sur des nombres), exemple du verbe *manger*, lien avec la facturation
+- `METHODE.md` mis à jour : nom correct du fichier `Prompt Encadre.md` (était `Encadre.md`)
+- `Plan-meta.md` mis à jour : règle sur les anglicismes ajoutée dans les conventions, avec exemples (*roughly* → "en gros")
+
+### Collaboration
+
+**Moment clé — La notion de session comme fil directeur**
+
+La session était absente du plan initial. C'est l'utilisateur qui a pointé que c'est la notion la plus importante du chapitre. Elle a restructuré tout l'arc : le problème devient concret, la conclusion pratique découle naturellement, et la terminologie "session vs chat" s'ancre dans le fil conducteur du guide ("travailler avec une IA").
+
+**Moment clé — Le call center plutôt que le médecin**
+
+Plusieurs analogies explorées (médecin remplaçant, notaire, traducteur en cabine). Toutes écartées. Le call center s'est imposé pour une raison précise : il porte la bonne connotation — un humain déshumanisé, interchangeable — et l'analogie du dossier tient sur toute la longueur du chapitre. Les autres sonnaient faux pour le public visé.
+
+**Moment clé — Le prompt encadrés retrouvé**
+
+Le fichier `Encadre.md` avait été renommé `Prompt Encadre.md` sans mise à jour de `METHODE.md`. L'encadré tokens avait été rédigé directement, sans passer par les deux étapes obligatoires. Corrigé : référence mise à jour, encadré repris dans les règles, convention anglicismes notée au passage.
 
 ---
 
@@ -517,4 +543,5 @@ Le script PowerShell a introduit `u{2014}` littéral au lieu du cadratin `—`. 
 **Moment clé — Une lacune dans la méthode révélée en passant**
 
 En validant les mots-clés candidats, l'utilisateur a signalé que la finalité des mots-clés pour le lecteur (index de navigation) n'était pas documentée dans `METHODE.md`. La méthode décrivait le mécanisme technique (balise → index → lien) mais pas l'intention : un index est un outil de navigation, pas seulement un système de références internes. Correction immédiate dans `METHODE.md`. Exemple typique d'une session contenu qui améliore la méthode au passage.
+
 

@@ -12,28 +12,56 @@ standard scripts, and GitHub Pages publication.
 Load when a request involves the architecture of an artifact.
 Do not load for domain-specific rules — see the specialization file.
 
-## Keywords
-artifact, structured data, revisions, history, lifecycle, JSON, index.html,
-local server, URL modes, embed, GitHub Pages, scripts, convention
+## Load when
+Architecture of a time-tracked structured dataset (artifact)
 
-## Table of Contents
 
-1. [Definition](#definition)
-2. [The mandatory split - index.html and historique/index.html](#the-mandatory-split---indexhtml-and-historiqueindexhtml)
-3. [File structure](#file-structure)
-4. [State detection](#state-detection)
-5. [URL parameters and modes](#url-parameters-and-modes)
-6. [index.html behavior](#indexhtml-behavior)
-7. [Revision index](#revision-index)
-8. [Embedded variables](#embedded-variables)
-9. [Standard scripts](#standard-scripts)
-10. [Local server API contract](#local-server-api-contract)
-11. [GitHub Pages publication](#github-pages-publication)
-12. [Specializations](#specializations)
-13. [Index](#index)
+```insta-toc
+---
+title:
+  name:
+  level:
+  center:
+exclude:
+style:
+  listType:
+omit:
+levels:
+  min:
+  max:
+---
+
+# Table of Contents
+
+- Artifact — Structured data management convention
+    - Quick Start
+    - Load when
+    - Definition
+        - Why
+        - What
+        - Local and published modes
+    - The mandatory split - index.html and historique/index.html
+        - Why this split is non-negotiable
+        - What the split means
+        - How this enables clean navigation
+        - The anti-pattern to avoid absolutely
+    - File structure
+    - State detection
+    - URL parameters and modes
+    - index.html behavior
+        - On load
+        - In edit mode
+    - Revision index
+    - Embedded variables
+    - Standard scripts
+        - ouvrir-revision.js
+        - cloturer-revision.js
+    - Local server API contract
+    - GitHub Pages publication
+    - Specializations
+```
 
 ## Definition
-[up](#table-of-contents)
 
 ### Why
 
@@ -74,7 +102,6 @@ The export script (see `## GitHub Pages publication`) performs the embedding;
 the working `index.html` is never modified.
 
 ## The mandatory split - index.html and historique/index.html
-[up](#table-of-contents)
 
 **This rule is absolute. Every artifact must implement the split described here.**
 
@@ -144,7 +171,6 @@ Any file containing this branching logic is not conformant with this convention
 and must be refactored.
 
 ## File structure
-[up](#table-of-contents)
 
 Canonical structure for any artifact:
 
@@ -166,7 +192,6 @@ Fundamental rule: the most recent `data-*.json` is the current reference.
 If a `changes-*.json` with the same date exists, a revision is open.
 
 ## State detection
-[up](#table-of-contents)
 
 State is detected by `index.html` from the files present in `historique/` — never manually.
 
@@ -177,7 +202,6 @@ State is detected by `index.html` from the files present in `historique/` — ne
 | `data-*.json` + `changes-*.json` with same date | Revision in progress |
 
 ## URL parameters and modes
-[up](#table-of-contents)
 
 Modes common to all artifacts:
 
@@ -191,7 +215,6 @@ Modes common to all artifacts:
 Specializations may define additional modes. These are documented in the specialization file.
 
 ## index.html behavior
-[up](#table-of-contents)
 
 ### On load
 
@@ -211,7 +234,6 @@ Specializations may define additional modes. These are documented in the special
 - No export/import buttons, no localStorage, no IndexedDB
 
 ## Revision index
-[up](#table-of-contents)
 
 `historique/index.html` lists all revisions of an artifact.
 
@@ -232,7 +254,6 @@ const REVISIONS_EMBEDDED = null; // replaced by export-github-pages.js
 ```
 
 ## Embedded variables
-[up](#table-of-contents)
 
 Always present in `index.html`, initialized to `null`:
 
@@ -244,7 +265,6 @@ const CHANGES_EMBEDDED = null; // replaced if a revision is being published
 When the server is absent and a variable is non-null, it is used directly without a fetch call.
 
 ## Standard scripts
-[up](#table-of-contents)
 
 Two standard scripts apply to every artifact.
 The merge logic for `cloturer-revision.js` is domain-specific — defined in the specialization file.
@@ -282,7 +302,6 @@ Tasks:
 7. Print confirmation and new reference date
 
 ## Local server API contract
-[up](#table-of-contents)
 
 Endpoints used by every artifact:
 
@@ -299,7 +318,6 @@ Pages derive their base path from `window.location.pathname` — see `convention
 See `conventions/local-server.md` for the full server specification.
 
 ## GitHub Pages publication
-[up](#table-of-contents)
 
 See the project's `github-pages.md` for the full publication process.
 
@@ -325,7 +343,6 @@ The working `index.html` is never modified by this operation.
 Publication condition: defined by each specialization.
 
 ## Specializations
-[up](#table-of-contents)
 
 A specialization is a process file that extends this convention for a specific artifact.
 It documents only what is domain-specific: JSON schemas, merge logic, additional URL modes,
@@ -343,50 +360,3 @@ Expected content of a specialization:
 - Additional URL modes if applicable
 - Additional scripts if applicable
 - Domain-specific rules
-
-## Index
-
-| Term | Occurrences |
-|------|-------------|
-
-## Changelog
-
-### Version 1.3 - Mandatory split WWH section added
-**Date:** 2026-06-04
-**Reason:** The single-file anti-pattern (list + detail in one index.html) was not
-explicitly forbidden. Added a dedicated section with full WWH rationale -- complexity
-creep, navigation breakdown, the clean split model, and the anti-pattern to avoid.
-
-**Changes:**
-- Added `## The mandatory split - index.html and historique/index.html` with Why/What/How
-- TOC updated (section renumbered, new entry added)
-
----
-
-### Version 1.2 - Local server API updated to generic endpoints
-**Date:** 2026-06-04
-**Reason:** Server API refactored — `/patch` and `/list` replaced by generic `/file` and `/dir`.
-Pointer updated to `conventions/local-server.md` (shared KB convention).
-
-**Changes:**
-- `## Local server API contract`: endpoints updated (`/file`, `/dir`), absolute path note added
-- `## Local server API contract`: pointer updated to `conventions/local-server.md`
-
----
-
-### Version 1.1 - WWH compliance and local/published clarification
-**Date:** 2026-06-04
-**Reason:** Convention was missing its Why level and document type declaration.
-Local vs published mode distinction was implicit.
-
-**Changes:**
-- Added document type declaration (Convention)
-- `## Definition`: restructured with `### Why`, `### What`, `### Local and published modes`
-- Why explains the problem the pattern solves
-- Local/published modes clarifies the two operating contexts; GitHub Pages positioned as one example of publication
-
-### Version 1.0 - Creation
-**Date:** 2026-06-04
-**Reason:** Generic convention extracted from two mature specializations.
-Covers the shared structure, lifecycle, scripts, and publication pattern
-common to all time-tracked structured datasets.

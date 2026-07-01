@@ -13,31 +13,57 @@ If you only need the essentials:
 3. For each issue found: choose one → fix now / add to TODO / document as intentional deviation / propose best practice update
 
 ---
+## Load when
+Auditing a project for conformance
 
-## Table of Contents
+---
 
-- [When to Run](#when-to-run)
-- [Rules of Engagement](#rules-of-engagement)
-  - [Rule 1: Session Dedication](#rule-1-session-dedication)
-  - [Rule 2: Corrections During Audit](#rule-2-corrections-during-audit)
-  - [Rule 3: Review Deviations](#rule-3-review-deviations)
-  - [Rule 4: Improvements to Guides](#rule-4-improvements-to-guides)
-  - [Rule 5: Re-audit Separation](#rule-5-re-audit-separation)
-- [Steps](#steps)
-  - [Step 1: Load Conformance Criteria](#step-1-load-conformance-criteria)
-  - [Step 2: Identify Auditable Elements](#step-2-identify-auditable-elements)
-  - [Step 3: Verify Each Element Against Best Practices](#step-3-verify-each-element-against-best-practices)
-  - [Step 4: Present Findings](#step-4-present-findings)
-  - [Checkpoint: Proceed to Deviations?](#checkpoint-proceed-to-deviations)
-  - [Step 5: Group Deviations into Coherent Batches](#step-5-group-deviations-into-coherent-batches)
-  - [Step 6: Review and Apply Deviations by Batch](#step-6-review-and-apply-deviations-by-batch)
-  - [Step 7: Prepare Session Summary](#step-7-prepare-session-summary)
-  - [Step 8: Recommend Re-audit](#step-8-recommend-re-audit-if-needed)
-- [Output Format](#output-format)
-- [Batching & Checkpoints](#batching--checkpoints)
-- [Index](#index)
-- [Changelog](#changelog)
-- [Keywords](#keywords)
+```insta-toc
+---
+title:
+  name:
+  level:
+  center:
+exclude:
+style:
+  listType:
+omit:
+levels:
+  min:
+  max:
+---
+
+# Table of Contents
+
+- Project Audit Process
+    - Quick Start
+    - Load when
+    - When to Run
+    - Rules of Engagement
+        - Rule 1: Session Dedication
+        - Rule 2: Corrections During Audit
+        - Rule 3: Review Deviations
+            - 3a: Already Documented?
+            - 3b: Make Your Best Proposal
+                - Is it a simple fix? (typo, file name, trivial issue)
+                - Is it a complex change? (requires thought, implementation time)
+                - Is it a justified deviation? (intentional, contextual, documented reason)
+                - Is the best practice itself flawed?
+        - Rule 4: Improvements to Guides
+        - Rule 5: Re-audit Separation
+    - Steps
+        - Step 1: Load Conformance Criteria
+        - Step 2: Identify Auditable Elements
+        - Step 3: Verify Each Element Against Best Practices
+        - Step 4: Present Findings
+        - Checkpoint: Proceed to Deviations?
+        - Step 5: Group Deviations into Coherent Batches
+        - Step 6: Review and Apply Deviations by Batch
+        - Step 7: Prepare Session Summary
+        - Step 8: Recommend Re-audit (If Needed)
+    - Output Format
+    - Batching & Checkpoints
+```
 
 ---
 
@@ -365,60 +391,3 @@ Benefits:
 
 ---
 
-## Index
-
-| Terme | Occurrences |
-|-------|-------------|
-
----
-
-## Changelog
-
-### Version 2.3 - Cleanup and generalization
-**Date:** 2026-05-31
-**Rationale:** Remove all French content. Remove references to Claude.md and context.md. Reference best practices by name instead of number. Update typical auditable elements to reflect current project structure (PROJECT.md, bootstrap file). General cleanup.
-
-**Changes:**
-- Quick Start: translated to English
-- Step 2: "Claude.md, context.md" replaced by "Bootstrap file, PROJECT.md"
-- Step 3: added note — reference best practices by name, not number
-- Step 5: "Ordre de traitement des batches" translated and integrated; batch example updated with practice names instead of numbers
-- Rule 3: DEVIATIONS.md template updated — practice name instead of number
-- Changelog v2.2 and v2.1: translated to English
-
----
-
-### Version 2.2 - Audit scope rule
-**Date:** 2026-05-30
-**Rationale:** Prevent project-specific content from being added to this generic guide. The list of auditable elements always derives from the project's best practices guide, never from this guide.
-
-**Changes:**
-- Step 1: added explicit scope rule
-
----
-
-### Version 2.1 - Batch processing order
-**Date:** 2026-05-30
-**Rationale:** The guide defined how to group deviations but not in what order to process batches. Added explicit order by increasing complexity.
-
-**Changes:**
-- Added batch processing order in Step 5: immediate fixes → documented deviations → TODO → best practice updates
-- Added option to split oversized batches by sub-theme
-
----
-
-### Version 2.0 - Batching & Checkpoints
-**Date:** 2026-05-29
-**Rationale:** Improve UX during deviation review. Reduce message volume. Enable user control via checkpoints.
-
-**Changes:**
-- Added checkpoint after Step 4
-- Restructured Step 5: group deviations into coherent batches
-- Restructured Step 6: treat deviations by batch
-- Updated output format to reflect batching workflow
-- Added "Batching & Checkpoints" section
-
----
-
-## Keywords
-audit, verification, conformance, process, methodology, best-practices, deviations, batching, checkpoints, report

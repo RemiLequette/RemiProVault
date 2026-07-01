@@ -16,8 +16,33 @@ projects, directory, registry, dependencies, active, archived
 
 ## Table of Contents
 
-1. [Projects](#projects-1)
-2. [Index](#index)
+```insta-toc
+---
+title:
+  name:
+  level:
+  center:
+exclude:
+style:
+  listType:
+omit:
+levels:
+  min:
+  max:
+---
+
+# Table of Contents
+
+- Projects
+    - Quick Start
+    - Keywords
+    - Table of Contents
+    - Projects
+        - KB Maintenance
+        - GuideIA
+        - DDScope
+    - I
+```
 
 ## Projects
 
@@ -39,17 +64,13 @@ projects, directory, registry, dependencies, active, archived
 - **Uses KB conventions:** documentation.md, documentation-style.md, todo-list.md, filesystem.md, tools.md
 - **Depends on:** (none)
 
-## Index
+### DDScope
 
-| Term | Occurrences |
-|------|-------------|
+- **Tag:** `ddscope`
+- **Path:** C:\Users\RemiLequette\Development\with-ai\ddscope
+- **Status:** active
+- **Description:** CommWise web application supporting DDMRP scoping workshops — supply chain mapping tool used by consultants for current-state capture before buffer design.
+- **Uses KB conventions:** documentation.md, documentation-style.md, todo-list.md, journal-changelog.md, obsidian-links.md, idea-inbox.md
+- **Depends on:** (none)
+- **Note:** Project knowledge lives in its own Obsidian vault, separate from the KB/GuideIA vault — see `conventions/obsidian-links.md` for cross-vault reference rules.
 
-## Changelog
-
-### Version 1.1 - GuideIA registered
-**Date:** 2026-06-06
-**Reason:** GuideIA project added to the registry.
-
-### Version 1.0 - Creation
-**Date:** 2026-06-06
-**Reason:** Initial project directory — bootstrapped with KB Maintenance as first entry.

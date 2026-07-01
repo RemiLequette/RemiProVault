@@ -14,6 +14,7 @@
 #### Figures
 
 > 🖼️ **figure** `attention-dilution`
+> Dilution de l’attention : contexte court vs contexte long
 > Illustration du mécanisme de dilution de l'attention : un contexte court où
 > l'attention est concentrée sur les éléments pertinents, vs un contexte long
 > où elle se disperse sur de nombreux éléments peu pertinents.

@@ -8,19 +8,49 @@ Convention definissant le format et les regles du fichier GLOSSARY.md present da
 Charger quand on cree ou modifie un glossaire, ou quand on audite la conformite documentaire d'un projet.
 Ne couvre pas le contenu metier des termes — uniquement leur forme et leur organisation.
 
-## Keywords
-glossaire, glossary, terminologie, domaines, definitions, projet, conformite, audit
+## Load when
+Creating or auditing a GLOSSARY.md
 
-## Table des matieres
+```insta-toc
+---
+title:
+  name:
+  level:
+  center:
+exclude:
+style:
+  listType:
+omit:
+levels:
+  min:
+  max:
+---
 
-1. [Role du glossaire](#role-du-glossaire)
-2. [Emplacement et reference](#emplacement-et-reference)
-3. [Structure de GLOSSARY.md](#structure-de-glossarymd)
-4. [Domaines](#domaines)
-5. [Termes](#termes)
-6. [References croisees](#references-croisees)
-7. [Chargement par un AI Assistant](#chargement-par-un-ai-assistant)
-8. [Conformite et audit](#conformite-et-audit)
+# Table of Contents
+
+- Glossary Convention
+    - Quick Start
+    - Load when
+    - Role du glossaire
+    - Emplacement et reference
+        - Fichier glossaire
+        - Reference dans PROJECT.md
+    - Structure de GLOSSARY.md
+    - Domaines
+        - Definition
+        - Description de domaine
+        - Domaines suggeres
+    - Termes
+        - Format
+        - Regles
+    - References croisees
+    - Chargement par un AI Assistant
+    - Conformite et audit
+        - Criteres de conformite
+        - Deviations acceptables
+```
+
+
 
 ---
 
@@ -221,27 +251,3 @@ Cette strategie evite de charger des termes non pertinents et optimise l'utilisa
 - Glossaire vide en debut de projet → acceptable, a enrichir au fil des sessions
 
 ---
-
-## Index
-
-| Terme | Occurrences |
-|-------|-------------|
-
----
-
-## Changelog
-
-### Version 1.0 - Creation
-**Date:** 2026-05-30
-**Raison:** Nouvelle convention pour la gestion du glossaire de projet.
-
-**Contenu initial :**
-- Role du glossaire et distinction avec l'Index
-- Emplacement : GLOSSARY.md a la racine, reference dans PROJECT.md
-- Structure complete de GLOSSARY.md
-- Concept de domaines avec description informative
-- Liste de domaines suggeres
-- Format des termes
-- References croisees pour termes multi-domaines
-- Strategie de chargement par un AI Assistant
-- Criteres de conformite et audit

@@ -25,6 +25,7 @@
 #### Figures
 
 > 🖼️ **figure** `flux-opérateur`
+> Flux entre l’humain, l’opérateur et le modèle
 > Diagramme du flux entre les deux composants :
 > humain → prompt → opérateur → prompt étendu → modèle → complétion → opérateur → humain.
 > Flux aller et retour distincts entre chaque composant.

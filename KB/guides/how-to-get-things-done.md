@@ -6,26 +6,67 @@ A practical guide for running effective AI-assisted working sessions.
 
 ## Quick Start
 
-This guide (aka GTD) describes how to structure a working session with an AI Assistant to produce a clear, concrete result.
+This guide describes how to structure a working session with an AI Assistant to produce a clear, concrete result.
 A session maps to a chat — one objective, one log, one closure.
 Applies to any AI-assisted project.
 This guide is a framework, not a procedure — adapt it to your context.
 
-## Keywords
-working-session, productivity, scoping, execution, closure, WIP, todo, context, anti-patterns, AI-assisted, chat, log
+## Load when
+Running an effective AI-assisted working session, scoping or closing a session
 
-## Table of Contents
 
-1. [Why this guide exists](#why-this-guide-exists)
-2. [The session model](#the-session-model)
-3. [Phase 1 - Scoping](#phase-1---scoping)
-4. [Phase 2 - Execution](#phase-2---execution)
-5. [Phase 3 - Closure](#phase-3---closure)
-6. [Anti-patterns](#anti-patterns)
-7. [Index](#index)
+```insta-toc
+---
+title:
+  name:
+  level:
+  center:
+exclude:
+style:
+  listType:
+omit:
+levels:
+  min:
+  max:
+---
+
+# Table of Contents
+
+- How to Get Things Done
+    - Quick Start
+    - Keywords
+    - Why this guide exists
+    - The session model
+        - A session is a chat
+        - One objective, not one hour
+        - The project is the frame
+    - Phase 1 - Scoping
+        - Explore the project context
+        - Define the objective
+        - Use the AI's knowledge
+        - Validate before acting
+    - Phase 2 - Execution
+        - Stay on objective
+        - Propose and challenge before acting
+        - One thing at a time
+        - Watch for context drift
+    - Phase 3 - Closure
+        - Confirm the deliverable
+        - Update the project state
+        - If it is not written it does not exist
+        - Post-mortem
+        - Close the chat
+    - Anti-patterns
+        - Scope drift
+        - Premature file writes
+        - Vague first message
+        - Context overload
+        - Hierarchy of Concern violation (aka HOC)
+        - No closure
+        - Unanchored session
+```
 
 ## Why this guide exists
-[up](#table-of-contents)
 
 An AI-assisted session without structure drifts. You start with one objective and end with three open threads, half-written files, and a saturated context. The AI does not lose the thread mid-session — but it does not recenter either. That is the human's role.
 
@@ -34,7 +75,6 @@ This guide provides a repeatable frame so that every session produces a result t
 Underlying conviction: **effective collaboration practices with an AI resemble those with a human collaborator** — clear intent, defined scope, explicit feedback, clean closure.
 
 ## The session model
-[up](#table-of-contents)
 
 ### A session is a chat
 
@@ -61,7 +101,6 @@ A session does not happen in a vacuum. It takes place inside a project with its 
 The WIP is the bridge between sessions. A session closes by updating it. The next session may start by exploring it if no idea what to do next, once decided rename the chat ;-).
 
 ## Phase 1 - Scoping
-[up](#table-of-contents)
 
 Before producing anything, align on what the session is for.
 
@@ -96,7 +135,6 @@ Then follow with a healthy debate, give each other feedback, reformulate to chec
 The scoping conversation may not be finished. **No document is modified until the human gives an explicit go.** Design in the chat first — write to disk second.
 
 ## Phase 2 - Execution
-[up](#table-of-contents)
 
 ### Stay on objective
 
@@ -120,7 +158,6 @@ Complete one deliverable before starting the next. A session with one finished r
 As the session grows, the AI's grip on early decisions weakens. Signals of drift: the AI repeats something already decided, contradicts an earlier choice, or produces something that does not fit the objective. When this happens — restate the objective, summarize the decisions made, and continue.
 
 ## Phase 3 - Closure
-[up](#table-of-contents)
 
 A session is not over when the last file is written. It is over when the project state reflects what happened.
 
@@ -157,7 +194,6 @@ If the first message was a question of orientation (*"what's the WIP?"*, *"let's
 Closing the chat will vot create a closure, the human can come bak to a chat after a few days, the AI will not notice, it has to be triggered by the human, or validated on AI proposal. Note also that conducting multiple chats in parallel may not be the healthiest practise.
 
 ## Anti-patterns
-[up](#table-of-contents)
 
 ### Scope drift
 The session starts on objective A and gradually shifts to B, then C. No single step feels wrong — the drift is cumulative. Fix: restate the objective at the first sign of drift.
@@ -187,51 +223,3 @@ The session ends when energy runs out, not when the objective is reached. The WI
 ### Unanchored session
 The session starts without reading the project state — TODO, WIP, relevant files. The AI works from the conversation alone, disconnected from project history. Fix: always start by reading the project context.
 
-## Index
-
-| Term | Occurrences |
-|------|-------------|
-
-## Changelog
-
-### Version 1.4 - Memory rule and HOC anti-pattern
-**Date:** 2026-06-06
-**Reason:** Two additions pending in W1: memory rule (if it is not written it does not exist) and Hierarchy of Concern anti-pattern (do not mix levels of detail in the same answer).
-
-**Changes:**
-- `### If it is not written it does not exist`: new sub-section added in Phase 3 - Closure, after Update the project state
-- `### Hierarchy of Concern violation (aka HOC)`: new anti-pattern added
-
----
-
-### Version 1.3 - Close the chat — rename trigger clarified
-**Date:** 2026-06-06
-**Reason:** AI was suggesting chat rename even when the first message was already a concrete objective. Rule clarified: a specific first message produces a good title automatically — suggest rename only when the first message was an orientation question.
-
-**Changes:**
-- `### Close the chat`: explicit rule added — do not suggest renaming if first message was a scoped objective
-
----
-
-### Version 1.2 - WIP definition aligned with todo-list convention
-**Date:** 2026-06-06
-**Reason:** WIP was described as a separate artifact. Clarified: WIP = set of `[WIP]` items in `TODO.md`, with reference to `conventions/todo-list.md`.
-
-**Changes:**
-- `### The project is the frame`: WIP definition updated with reference to convention
-
----
-
-### Version 1.1 - Closure enriched
-**Date:** 2026-06-06
-**Reason:** Two additions to Phase 3: (1) Prepare the next session now explicitly covers reviewing WIP + TODO and drafting the opening message of the next session as a concrete, titlable objective; (2) Close the chat now includes a suggestion to rename the chat if the first message was a question of orientation rather than a scoped objective.
-
-**Changes:**
-- `### Prepare the next session`: rewritten — review WIP + TODO, draft next opening message, example added
-- `### Close the chat`: added — suggest chat rename if first message was orientation-only
-
----
-
-### Version 1.0 - Creation
-**Date:** 2026-06-06
-**Reason:** New guide — practical framework for running effective AI-assisted working sessions. Covers session model (chat = session), three phases (scoping, execution, closure), and anti-patterns.

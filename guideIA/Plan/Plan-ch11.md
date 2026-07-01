@@ -1,4 +1,4 @@
-﻿# Plan — Chapitre 11
+# Plan — Chapitre 11
 
 ### 11. Développer sa base de connaissance
 
@@ -7,7 +7,11 @@
 #### Figures
 
 #### Encadrés
+Markdown
+Jason
 
 #### Contenu
 
 *À développer en session dédiée.*
+Obsidian
+le droit a l'oubli

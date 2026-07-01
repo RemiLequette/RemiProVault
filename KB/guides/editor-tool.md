@@ -9,18 +9,48 @@ Covers the rationale for building a dedicated tool, the canonical vocabulary, an
 Does not cover the local server itself — see `conventions/local-server.md`.
 Does not cover the general tool rationale — see `conventions/tools.md [section Rationale]`.
 
-## Keywords
-editor-tool, viewer, resource, HTML, local-server, revision, working-file, save, bootstrap, topbar, modal, toast, refresh
+## Load when
+Building or auditing an HTML viewer or editor tool
 
-## Table of Contents
+```insta-toc
+---
+title:
+  name:
+  level:
+  center:
+exclude:
+style:
+  listType:
+omit:
+levels:
+  min:
+  max:
+---
 
-1. [Why](#why)
-2. [What](#what)
-3. [How](#how)
-4. [Index](#index)
+# Table of Contents
+
+- Editor Tool Guide
+    - Quick Start
+    - Load when
+    - Why
+        - Viewer and editor
+        - Resources without a human view
+        - The value of a viewer
+        - The viewer as a foundation for AI collaboration
+        - What an editor adds
+        - Writing the Why section of a tool spec
+    - What
+        - Data model vocabulary
+        - UI vocabulary
+    - How
+        - Stack
+        - Bootstrap pattern
+        - Resource access
+        - Revision model
+        - UI shell
+```
 
 ## Why
-[up](#table-of-contents)
 
 ### Viewer and editor
 
@@ -87,7 +117,6 @@ A good Why section answers three questions:
 3. **Why each design decision?** — for every non-obvious feature (a trash zone, a split layout, a revision model), explain why it exists. Decisions without a Why will be undone by the next person who touches the tool.
 
 ## What
-[up](#table-of-contents)
 
 ### Data model vocabulary
 
@@ -124,7 +153,6 @@ Use these terms consistently in specs, comments, and labels.
 **Toast** — a short non-blocking notification that appears briefly (typically 2–3 seconds) at a corner of the screen. Used to confirm that an action was recorded. Never used for errors that require user action — those go in a modal.
 
 ## How
-[up](#table-of-contents)
 
 ### Stack
 
@@ -220,57 +248,3 @@ mutate in-memory state
 -> mark dirty
 -> write working file (saveWork)
 -> re-render
-```
-
-## Index
-
-| Term | Occurrences |
-|------|-------------|
-
-## Changelog
-
-### Version 1.3 - Visibility of changes, Refresh, local server rationale, doc context
-**Date:** 2026-06-05
-**Reason:** Four additions in the same session.
-
-**Changes:**
-- Why / What an editor adds: new paragraph "Visibility of in-progress changes" — dirty highlighting, revision badge, Save as a deliberate informed act
-- Why / Writing the Why: added documentation context — spec is mandatory before coding, doubles as user manual, references documentation-style.md and tools.md conventions
-- What / Data model: new term "Refresh" — explicit reload from backend, distinct from Discard
-- How / Resource access: rewritten — desktop local files (local server, browser security rationale), cloud resources (MCP), other backends; local server presented as solution to browser filesystem restrictions
-- How / Revision model: Refresh lifecycle added
-- How / UI shell: Refresh button added to topbar
-- Keywords: refresh added
-
-
-### Version 1.2 - Resource generalization
-**Date:** 2026-06-05
-**Reason:** "File" replaced by "resource" throughout — the pattern applies equally to local files, binary resources, databases, and APIs. How section updated to present local server as the recommended backend for files, with an open door to other backends.
-
-**Changes:**
-- Quick Start: "files" replaced by "resources"
-- Keywords: "file-access" replaced by "resource"
-- Why: new section "Resources without a human view" — examples of text files, binary files, databases/APIs; "file" replaced by "resource" throughout
-- Why / AI collaboration: reliability argument added — viewer is deterministic, AI can hallucinate even on factual state questions
-- What: "source file" replaced by "source resource" throughout; connection indicator generalized to "backend"
-- How: "File access" renamed "Resource access" — local server presented as recommended backend for files; other backends (SQLite, REST API) mentioned explicitly; bootstrap pattern generalized
-
-
-### Version 1.1 - Why rewritten
-**Date:** 2026-06-05
-**Reason:** Initial Why was generic (script rationale). Rewritten to capture the specific value of viewer and editor tools — structured display, filtering, drill up/down, aggregation, AI collaboration, revision model.
-
-**Changes:**
-- Why: full rewrite — viewer value, editor value, AI collaboration, writing guidance
-- Quick Start: subtitle updated to mention viewer
-- Keywords: viewer added
-
-
-### Version 1.0 - Creation
-**Date:** 2026-06-05
-**Reason:** Guide for building HTML editor tools — extracted from todo-tool and plan-editor patterns.
-
-**Content:**
-- Why: when to build a tool, tool vs AI comparison, guidance for writing a tool spec Why section
-- What: data model vocabulary (source file, working file, revision, save, discard, dirty), UI vocabulary (topbar, connection indicator, revision badge, panel, view, modal, toast)
-- How: stack, bootstrap pattern, file access, revision model, UI shell

@@ -65,26 +65,6 @@ After any DDL (ALTER TABLE, CREATE TABLE, DROP TABLE, CREATE VIEW):
 
 ---
 
-## Keywords
-sqlite, MCP, SQL, database, schema, write, query, conventions, DDL
+## Load when
+SQL query, database read/write, schema change
 
----
-
-## Index
-
-| Terme | Occurrences |
-|-------|-------------|
-
----
-
-## Changelog
-
-### Version 1.0 - Creation
-**Date:** 2026-05-30
-**Raison:** Convention SQLite MCP — regles d'execution de requetes SQL.
-
-**Contenu initial :**
-- Une instruction par appel
-- Ordre DELETE avant INSERT
-- Verification apres chaque write
-- Mise a jour de schema.sql apres DDL
